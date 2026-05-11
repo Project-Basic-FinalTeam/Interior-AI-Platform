@@ -1,0 +1,42 @@
+// shared/schema/vision_data.fbs
+
+namespace InteriorPlatform;
+
+struct Vec3 {
+  x: float;
+  y: float;
+  z: float;
+}
+
+struct Vec2 {
+  x: float;
+  y: float;
+}
+
+table BoundingBox {
+  x_min: float;
+  y_min: float;
+  x_max: float;
+  y_max: float;
+}
+
+table DetectedObject {
+  id: int;                 
+  label: string;           
+  confidence: float;       
+  bbox: BoundingBox;       
+  position_3d: Vec3;       
+}
+
+table HandTracking {
+  is_pinching: bool;       
+  pinch_position: Vec3;    
+}
+
+table VisionMessage {
+  timestamp: int64;                // long 대신 int64 사용
+  objects: [DetectedObject];       // 객체 배열
+  hands: HandTracking;             // 손 상태
+}
+
+root_type VisionMessage;

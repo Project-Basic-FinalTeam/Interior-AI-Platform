@@ -1,0 +1,8 @@
+torch
+torchvision
+ultralytics
+opencv-python-headless
+numpy
+pyzmq
+flatbuffers
+mediapipe

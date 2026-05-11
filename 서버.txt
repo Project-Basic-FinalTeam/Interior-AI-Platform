@@ -1,0 +1,12 @@
+맥북(M1/M2) 및 일반 노트북 사용자:
+docker compose up --build
+
+NVIDIA GPU(RTX 등)가 장착된 데스크톱 사용자:
+docker compose -f docker-compose.yml -f docker-compose.gpu.yml up --build
+
+
+# AI와 C++ 양쪽 모두 최신 코드로 빌드
+docker compose build ai-perception logic-cpp
+
+# 빌드 완료 후 실행!
+docker compose up logic-cpp ai-perception

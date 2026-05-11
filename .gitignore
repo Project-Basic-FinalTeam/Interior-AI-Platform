@@ -1,0 +1,91 @@
+# ==========================================
+# 1. OS & IDE Settings
+# ==========================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.bak
+
+# ==========================================
+# 2. Unity (InteriorUnity/)
+# ==========================================
+[Ii]nteriorUnity/[Ll]ibrary/
+[Ii]nteriorUnity/[Tt]emp/
+[Ii]nteriorUnity/[Oo]bj/
+[Ii]nteriorUnity/[Bb]uild/
+[Ii]nteriorUnity/[Bb]uilds/
+[Ii]nteriorUnity/[Ll]ogs/
+[Ii]nteriorUnity/[Mm]emoryCaptures/
+[Ii]nteriorUnity/UserSettings/
+
+# Unity generated files
+[Ii]nteriorUnity/*.csproj
+[Ii]nteriorUnity/*.unitypackage
+[Ii]nteriorUnity/*.sln
+[Ii]nteriorUnity/*.suo
+[Ii]nteriorUnity/*.user
+[Ii]nteriorUnity/*.userprefs
+[Ii]nteriorUnity/*.pidb
+[Ii]nteriorUnity/*.svd
+[Ii]nteriorUnity/*.pdb
+[Ii]nteriorUnity/*.opendb
+[Ii]nteriorUnity/*.IDB
+
+# Asset Meta files (Optional: keep them if you want consistent GUIDs)
+# /[Ii]nteriorUnity/Assets/**/*.meta
+
+# ==========================================
+# 3. C++ (services/logic-cpp/)
+# ==========================================
+**/build/
+**/bin/
+**/lib/
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+Makefile
+install_manifest.txt
+compile_commands.json
+
+# ==========================================
+# 4. Python (AI Services)
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+.env
+.ipynb_checkpoints/
+.pytest_cache/
+
+# ==========================================
+# 5. Docker & Database
+# ==========================================
+.docker-build-args
+docker-compose.override.yml
+# DB 데이터가 로컬 폴더에 마운트된 경우 제외
+infrastructure/postgres_data/
+
+# ==========================================
+# 6. Shared Assets (중요: 대용량 파일 관리)
+# ==========================================
+# AI 모델 가중치 (.pt, .ckpt 등) - 용량이 매우 크므로 제외
+shared/models/*.pt
+shared/models/*.ckpt
+shared/models/*.pth
+shared/models/*.onnx
+
+# 테스트용 이미지 및 결과물
+shared/models/test_room.jpg
+
+# 생성된 3DGS 가구 파일 (.ply)
+shared/assets_3dgs/*.ply
+
+# FlatBuffers 생성 파일 (선택 사항: 자동 생성이므로 제외 가능)
+# shared/schema/vision_data_generated.h
+# shared/schema/InteriorPlatform/

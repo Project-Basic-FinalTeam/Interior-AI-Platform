@@ -1,0 +1,21 @@
+# docker-compose.gpu.yml (NVIDIA GPU 보유자만 사용)
+version: '3.8'
+
+services:
+  ai-perception:
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  ai-reconstruction:
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

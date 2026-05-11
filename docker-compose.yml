@@ -1,0 +1,93 @@
+version: '3.8'
+
+# [1] 가상 네트워크 정의 (도커 컨테이너들끼리 통신하는 전용망)
+networks:
+  interior_net:
+    driver: bridge
+
+# [2] 서비스 정의
+services:
+  # --------------------------------------------------------
+  # 1. Database (PostgreSQL) - 인프라
+  # --------------------------------------------------------
+  postgres_db:
+    image: postgres:15-alpine
+    container_name: interior_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: interior_assets
+    volumes:
+      - ./infrastructure/postgres_db/data:/var/lib/postgresql/data
+      - ./infrastructure/init_db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - interior_net
+
+  # --------------------------------------------------------
+  # 2. Logic Core (C++ 서버) - 컨트롤 타워
+  # --------------------------------------------------------
+  logic-cpp:
+    build: 
+      context: ./services/logic-cpp
+    container_name: logic_core
+    volumes:
+      - ./shared/schema:/app/schema:rw     # 스키마(읽기 전용)
+      - ./shared/assets_3dgs:/app/assets   # 3DGS 메타데이터 접근용
+    networks:
+      - interior_net
+    ports:
+      - "5555:5555" # [중요] 외부(Unity)에서 접속할 포트 개방!
+    depends_on:
+      - postgres_db
+
+  # --------------------------------------------------------
+  # 3. AI Perception (Python 비전) - 기본 CPU 호환 모드
+  # --------------------------------------------------------
+  ai-perception:
+    build: 
+      context: ./services/ai-perception
+    container_name: ai_perception
+    volumes:
+      # [수정 전] - ./shared/models:/app/models:ro
+      - ./shared/models:/app/models:rw     # <--- 여기를 rw로 변경 (또는 :ro를 아예 삭제)
+      - ./shared/schema:/app/schema:rw
+    networks:
+      - interior_net
+    environment:
+      - ZMQ_TARGET_URL=tcp://logic-cpp:5556 # C++ 서버의 내부 주소 지정
+
+  # --------------------------------------------------------
+  # 4. AI Reconstruction (3DGS 생성) - 기본 CPU 호환 모드
+  # --------------------------------------------------------
+  ai-reconstruction:
+    build: 
+      context: ./services/ai-reconstruction
+    container_name: ai_reconstruction
+    volumes:
+      - ./shared/models:/app/models:ro
+      - ./shared/assets_3dgs:/app/output_assets # 생성된 .ply 저장
+    networks:
+      - interior_net
+    environment:
+      - ZMQ_TARGET_URL=tcp://logic-cpp:5557
+
+  # --------------------------------------------------------
+  # 5. Matching Engine (GPT & DB) - Lightweight
+  # --------------------------------------------------------
+  matching-engine:
+    build:
+      context: ./services/matching-engine
+    container_name: matching_engine
+    volumes:
+      - ./shared/schema:/app/schema:rw
+    networks:
+      - interior_net
+    environment:
+      - DB_HOST=postgres_db
+      - DB_USER=admin
+      - DB_PASS=secretpassword
+      - DB_NAME=interior_assets
+      - OPENAI_API_KEY=${OPENAI_API_KEY} # 호스트의 환경변수 읽어오기
+      - ZMQ_TARGET_URL=tcp://logic-cpp:5558
+    depends_on:
+      - postgres_db
