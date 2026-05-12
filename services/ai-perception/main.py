@@ -1,14 +1,10 @@
-# services/ai-perception/main.py
-
 import os
 import time
 import zmq
-import cv2
 import sys
 import flatbuffers
 from ultralytics import YOLO
 
-# 컴파일된 FlatBuffers 파이썬 클래스 경로 추가
 sys.path.append('/app/schema')
 import InteriorPlatform.VisionMessage as VisionMessage
 import InteriorPlatform.DetectedObject as DetectedObject
@@ -18,16 +14,14 @@ import InteriorPlatform.HandTracking as HandTracking
 
 def main():
     print("======================================")
-    print("[AI Perception] 비전 서비스 기동 중...")
+    print("[AI Perception] 비전 서비스 대기 모드 (REQ-REP)")
     print("======================================")
 
-    # 1. ZMQ 설정
-    zmq_url = os.getenv("ZMQ_TARGET_URL", "tcp://logic-cpp:5556")
+    # 1. ZMQ 설정 (REP: 요청이 올 때만 반응함)
     context = zmq.Context()
-    socket = context.socket(zmq.PUSH)
-    socket.connect(zmq_url)
+    socket = context.socket(zmq.REP)
+    socket.bind("tcp://0.0.0.0:5556") # 서버로서 바인딩
 
-    # 2. 모델 및 이미지 경로
     model_dir = "/app/models"
     os.makedirs(model_dir, exist_ok=True)
     model_path = os.path.join(model_dir, "yolo11n.pt")
@@ -36,27 +30,27 @@ def main():
     model = YOLO(model_path if os.path.exists(model_path) else "yolo11n.pt")
     if not os.path.exists(model_path): model.save(model_path)
 
-    print("[AI Perception] 추론 루프 시작...")
-
     while True:
+        # 2. C++의 요청 대기 (여기서 멈춰있으므로 CPU/GPU 점유율 0%)
+        print("\n[AI Perception] C++의 추론 명령을 기다립니다...")
+        request = socket.recv()
+        print(f"[AI Perception] 명령 수신: {request.decode('utf-8')} -> YOLO 추론 시작!")
+
         if not os.path.exists(image_path):
-            print(f"[경고] {image_path} 사진 파일이 없습니다. 사진을 넣어주세요!")
-            time.sleep(3)
+            socket.send(b"ERROR: NO_IMAGE")
             continue
 
-        # YOLO 추론
+        # 3. 요청이 들어왔을 때만 딱 한 번 추론
         results = model(image_path, verbose=False)
         builder = flatbuffers.Builder(1024)
 
         object_offsets = []
         for result in results:
             for box in result.boxes:
-                # 1) String 생성 (테이블 시작 전 가능)
                 label_name = model.names[int(box.cls[0])]
                 label_offset = builder.CreateString(label_name)
-
-                # 2) BoundingBox (Table) 생성 및 Offset 확보
                 x1, y1, x2, y2 = box.xyxy[0].tolist()
+
                 BoundingBox.BoundingBoxStart(builder)
                 BoundingBox.BoundingBoxAddXMin(builder, float(x1))
                 BoundingBox.BoundingBoxAddYMin(builder, float(y1))
@@ -64,51 +58,41 @@ def main():
                 BoundingBox.BoundingBoxAddYMax(builder, float(y2))
                 bbox_offset = BoundingBox.BoundingBoxEnd(builder)
 
-                # --- 3) DetectedObject (Table) 조립 시작 ---
                 DetectedObject.DetectedObjectStart(builder)
                 DetectedObject.DetectedObjectAddId(builder, 1)
                 DetectedObject.DetectedObjectAddLabel(builder, label_offset)
                 DetectedObject.DetectedObjectAddConfidence(builder, float(box.conf[0]))
                 DetectedObject.DetectedObjectAddBbox(builder, bbox_offset)
 
-                # [핵심 수정] Struct(Vec3)는 반드시 Table을 만들고 있는 도중에 "In-line"으로 넣어야 함
                 center_x = (x1 + x2) / 2.0
                 center_y = (y1 + y2) / 2.0
-                # CreateVec3를 별도의 변수에 담지 않고 Add 함수 안에서 즉시 호출
                 DetectedObject.DetectedObjectAddPosition3d(
-                    builder, 
+                    builder,
                     Vec3.CreateVec3(builder, float(center_x), float(center_y), 2.5)
                 )
-
                 obj_offset = DetectedObject.DetectedObjectEnd(builder)
                 object_offsets.append(obj_offset)
 
-        # 4) Objects Vector 생성
         VisionMessage.VisionMessageStartObjectsVector(builder, len(object_offsets))
         for obj in reversed(object_offsets):
             builder.PrependUOffsetTRelative(obj)
         objects_vector = builder.EndVector()
 
-        # 5) HandTracking (Table) 생성
         HandTracking.HandTrackingStart(builder)
         HandTracking.HandTrackingAddIsPinching(builder, False)
         hand_offset = HandTracking.HandTrackingEnd(builder)
 
-        # 6) 최종 VisionMessage 조립
         VisionMessage.VisionMessageStart(builder)
         VisionMessage.VisionMessageAddTimestamp(builder, int(time.time()))
         VisionMessage.VisionMessageAddObjects(builder, objects_vector)
         VisionMessage.VisionMessageAddHands(builder, hand_offset)
         msg_offset = VisionMessage.VisionMessageEnd(builder)
-
         builder.Finish(msg_offset)
 
-        # 전송
+        # 4. C++로 압축된 결과 전송
         binary_data = builder.Output()
         socket.send(binary_data)
-
-        print(f"[AI Perception] 사진 분석 완료: {len(object_offsets)}개 객체 전송됨 -> C++")
-        time.sleep(3)
+        print(f"[AI Perception] 추론 결과({len(object_offsets)}개 객체) 반환 완료.")
 
 if __name__ == "__main__":
     main()
