@@ -1,3 +1,4 @@
+// Assets/Scripts/Network/ZmqReceiver.cs
 using UnityEngine;
 using System.Threading.Tasks;
 using NetMQ;
@@ -13,24 +14,32 @@ public class ZmqReceiver : MonoBehaviour
     [Header("Manager Reference")]
     public FurnitureManager furnitureManager;
 
-    // 이 함수를 UI 버튼에 연결할 겁니다!
+    // 🔥 중복 클릭 방지용 자물쇠
+    private bool _isScanning = false; 
+
     public void RequestScanFromCPP()
     {
-        Debug.Log("[ZMQ] C++ 서버에 스캔 명령 하달 중...");
+        // 자물쇠가 잠겨있으면 (이미 스캔 중이면) 무시!
+        if (_isScanning)
+        {
+            Debug.LogWarning("[ZMQ] ⏳ 아직 이전 스캔 데이터를 처리 중입니다. 잠시만 기다려주세요!");
+            return; 
+        }
 
-        // 파이썬 AI가 추론하는 동안 유니티 화면이 멈추지 않게 비동기로 처리
+        Debug.Log("[ZMQ] 🚀 C++ 서버에 스캔 명령 하달 중...");
+        _isScanning = true; // 스캔 시작! 자물쇠 잠금
+
         Task.Run(() => {
             AsyncIO.ForceDotNet.Force();
-            
-            // 구독(SUB)이 아니라 요청(REQ) 소켓 사용
             using (var reqSocket = new RequestSocket())
             {
                 reqSocket.Connect(serverUrl);
-                reqSocket.SendFrame("BTN_CLICKED"); // C++ 깨우기
+                reqSocket.SendFrame("BTN_CLICKED");
 
                 byte[] rawData;
-                // AI 추론 시간을 고려해 10초 정도 넉넉히 기다려줌
-                if (reqSocket.TryReceiveFrameBytes(System.TimeSpan.FromSeconds(10), out rawData))
+                
+                // 🔥 대용량 3D 파일 복사 시간을 고려해 대기 시간을 10초 -> 30초로 넉넉하게 늘림!
+                if (reqSocket.TryReceiveFrameBytes(System.TimeSpan.FromSeconds(30), out rawData))
                 {
                     var bb = new ByteBuffer(rawData);
                     var visionMsg = VisionMessage.GetRootAsVisionMessage(bb);
@@ -43,19 +52,28 @@ public class ZmqReceiver : MonoBehaviour
                         float scaledX = obj.Position3d.Value.X * 0.01f;
                         float scaledZ = obj.Position3d.Value.Y * 0.01f;
 
+                        string rawLabel = obj.Label;
+                        string[] parts = rawLabel.Split('|');
+                        string className = parts[0];
+                        string plyFileName = parts.Length > 1 ? parts[1] : "";
+
                         furnitureManager._furnitureQueue.Enqueue(new FurnitureManager.FurnitureData {
                             id = i, 
-                            label = obj.Label, 
+                            label = className, 
+                            plyPath = plyFileName, 
                             position = new Vector3(scaledX, 0f, scaledZ)
                         });
                     }
                 }
                 else
                 {
-                    Debug.LogError("[ZMQ] 응답 초과. 파이썬 AI가 아직 자고 있거나 에러가 났습니다.");
+                    Debug.LogError("[ZMQ] ❌ 응답 초과. 처리 시간이 30초를 넘었거나 서버에 문제가 있습니다.");
                 }
             }
             NetMQConfig.Cleanup();
+            
+            // 모든 작업이 끝났으므로 자물쇠 해제!
+            _isScanning = false; 
         });
     }
 }

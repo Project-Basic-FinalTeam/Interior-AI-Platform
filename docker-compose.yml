@@ -47,15 +47,17 @@ services:
     build: 
       context: ./services/ai-perception
     container_name: ai_perception
+    tty: true
+    environment:
+      - PYTHONUNBUFFERED=1                  # 로그 즉시 출력 (버퍼링 방지)
+      - ZMQ_TARGET_URL=tcp://logic-cpp:5556 # C++ 서버 주소
     volumes:
-      # [수정 전] - ./shared/models:/app/models:ro
-      - ./shared/models:/app/models:rw     # <--- 여기를 rw로 변경 (또는 :ro를 아예 삭제)
-      - ./shared/schema:/app/schema:rw
+      - ./shared/models:/app/models:rw      # AI 모델 저장용
+      - ./shared/schema:/app/schema:rw      # FlatBuffers 통신용
+      - ./shared/assets_3dgs:/app/assets:rw # [중요] 생성된 .ply 파일을 유니티와 공유!
     networks:
       - interior_net
-    environment:
-      - ZMQ_TARGET_URL=tcp://logic-cpp:5556 # C++ 서버의 내부 주소 지정
-
+      
   # --------------------------------------------------------
   # 4. AI Reconstruction (3DGS 생성) - 기본 CPU 호환 모드
   # --------------------------------------------------------
