@@ -1,6 +1,6 @@
 version: '3.8'
 
-# [1] 가상 네트워크 정의 (도커 컨테이너들끼리 통신하는 전용망)
+# [1] 가상 네트워크 정의 (도커 컨테이너들끼리 통신하는 전용망) 
 networks:
   interior_net:
     driver: bridge
@@ -31,8 +31,9 @@ services:
       context: ./services/logic-cpp
     container_name: logic_core
     volumes:
-      - ./shared/schema:/app/schema:rw     # 스키마(읽기 전용)
-      - ./shared/assets_3dgs:/app/assets   # 3DGS 메타데이터 접근용
+      - ./services/logic-cpp/src:/app/src:ro       # 🔥 [추가] C++ 소스 코드 실시간 동기화
+      - ./shared/schema:/app/schema:rw             # 스키마(읽기/쓰기)
+      - ./shared/assets_3dgs:/app/assets           # 3DGS 메타데이터 접근용
     networks:
       - interior_net
     ports:
@@ -52,6 +53,8 @@ services:
       - PYTHONUNBUFFERED=1                  # 로그 즉시 출력 (버퍼링 방지)
       - ZMQ_TARGET_URL=tcp://logic-cpp:5556 # C++ 서버 주소
     volumes:
+      - ./services/ai-perception/main.py:/app/main.py:ro # 🔥 [추가] 파이썬 메인 코드 실시간 동기화
+      - ./services/ai-perception/modules:/app/modules:ro # 🔥 [추가] Depth, YOLO 등 모듈 실시간 동기화
       - ./shared/models:/app/models:rw      # AI 모델 저장용
       - ./shared/schema:/app/schema:rw      # FlatBuffers 통신용
       - ./shared/assets_3dgs:/app/assets:rw # [중요] 생성된 .ply 파일을 유니티와 공유!
@@ -66,6 +69,8 @@ services:
       context: ./services/ai-reconstruction
     container_name: ai_reconstruction
     volumes:
+      - ./services/ai-reconstruction/main.py:/app/main.py:ro # 🔥 [추가] 파이썬 메인 코드 실시간 동기화
+      - ./services/ai-reconstruction/utils:/app/utils:ro     # 🔥 [추가] 유틸리티 로직 실시간 동기화
       - ./shared/models:/app/models:ro
       - ./shared/assets_3dgs:/app/output_assets # 생성된 .ply 저장
     networks:
@@ -81,6 +86,7 @@ services:
       context: ./services/matching-engine
     container_name: matching_engine
     volumes:
+      - ./services/matching-engine/src:/app/src:ro           # 🔥 [추가] 매칭 엔진 소스 코드 실시간 동기화
       - ./shared/schema:/app/schema:rw
     networks:
       - interior_net

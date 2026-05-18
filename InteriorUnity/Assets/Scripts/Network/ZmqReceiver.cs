@@ -46,6 +46,19 @@ public class ZmqReceiver : MonoBehaviour
 
                     Debug.Log($"[ZMQ] 📬 데이터 배송 완료! 가구 수: {visionMsg.ObjectsLength}");
 
+                    if (visionMsg.Hands.HasValue)
+                    {
+                        bool isPinching = visionMsg.Hands.Value.IsPinching;
+                        if (isPinching)
+                        {
+                            Debug.Log("🤏 [UI 연동] Pinch (꼬집기) 감지! 가구를 집어 들 준비 완료!");
+                        }
+                        else
+                        {
+                            Debug.Log("🖐️ [UI 연동] 손바닥 폄. 아무것도 잡고 있지 않습니다.");
+                        }
+                    }
+
                     for (int i = 0; i < visionMsg.ObjectsLength; i++)
                     {
                         var obj = visionMsg.Objects(i).Value;

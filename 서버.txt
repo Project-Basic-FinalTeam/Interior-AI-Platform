@@ -10,3 +10,20 @@ docker compose build ai-perception logic-cpp
 
 # 빌드 완료 후 실행!
 docker compose up logic-cpp ai-perception
+
+
+처음 켤 때, 또는 requirements.txt에 패키지를 추가했을 때만!
+👉 docker compose up --build (도커 이미지를 새로 굽습니다)
+
+Python 로직(main.py 등)만 수정했을 때!
+👉 수정/저장 후 docker restart ai_perception (1초 컷)
+
+C++ 로직만 수정했을 때!
+👉 수정/저장 후 docker exec -it logic_core bash -c "cd build && make" (바뀐 부분만 1초 컷 컴파일)
+
+
+# 1. 현재 실행 중인 서비스를 중지하고 컨테이너를 삭제합니다.
+docker compose down
+
+# 2. 변경된 설정을 반영하여 다시 실행합니다.
+docker compose up -d ai-perception
