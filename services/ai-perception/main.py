@@ -8,9 +8,9 @@ import shutil
 import flatbuffers
 import numpy as np
 import torch
-from ultralytics import YOLO
 
 from modules.depth_handler import DepthEstimator
+from modules.rfdetr_handler import RFDETRDetector
 # 🔥 hand_tracker 임포트 삭제 완료!
 
 sys.path.append('/app/schema')
@@ -52,7 +52,11 @@ def main():
     # 엣지 아키텍처에서는 유니티가 웹캠 화면을 찍어서 ZMQ로 파이썬에 넘겨주는 것이 정석입니다.
     # 현재는 테스트를 위해 다시 test_room.jpg를 스캔하도록 세팅합니다.
     image_path = os.path.join(model_dir, "test_room.jpg")
-    model = YOLO(os.path.join(model_dir, "yolo11n.pt") if os.path.exists(os.path.join(model_dir, "yolo11n.pt")) else "yolo11n.pt")
+    rfdetr_weights = os.path.join(model_dir, "rfdetr_base.pth")
+    model = RFDETRDetector(
+        model_path=rfdetr_weights if os.path.exists(rfdetr_weights) else None,
+        confidence=0.5,
+    )
     depth_estimator = DepthEstimator()
 
     while True:
@@ -61,49 +65,48 @@ def main():
         print(f"[AI Perception] 명령 수신: {request.decode('utf-8')} -> 3D 파이프라인 가동!")
 
         original_img = cv2.imread(image_path)
-        results = model(image_path, verbose=False)
+        detections = model.predict(original_img)
         builder = flatbuffers.Builder(1024)
         object_offsets = []
 
-        for i, result in enumerate(results):
-            for j, box in enumerate(result.boxes):
-                class_name = model.names[int(box.cls[0])]
-                x1, y1, x2, y2 = map(int, box.xyxy[0].tolist())
-                x1, y1 = max(0, x1), max(0, y1)
-                x2, y2 = min(original_img.shape[1], x2), min(original_img.shape[0], y2)
-                cropped_img = original_img[y1:y2, x1:x2]
-                
-                ply_filename = f"asset_{class_name}_{j}.ply"
-                ply_filepath = os.path.join(asset_dir, ply_filename)
-                
-                generate_3dgs_dual_track(cropped_img, ply_filepath, asset_dir)
+        for j, det in enumerate(detections):
+            class_name = det["label"]
+            x1, y1, x2, y2 = map(int, det["bbox"])
+            x1, y1 = max(0, x1), max(0, y1)
+            x2, y2 = min(original_img.shape[1], x2), min(original_img.shape[0], y2)
+            cropped_img = original_img[y1:y2, x1:x2]
 
-                combined_label = f"{class_name}|{ply_filename}"
-                label_offset = builder.CreateString(combined_label)
+            ply_filename = f"asset_{class_name}_{j}.ply"
+            ply_filepath = os.path.join(asset_dir, ply_filename)
 
-                BoundingBox.BoundingBoxStart(builder)
-                BoundingBox.BoundingBoxAddXMin(builder, float(x1))
-                BoundingBox.BoundingBoxAddYMin(builder, float(y1))
-                BoundingBox.BoundingBoxAddXMax(builder, float(x2))
-                BoundingBox.BoundingBoxAddYMax(builder, float(y2))
-                bbox_offset = BoundingBox.BoundingBoxEnd(builder)
+            generate_3dgs_dual_track(cropped_img, ply_filepath, asset_dir)
 
-                DetectedObject.DetectedObjectStart(builder)
-                DetectedObject.DetectedObjectAddId(builder, j) 
-                DetectedObject.DetectedObjectAddLabel(builder, label_offset)
-                DetectedObject.DetectedObjectAddConfidence(builder, float(box.conf[0]))
-                DetectedObject.DetectedObjectAddBbox(builder, bbox_offset)
+            combined_label = f"{class_name}|{ply_filename}"
+            label_offset = builder.CreateString(combined_label)
 
-                center_x = (x1 + x2) / 2.0
-                center_y = (y1 + y2) / 2.0
-                estimated_z = depth_estimator.estimate_depth(original_img, (x1, y1, x2, y2))
-                
-                DetectedObject.DetectedObjectAddPosition3d(
-                    builder,
-                    Vec3.CreateVec3(builder, float(center_x), float(center_y), float(estimated_z))
-                )
-                obj_offset = DetectedObject.DetectedObjectEnd(builder)
-                object_offsets.append(obj_offset)
+            BoundingBox.BoundingBoxStart(builder)
+            BoundingBox.BoundingBoxAddXMin(builder, float(x1))
+            BoundingBox.BoundingBoxAddYMin(builder, float(y1))
+            BoundingBox.BoundingBoxAddXMax(builder, float(x2))
+            BoundingBox.BoundingBoxAddYMax(builder, float(y2))
+            bbox_offset = BoundingBox.BoundingBoxEnd(builder)
+
+            DetectedObject.DetectedObjectStart(builder)
+            DetectedObject.DetectedObjectAddId(builder, j)
+            DetectedObject.DetectedObjectAddLabel(builder, label_offset)
+            DetectedObject.DetectedObjectAddConfidence(builder, float(det["confidence"]))
+            DetectedObject.DetectedObjectAddBbox(builder, bbox_offset)
+
+            center_x = (x1 + x2) / 2.0
+            center_y = (y1 + y2) / 2.0
+            estimated_z = depth_estimator.estimate_depth(original_img, (x1, y1, x2, y2))
+
+            DetectedObject.DetectedObjectAddPosition3d(
+                builder,
+                Vec3.CreateVec3(builder, float(center_x), float(center_y), float(estimated_z))
+            )
+            obj_offset = DetectedObject.DetectedObjectEnd(builder)
+            object_offsets.append(obj_offset)
 
         VisionMessage.VisionMessageStartObjectsVector(builder, len(object_offsets))
         for obj in reversed(object_offsets):
