@@ -4,10 +4,9 @@ fastapi
 uvicorn
 pyzmq
 
-# 2. 이미지 전처리 및 비전
+# 2. 이미지 전처리 및 비전 (MobileSAM 전담)
 Pillow
-opencv-python-headless  # (cv2) LGM 내부 이미지 처리
-rembg
+opencv-python-headless
 onnxruntime-gpu
 imageio
 imageio-ffmpeg
@@ -19,20 +18,21 @@ transformers<4.40.0
 accelerate
 xformers==0.0.23.post1+cu118
 einops
-omegaconf               # MVDream 설정 파싱용 (필수)
+omegaconf
 safetensors
-open_clip_torch         # 비전 모델 특징 추출용
+open_clip_torch
 
 # 4. 3D 수학 & 렌더링
 numpy<2.0.0
 scipy
 trimesh
-kiui                    # LGM 제작자 3D 유틸리티
-roma                    # 3D 회전 행렬 계산
-plyfile                 # 3D 파일 규격 처리
-PyMCubes                # 메쉬/볼륨 변환 보조
+kiui
+roma
+plyfile
+PyMCubes
 
-# 5. 기타 유틸리티
-tyro                    # Options 파싱
-tqdm                    # 진행률 표시창
-ninja                   # C++ 확장 빌드 가속
+# 5. 기타 유틸리티 및 강력한 SAM 엔진
+tyro
+tqdm
+ninja
+ultralytics

@@ -3,8 +3,9 @@
 # 1. Base Image: 순수 Python (모든 OS, 하드웨어에서 동작)
 FROM python:3.10-slim
 
-# 2. 시스템 의존성 설치 (libgl1 추가됨!)
+# 2. 시스템 의존성 설치 (여기에 git이 추가되었습니다!)
 RUN apt-get update && apt-get install -y \
+    git \
     libgl1 \
     libglib2.0-0 \
     libsm6 \

@@ -5,18 +5,21 @@ import uvicorn
 import time
 import threading
 import subprocess
+import cv2
+import numpy as np
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles  
 from PIL import Image 
-# 🔥 배경 제거 라이브러리 임포트 완료!
-from rembg import remove
+
+# 🔥 기존 rembg를 과감히 버리고, 초경량/초정밀 MobileSAM을 도입합니다!
+from ultralytics import SAM
 
 # ONNX 단순 경고 숨기기 및 CPU 강제 전환 (에러 로그 도배 방지)
 os.environ["ONNXRUNTIME_PROVIDER"] = "CPUExecutionProvider"
 os.environ["ORT_ENV_DISABLE_CUDA"] = "1"
 
 # ==========================================
-# 1. 설정
+# 1. 설정 및 모델 로드
 # ==========================================
 SHARED_DIR = "/app/output_assets"
 MODEL_PATH = "/app/models/model.safetensors" 
@@ -25,7 +28,12 @@ os.makedirs(SHARED_DIR, exist_ok=True)
 app = FastAPI()
 app.mount("/assets", StaticFiles(directory=SHARED_DIR), name="assets")
 
-print("[3DGS] 🚀 서버 초기화 완료 (LGM 원본 + 배경 제거 누끼 모드 통합)")
+print("[3DGS] 🚀 서버 초기화 완료 (LGM 원본 + MobileSAM 정밀 누끼 모드 통합)")
+
+# 🔥 [핵심 1] MobileSAM 모델 전역 로드 (서버 켤 때 한 번만 로드하여 딜레이 최소화)
+print("[3DGS] MobileSAM 가중치 로드 중...")
+sam_model = SAM("mobile_sam.pt")
+print("[3DGS] ✅ MobileSAM 로드 완료!")
 
 # ==========================================
 # 2. 추론 파이프라인 (infer.py 원격 호출)
@@ -37,45 +45,63 @@ def generate_3dgs_ply(image_path: str, object_id: str, bbox: list = None) -> str
     
     if bbox is not None and len(bbox) == 4:
         try:
-            print(f"[3DGS] ✂️ 바운딩 박스 크롭 및 누끼 따기 시작... 좌표: {bbox}")
-            raw_img = Image.open(image_path).convert("RGB")
-            img_w, img_h = raw_img.size
+            print(f"[3DGS] ✂️ MobileSAM에게 바운딩 박스 힌트 전달 중... 좌표: {bbox}")
+            
+            # 1. 원본 이미지를 읽고 투명도(Alpha)를 넣을 수 있는 RGBA로 변환
+            orig_img = cv2.imread(image_path)
+            orig_img = cv2.cvtColor(orig_img, cv2.COLOR_BGR2RGBA)
+            img_h, img_w = orig_img.shape[:2]
             
             x, y, w, h = bbox
             
+            # YOLO 정규화 좌표 방어 로직
             if w <= 1.5 and h <= 1.5:
-                x = x * img_w
-                y = y * img_h
-                w = w * img_w
-                h = h * img_h
+                x, y, w, h = x * img_w, y * img_h, w * img_w, h * img_h
             
-            left = int(x)
-            upper = int(y)
-            right = int(x + w)
-            lower = int(y + h)
+            # 화면 밖으로 나가지 않게 안전장치
+            left = max(0, int(x))
+            upper = max(0, int(y))
+            right = min(img_w, int(x + w))
+            lower = min(img_h, int(y + h))
             
-            # 1. 이미지 자르기
-            cropped_img = raw_img.crop((left, upper, right, lower))
-
-            # 2. 투명하게 배경 제거
-            print("[3DGS] 🧹 가구만 남기고 배경 날리는 중 (누끼 따기)...")
-            isolated_rgba = remove(cropped_img)
+            # 🔥 [핵심 2] SAM 추론: 박스 영역 안에서 진짜 가구 외곽선만 픽셀 단위로 찾기
+            print("[3DGS] 🧹 SAM이 가구 외곽선을 따라 정밀 누끼를 따는 중...")
+            # retina_masks=True 옵션으로 원본 화질을 유지하며 마스크를 땁니다.
+            results = sam_model(image_path, bboxes=[left, upper, right, lower], retina_masks=True, verbose=False)
             
-            # 3. 투명 배경 밑에 '순백색(White)' 도화지를 깔아줍니다.
-            white_bg = Image.new("RGBA", isolated_rgba.size, (255, 255, 255, 255))
-            white_bg.paste(isolated_rgba, mask=isolated_rgba)
-            final_rgb_img = white_bg.convert("RGB")
-            
-            # 4. 저장
-            target_image_path = os.path.join(SHARED_DIR, f"crop_{object_id}.jpg")
-            final_rgb_img.save(target_image_path, format="JPEG")
-            
-            print(f"[3DGS] ✅ 누끼 추출 및 흰색 배경 합성 완료: {target_image_path} (크기: {int(w)}x{int(h)})")
+            if results[0].masks is not None:
+                # SAM이 찾은 흑백 마스크 (가구=1, 배경=0)
+                mask = results[0].masks.data[0].cpu().numpy()
+                mask = (mask * 255).astype(np.uint8)
+                
+                # 🔥 원본 이미지의 투명도(Alpha) 채널에 SAM 마스크를 덮어씌움 (배경 즉시 투명화!)
+                orig_img[:, :, 3] = mask
+                
+                # 투명해진 이미지에서 바운딩 박스 영역만 잘라내기
+                cropped_rgba_array = orig_img[upper:lower, left:right]
+                isolated_rgba = Image.fromarray(cropped_rgba_array)
+                
+                # 🔥 LGM 엔진이 입체감을 잘 잡도록 '순백색(White)' 도화지를 밑에 깔아줌
+                white_bg = Image.new("RGBA", isolated_rgba.size, (255, 255, 255, 255))
+                white_bg.paste(isolated_rgba, mask=isolated_rgba)
+                final_rgb_img = white_bg.convert("RGB")
+                
+                target_image_path = os.path.join(SHARED_DIR, f"crop_{object_id}.jpg")
+                final_rgb_img.save(target_image_path, format="JPEG")
+                
+                print(f"[3DGS] ✅ SAM 정밀 누끼 추출 및 흰색 배경 합성 완료 (크기: {int(w)}x{int(h)})")
+            else:
+                # 혹시라도 SAM이 물체를 못 찾았을 경우 일반 크롭으로 백업(Fallback)
+                print("[3DGS] ⚠️ SAM이 마스크를 찾지 못했습니다. 일반 사각형 크롭으로 대체합니다.")
+                raw_img = Image.open(image_path).convert("RGB")
+                cropped_img = raw_img.crop((left, upper, right, lower))
+                target_image_path = os.path.join(SHARED_DIR, f"crop_{object_id}.jpg")
+                cropped_img.save(target_image_path)
             
         except Exception as e:
-            print(f"[3DGS] ⚠️ 이미지 크롭/합성 실패, 원본 전체 이미지를 사용합니다: {e}")
+            print(f"[3DGS] 🚨 SAM 누끼 작업 중 치명적 에러 발생: {e}")
 
-    # 원작자의 infer.py 스크립트 실행 명령어 (투명 배경의 PNG 파일이 들어갑니다)
+    # 원작자의 infer.py 스크립트 실행 명령어 (투명 배경 처리된 PNG가 들어갑니다)
     cmd = [
         sys.executable,
         "/app/lgm_core/infer.py",
@@ -86,7 +112,7 @@ def generate_3dgs_ply(image_path: str, object_id: str, bbox: list = None) -> str
     ]
     
     try:
-        # 비디오 렌더링 에러는 무시하도록 세팅 (LGM infer.py 내부의 비디오 생성 과정이 CPU에서 에러나는 경우가 많음)
+        # 비디오 렌더링 에러는 무시하도록 세팅
         subprocess.run(cmd, check=False)
         print("[3DGS] 엔진 추론 프로세스 완료 (PLY 파일 확인)")
     except subprocess.CalledProcessError as e:
@@ -115,14 +141,14 @@ def generate_3dgs_ply(image_path: str, object_id: str, bbox: list = None) -> str
         else:
             print(f"[3DGS] 🚨 에러 발생: PLY 파일이 없습니다. AI 엔진 추론 자체가 실패했습니다.")
     
-    # 추론이 끝난 임시 크롭 이미지(.png)는 삭제하여 용량을 아낍니다.
+    # 추론이 끝난 임시 크롭 이미지(.jpg)는 삭제하여 용량을 아낍니다.
     if target_image_path != image_path and os.path.exists(target_image_path):
         os.remove(target_image_path)
         
     return output_filename
 
 # ==========================================
-# 3. ZMQ 및 FastAPI 서버 통신 로직
+# 3. ZMQ 및 FastAPI 서버 통신 로직 (변경 없음)
 # ==========================================
 def run_fastapi():
     uvicorn.run(app, host="0.0.0.0", port=8000, log_level="warning")

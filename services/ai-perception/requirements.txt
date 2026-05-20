@@ -9,3 +9,5 @@ flatbuffers
 mediapipe
 diffusers
 trimesh
+ultralytics
+git+https://github.com/ultralytics/CLIP.git
