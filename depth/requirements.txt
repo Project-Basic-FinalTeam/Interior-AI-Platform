@@ -1,8 +1,17 @@
-opencv-python>=4.5.0
-numpy>=1.21.0
-torch>=2.0.0
-pillow>=9.0.0
-pillow-avif>=1.0.0
-transformers>=4.30.0
+# Depth Anything V2 Metric Indoor 실험 코드 실행용 requirements.txt
+# Python 권장 버전: 3.10 이상
+# 설치 명령어:
+#   python -m pip install -r requirements.txt
+#
+# GPU(CUDA) 환경에서 PyTorch를 사용할 경우,
+# torch/torchvision은 본인 CUDA 버전에 맞는 공식 설치 명령으로 별도 설치하는 것을 권장합니다.
 
-flatbuffers-25.12.19 pyzmq-27.1.0
+torch
+torchvision
+transformers>=4.45.0
+numpy
+opencv-python
+Pillow
+pillow-avif-plugin
+pyzmq
+flatbuffers
