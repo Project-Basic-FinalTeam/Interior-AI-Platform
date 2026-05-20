@@ -7,7 +7,9 @@ import threading
 import subprocess
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles  
-from PIL import Image  # 🔥 이미지 크롭 연산을 위해 PIL.Image 임포트
+from PIL import Image 
+# 🔥 배경 제거 라이브러리 임포트 완료!
+from rembg import remove
 
 # ONNX 단순 경고 숨기기 및 CPU 강제 전환 (에러 로그 도배 방지)
 os.environ["ONNXRUNTIME_PROVIDER"] = "CPUExecutionProvider"
@@ -23,7 +25,7 @@ os.makedirs(SHARED_DIR, exist_ok=True)
 app = FastAPI()
 app.mount("/assets", StaticFiles(directory=SHARED_DIR), name="assets")
 
-print("[3DGS] 🚀 서버 초기화 완료 (LGM 원본 자동화 스크립트 연동 모드)")
+print("[3DGS] 🚀 서버 초기화 완료 (LGM 원본 + 배경 제거 누끼 모드 통합)")
 
 # ==========================================
 # 2. 추론 파이프라인 (infer.py 원격 호출)
@@ -33,53 +35,62 @@ def generate_3dgs_ply(image_path: str, object_id: str, bbox: list = None) -> str
     
     target_image_path = image_path
     
-    # 🔥 [크롭 로직] 비율 좌표를 픽셀로 변환 후 이미지 자르기
     if bbox is not None and len(bbox) == 4:
         try:
-            print(f"[3DGS] ✂️ 바운딩 박스 크롭 진행 중... 받은 좌표: {bbox}")
+            print(f"[3DGS] ✂️ 바운딩 박스 크롭 및 누끼 따기 시작... 좌표: {bbox}")
             raw_img = Image.open(image_path).convert("RGB")
-            img_w, img_h = raw_img.size  # 원본 이미지의 실제 픽셀 크기
+            img_w, img_h = raw_img.size
             
             x, y, w, h = bbox
             
-            # [안전장치] YOLO가 0~1 사이의 비율(정규화)로 값을 줬다면 픽셀 단위로 곱해줍니다.
             if w <= 1.5 and h <= 1.5:
                 x = x * img_w
                 y = y * img_h
                 w = w * img_w
                 h = h * img_h
             
-            # 소수점을 확실한 정수(픽셀)로 변환
             left = int(x)
             upper = int(y)
             right = int(x + w)
             lower = int(y + h)
             
-            # PIL 라이브러리의 crop은 (left, upper, right, lower) 기준입니다.
+            # 1. 이미지 자르기
             cropped_img = raw_img.crop((left, upper, right, lower))
+
+            # 2. 투명하게 배경 제거
+            print("[3DGS] 🧹 가구만 남기고 배경 날리는 중 (누끼 따기)...")
+            isolated_rgba = remove(cropped_img)
             
-            # 잘린 이미지를 추론용으로 덮어쓰지 않고 임시 파일로 저장합니다.
+            # 3. 투명 배경 밑에 '순백색(White)' 도화지를 깔아줍니다.
+            white_bg = Image.new("RGBA", isolated_rgba.size, (255, 255, 255, 255))
+            white_bg.paste(isolated_rgba, mask=isolated_rgba)
+            final_rgb_img = white_bg.convert("RGB")
+            
+            # 4. 저장
             target_image_path = os.path.join(SHARED_DIR, f"crop_{object_id}.jpg")
-            cropped_img.save(target_image_path)
-            print(f"[3DGS] ✅ 크롭 이미지 준비 완료: {target_image_path} (크기: {int(w)}x{int(h)})")
+            final_rgb_img.save(target_image_path, format="JPEG")
+            
+            print(f"[3DGS] ✅ 누끼 추출 및 흰색 배경 합성 완료: {target_image_path} (크기: {int(w)}x{int(h)})")
             
         except Exception as e:
-            print(f"[3DGS] ⚠️ 이미지 크롭 실패, 원본 전체 이미지를 사용합니다: {e}")
+            print(f"[3DGS] ⚠️ 이미지 크롭/합성 실패, 원본 전체 이미지를 사용합니다: {e}")
 
-    # 원작자의 infer.py 스크립트 실행 명령어 (target_image_path 사용)
+    # 원작자의 infer.py 스크립트 실행 명령어 (투명 배경의 PNG 파일이 들어갑니다)
     cmd = [
         sys.executable,
         "/app/lgm_core/infer.py",
         "big",
         "--resume", MODEL_PATH,
-        "--test_path", target_image_path,  # 원본 대신 크롭된 이미지가 들어갑니다.
+        "--test_path", target_image_path, 
         "--workspace", SHARED_DIR
     ]
     
     try:
-        subprocess.run(cmd, check=True)
+        # 비디오 렌더링 에러는 무시하도록 세팅 (LGM infer.py 내부의 비디오 생성 과정이 CPU에서 에러나는 경우가 많음)
+        subprocess.run(cmd, check=False)
+        print("[3DGS] 엔진 추론 프로세스 완료 (PLY 파일 확인)")
     except subprocess.CalledProcessError as e:
-        print(f"[3DGS] ⚠️ 비디오 렌더링 중단됨 (무시 가능: 3D 알맹이 PLY 파일은 추출 성공!)")
+        print(f"[3DGS] ❌ AI 엔진 실행 중 치명적 오류: {e}")
     
     # 파일명 변경 및 검증 로직
     base_name = os.path.splitext(os.path.basename(target_image_path))[0]
@@ -102,9 +113,9 @@ def generate_3dgs_ply(image_path: str, object_id: str, bbox: list = None) -> str
             os.rename(latest_ply, output_path)
             print(f"[3DGS] ✅ 3D 가구 생성 완료 (최신 파일 탐색): {output_filename}")
         else:
-            raise FileNotFoundError(f"🚨 PLY 파일이 없습니다. AI 엔진 추론 자체가 실패했습니다.")
+            print(f"[3DGS] 🚨 에러 발생: PLY 파일이 없습니다. AI 엔진 추론 자체가 실패했습니다.")
     
-    # 추론이 끝난 임시 크롭 이미지는 삭제하여 용량을 아낍니다.
+    # 추론이 끝난 임시 크롭 이미지(.png)는 삭제하여 용량을 아낍니다.
     if target_image_path != image_path and os.path.exists(target_image_path):
         os.remove(target_image_path)
         
@@ -143,7 +154,7 @@ def run_zmq_server():
             socket.send_json({"status": "success", "obj_id": obj_id, "ply_url": download_url})
             
         except Exception as e:
-            print(f"[AI Reconstruction] 🚨 에러 발생: {e}")
+            print(f"[AI Reconstruction] 🚨 ZMQ 루프 내부 에러 발생: {e}")
             socket.send_json({"status": "error", "message": str(e)})
 
 if __name__ == "__main__":

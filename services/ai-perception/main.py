@@ -50,7 +50,7 @@ def main():
     rfdetr_weights = os.path.join(model_dir, "rfdetr_base.pth")
     model = RFDETRDetector(
         model_path=rfdetr_weights if os.path.exists(rfdetr_weights) else None,
-        confidence=0.1,  # 🔥 확신도를 낮춰서 흐릿한 것도 다 잡습니다.
+        confidence=0.4,  
     )
     depth_estimator = DepthEstimator()
 
@@ -66,6 +66,8 @@ def main():
 
         valid_id = 0  # 🔥 크기가 통과된 객체만 세기 위한 번호표
 
+        debug_img = original_img.copy()
+
         for det in detections:
             class_name = det["label"]
             x1, y1, x2, y2 = map(int, det["bbox"])
@@ -75,11 +77,19 @@ def main():
             w = x2 - x1
             h = y2 - y1
             
-            # 🔥 [수정 1] 크기 필터링 대폭 완화! (50 -> 10픽셀)
-            # 이제 예전처럼 19개 객체를 싹 다 잡아낼 것입니다.
-            if w < 10 or h < 10:
-                print(f"[필터링] '{class_name}' 객체가 너무 작아 무시합니다. (크기: {w}x{h})")
-                continue
+            img_area = original_img.shape[0] * original_img.shape[1]
+            box_area = w * h
+            
+            if w < 30 or h < 30:
+                continue # 먼지 컷
+                
+            if box_area > img_area * 0.8:
+                print(f"[필터링] '{class_name}' 객체가 방 전체를 덮고 있어 무시합니다.")
+                continue # 방 전체 컷
+
+            # 🔥 [디버그 2] 통과된 객체들의 네모 박스와 이름을 이미지에 그립니다.
+            cv2.rectangle(debug_img, (x1, y1), (x2, y2), (0, 255, 0), 2)
+            cv2.putText(debug_img, f"{class_name}_{valid_id}", (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
 
             cropped_img = original_img[y1:y2, x1:x2]
 
@@ -127,6 +137,11 @@ def main():
         VisionMessage.VisionMessageAddObjects(builder, objects_vector)
         msg_offset = VisionMessage.VisionMessageEnd(builder)
         builder.Finish(msg_offset)
+
+        # 🔥 [디버그 3] 박스가 다 그려진 이미지를 assets 폴더에 저장합니다.
+        debug_save_path = os.path.join(asset_dir, "debug_rfdetr_boxes.jpg")
+        cv2.imwrite(debug_save_path, debug_img)
+        print(f"[AI Perception] 📸 디버그용 바운딩 박스 이미지 저장 완료: {debug_save_path}")
 
         binary_data = builder.Output()
         socket.send(binary_data)
