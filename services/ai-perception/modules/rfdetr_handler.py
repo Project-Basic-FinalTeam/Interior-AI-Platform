@@ -1,9 +1,7 @@
-# services/ai-perception/modules/rfdetr_handler.py
 import os
 import torch
 import numpy as np
 from PIL import Image
-
 
 class RFDETRDetector:
     """
@@ -98,7 +96,19 @@ class RFDETRDetector:
 
             for i in range(len(xyxy)):
                 cid = int(class_id[i]) if class_id is not None else -1
-                label = self.class_names.get(cid, str(cid)) if self.class_names else str(cid)
+                
+                # 🔥 [수정됨] class_names가 딕셔너리인지 리스트인지 판별하여 안전하게 라벨을 추출합니다.
+                if isinstance(self.class_names, dict):
+                    label = self.class_names.get(cid, str(cid))
+                elif isinstance(self.class_names, (list, tuple)):
+                    # 리스트 인덱스 초과 에러(IndexError) 방지 로직 추가
+                    if 0 <= cid < len(self.class_names):
+                        label = self.class_names[cid]
+                    else:
+                        label = str(cid) # 예외 번호(84, 86 등)는 숫자 그대로 반환
+                else:
+                    label = str(cid)
+
                 results.append({
                     "bbox": [float(v) for v in xyxy[i]],
                     "label": label,
