@@ -1,0 +1,472 @@
+{
+  "input_image": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Depth\\iphone16pro_test.jpg",
+  "output_json": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Depth\\iphone16pro_test.json",
+  "model": {
+    "name": "depth-anything/Depth-Anything-V2-Metric-Indoor-Large-hf",
+    "task": "single_image_metric_depth_estimation",
+    "scene_type": "indoor"
+  },
+  "image": {
+    "width": 5712,
+    "height": 4284,
+    "megapixel_info": "24MP, 5712x4284 기준"
+  },
+  "camera": {
+    "device": "iPhone 16 Pro",
+    "lens": "1x main camera",
+    "equivalent_focal_length_mm": 24.0,
+    "f_number": 1.78,
+    "iso": 160,
+    "exposure_compensation_ev": 0,
+    "shutter_speed": "1/120s",
+    "camera_height_m": 1.3,
+    "shooting_assumption": "수평 촬영",
+    "intrinsics_original": {
+      "fx": 3960.559401048136,
+      "fy": 3960.559401048136,
+      "cx": 2856.0,
+      "cy": 2142.0,
+      "method": "35mm_equivalent_focal_length_based",
+      "equivalent_focal_length_mm": 24.0
+    },
+    "intrinsics_geometry": {
+      "fx": 1109.4003924504582,
+      "fy": 1109.4003924504582,
+      "cx": 800.0,
+      "cy": 600.0,
+      "method": "35mm_equivalent_focal_length_based",
+      "equivalent_focal_length_mm": 24.0
+    },
+    "note": "24mm 35mm 환산 초점거리와 이미지 해상도를 이용해 intrinsic을 근사했습니다."
+  },
+  "resize_for_geometry": {
+    "original_width": 5712,
+    "original_height": 4284,
+    "geometry_width": 1600,
+    "geometry_height": 1200,
+    "scale_x": 0.2801120448179272,
+    "scale_y": 0.2801120448179272
+  },
+  "depth_statistics_original_m": {
+    "min_m": 1.1963269710540771,
+    "max_m": 7.077493667602539,
+    "mean_m": 4.394432067871094,
+    "median_m": 4.917813301086426,
+    "p10_m": 1.6794817447662354,
+    "p90_m": 6.299803256988525
+  },
+  "floor_plane": {
+    "normal_raw": [
+      0.021789854392409325,
+      0.9827176928520203,
+      0.1838236153125763
+    ],
+    "d_raw": -0.9880670309066772,
+    "threshold_m": 0.07376493215560913,
+    "inlier_count_sampled": 2948,
+    "estimated_camera_height_m_raw": 0.9880670309066772,
+    "known_camera_height_m": 1.3,
+    "scale_factor_from_camera_height": 1.3157001733779907
+  },
+  "front_wall": {
+    "detected": true,
+    "known_width_m": 3.24,
+    "plane": {
+      "normal_raw": [
+        -0.3759411573410034,
+        -0.07593034952878952,
+        0.9235273599624634
+      ],
+      "d_raw": -5.983123302459717,
+      "threshold_m": 0.08851791858673096,
+      "z_alignment": 0.9235273599624634,
+      "y_alignment": 0.07593034952878952
+    },
+    "mask_area_pixels_geometry": 429462,
+    "polygon_geometry": [
+      {
+        "x": 65,
+        "y": 60
+      },
+      {
+        "x": 161,
+        "y": 594
+      },
+      {
+        "x": 1011,
+        "y": 522
+      },
+      {
+        "x": 1014,
+        "y": 149
+      }
+    ],
+    "polygon_original": [
+      {
+        "x": 232,
+        "y": 214
+      },
+      {
+        "x": 575,
+        "y": 2121
+      },
+      {
+        "x": 3609,
+        "y": 1864
+      },
+      {
+        "x": 3620,
+        "y": 532
+      }
+    ],
+    "width_estimation": {
+      "detected": true,
+      "left_bottom_pixel_geometry": {
+        "x": 129,
+        "y": 645
+      },
+      "right_bottom_pixel_geometry": {
+        "x": 982,
+        "y": 544
+      },
+      "left_bottom_point_3d_raw_m": {
+        "x": -2.632310628890991,
+        "y": 0.17660118639469147,
+        "z": 4.353809356689453
+      },
+      "right_bottom_point_3d_raw_m": {
+        "x": 1.1355899572372437,
+        "y": -0.3487662672996521,
+        "z": 6.910666465759277
+      },
+      "estimated_width_raw_m": 4.583732604980469,
+      "known_width_m": 3.24,
+      "pixel_width_geometry": 858.9586718812495,
+      "estimated_width_calibrated_m": 3.24,
+      "scale_error_after_calibration_m": 0.0,
+      "left_bottom_pixel_original": {
+        "x": 461,
+        "y": 2303
+      },
+      "right_bottom_pixel_original": {
+        "x": 3506,
+        "y": 1942
+      }
+    }
+  },
+  "scale_calibration": {
+    "selected_scale_method": "known_front_wall_width_3.24m",
+    "final_scale_factor": 0.706847514726223,
+    "scale_factor_from_known_front_wall_width": 0.706847514726223,
+    "scale_factor_from_camera_height": 1.3157001733779907,
+    "note": "정면 벽 3.24m 탐지가 성공하면 해당 값을 최종 scale로 사용하고, 실패하면 카메라 높이 1.30m 기반 scale을 사용합니다."
+  },
+  "floor_wall_boundary_edges": [
+    {
+      "edge_id": "floor_wall_edge_1",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start_geometry": {
+        "x": 330,
+        "y": 593
+      },
+      "pixel_end_geometry": {
+        "x": 900,
+        "y": 544
+      },
+      "pixel_start_original": {
+        "x": 1178,
+        "y": 2117
+      },
+      "pixel_end_original": {
+        "x": 3213,
+        "y": 1942
+      },
+      "point_3d_start_raw_m": {
+        "x": -2.321521520614624,
+        "y": -0.034607358276844025,
+        "z": 5.48777437210083
+      },
+      "point_3d_end_raw_m": {
+        "x": 0.6015361547470093,
+        "y": -0.3368454873561859,
+        "z": 6.673476696014404
+      },
+      "point_3d_start_calibrated_m": {
+        "x": -1.6409616470336914,
+        "y": -0.024462124332785606,
+        "z": 3.8790194988250732
+      },
+      "point_3d_end_calibrated_m": {
+        "x": 0.42519432306289673,
+        "y": -0.2380983829498291,
+        "z": 4.717130184173584
+      },
+      "length_raw_m": 3.1688332557678223,
+      "length_calibrated_m": 2.239881911421291,
+      "pixel_length_geometry": 572.1022635858034
+    },
+    {
+      "edge_id": "floor_wall_edge_2",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start_geometry": {
+        "x": 620,
+        "y": 569
+      },
+      "pixel_end_geometry": {
+        "x": 974,
+        "y": 539
+      },
+      "pixel_start_original": {
+        "x": 2213,
+        "y": 2031
+      },
+      "pixel_end_original": {
+        "x": 3477,
+        "y": 1924
+      },
+      "point_3d_start_raw_m": {
+        "x": -0.9816376566886902,
+        "y": -0.16905982792377472,
+        "z": 6.050354957580566
+      },
+      "point_3d_end_raw_m": {
+        "x": 1.0791831016540527,
+        "y": -0.37833431363105774,
+        "z": 6.879595756530762
+      },
+      "point_3d_start_calibrated_m": {
+        "x": -0.693868100643158,
+        "y": -0.11949951201677322,
+        "z": 4.276678085327148
+      },
+      "point_3d_end_calibrated_m": {
+        "x": 0.7628178596496582,
+        "y": -0.26742467284202576,
+        "z": 4.8628249168396
+      },
+      "length_raw_m": 2.2312371730804443,
+      "length_calibrated_m": 1.5771444505566754,
+      "pixel_length_geometry": 355.2689122340991
+    },
+    {
+      "edge_id": "floor_wall_edge_3",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start_geometry": {
+        "x": 163,
+        "y": 607
+      },
+      "pixel_end_geometry": {
+        "x": 830,
+        "y": 549
+      },
+      "pixel_start_original": {
+        "x": 582,
+        "y": 2167
+      },
+      "pixel_end_original": {
+        "x": 2963,
+        "y": 1960
+      },
+      "point_3d_start_raw_m": {
+        "x": -3.0179502964019775,
+        "y": 0.03317607194185257,
+        "z": 5.256102561950684
+      },
+      "point_3d_end_raw_m": {
+        "x": 0.1763594150543213,
+        "y": -0.2998110055923462,
+        "z": 6.5221452713012695
+      },
+      "point_3d_start_calibrated_m": {
+        "x": -2.133230686187744,
+        "y": 0.023450423032045364,
+        "z": 3.7152628898620605
+      },
+      "point_3d_end_calibrated_m": {
+        "x": 0.1246592104434967,
+        "y": -0.21192066371440887,
+        "z": 4.610161781311035
+      },
+      "length_raw_m": 3.452152729034424,
+      "length_calibrated_m": 2.4401455769733307,
+      "pixel_length_geometry": 669.5169900756814
+    },
+    {
+      "edge_id": "floor_wall_edge_4",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start_geometry": {
+        "x": 165,
+        "y": 605
+      },
+      "pixel_end_geometry": {
+        "x": 417,
+        "y": 583
+      },
+      "pixel_start_original": {
+        "x": 589,
+        "y": 2160
+      },
+      "pixel_end_original": {
+        "x": 1489,
+        "y": 2081
+      },
+      "point_3d_start_raw_m": {
+        "x": -3.0085811614990234,
+        "y": 0.02368558943271637,
+        "z": 5.2558512687683105
+      },
+      "point_3d_end_raw_m": {
+        "x": -1.94938325881958,
+        "y": -0.08652615547180176,
+        "z": 5.646487236022949
+      },
+      "point_3d_start_calibrated_m": {
+        "x": -2.12660813331604,
+        "y": 0.016742099076509476,
+        "z": 3.71508526802063
+      },
+      "point_3d_end_calibrated_m": {
+        "x": -1.377916693687439,
+        "y": -0.061160795390605927,
+        "z": 3.9912052154541016
+      },
+      "length_raw_m": 1.1343029737472534,
+      "length_calibrated_m": 0.8017792379398102,
+      "pixel_length_geometry": 252.9584946191766
+    },
+    {
+      "edge_id": "floor_wall_edge_5",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start_geometry": {
+        "x": 164,
+        "y": 606
+      },
+      "pixel_end_geometry": {
+        "x": 442,
+        "y": 582
+      },
+      "pixel_start_original": {
+        "x": 585,
+        "y": 2163
+      },
+      "pixel_end_original": {
+        "x": 1578,
+        "y": 2078
+      },
+      "point_3d_start_raw_m": {
+        "x": -3.0142829418182373,
+        "y": 0.028425361961126328,
+        "z": 5.25432825088501
+      },
+      "point_3d_end_raw_m": {
+        "x": -1.8276910781860352,
+        "y": -0.09187369048595428,
+        "z": 5.663802146911621
+      },
+      "point_3d_start_calibrated_m": {
+        "x": -2.130638360977173,
+        "y": 0.020092396065592766,
+        "z": 3.7140088081359863
+      },
+      "point_3d_end_calibrated_m": {
+        "x": -1.2918988466262817,
+        "y": -0.0649406909942627,
+        "z": 4.003444194793701
+      },
+      "length_raw_m": 1.2610079050064087,
+      "length_calibrated_m": 0.891340303703901,
+      "pixel_length_geometry": 279.03404810166086
+    },
+    {
+      "edge_id": "floor_wall_edge_6",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start_geometry": {
+        "x": 21,
+        "y": 1076
+      },
+      "pixel_end_geometry": {
+        "x": 48,
+        "y": 690
+      },
+      "pixel_start_original": {
+        "x": 75,
+        "y": 3841
+      },
+      "pixel_end_original": {
+        "x": 171,
+        "y": 2463
+      },
+      "point_3d_start_raw_m": {
+        "x": -1.0897386074066162,
+        "y": 0.6656454801559448,
+        "z": 1.552039623260498
+      },
+      "point_3d_end_raw_m": {
+        "x": -2.1662909984588623,
+        "y": 0.25921231508255005,
+        "z": 3.1958565711975098
+      },
+      "point_3d_start_calibrated_m": {
+        "x": -0.7702789902687073,
+        "y": 0.4705098271369934,
+        "z": 1.0970553159713745
+      },
+      "point_3d_end_calibrated_m": {
+        "x": -1.5312373638153076,
+        "y": 0.18322357535362244,
+        "z": 2.2589831352233887
+      },
+      "length_raw_m": 2.006561040878296,
+      "length_calibrated_m": 1.4183326848912865,
+      "pixel_length_geometry": 386.9431482789171
+    },
+    {
+      "edge_id": "floor_wall_edge_7",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start_geometry": {
+        "x": 22,
+        "y": 1076
+      },
+      "pixel_end_geometry": {
+        "x": 42,
+        "y": 784
+      },
+      "pixel_start_original": {
+        "x": 79,
+        "y": 3841
+      },
+      "pixel_end_original": {
+        "x": 150,
+        "y": 2799
+      },
+      "point_3d_start_raw_m": {
+        "x": -1.089269757270813,
+        "y": 0.6660204529762268,
+        "z": 1.552642583847046
+      },
+      "point_3d_end_raw_m": {
+        "x": -1.91398286819458,
+        "y": 0.4651971757411957,
+        "z": 2.805101156234741
+      },
+      "point_3d_start_calibrated_m": {
+        "x": -0.7699475884437561,
+        "y": 0.47077488899230957,
+        "z": 1.0974814891815186
+      },
+      "point_3d_end_calibrated_m": {
+        "x": -1.3528939485549927,
+        "y": 0.328823447227478,
+        "z": 1.9827786684036255
+      },
+      "length_raw_m": 1.512988567352295,
+      "length_calibrated_m": 1.0694522086421583,
+      "pixel_length_geometry": 292.6841300788275
+    }
+  ],
+  "llm_placement_context": {
+    "summary": "바닥-벽 경계 후보선, 정면 벽 후보 영역, 보정된 m 단위 길이를 제공합니다.",
+    "recommended_usage": "가구 배치 가능 벽면과 바닥 경계 기준 좌표를 LLM 또는 메인 서버에 전달할 때 사용합니다.",
+    "important_warning": "정면 벽이 가구나 커튼 등으로 많이 가려져 있으면 벽 탐지와 길이 보정이 불안정할 수 있습니다."
+  }
+}
