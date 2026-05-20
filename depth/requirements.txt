@@ -4,3 +4,5 @@ torch>=2.0.0
 pillow>=9.0.0
 pillow-avif>=1.0.0
 transformers>=4.30.0
+
+flatbuffers-25.12.19 pyzmq-27.1.0
