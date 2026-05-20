@@ -1,4 +1,3 @@
-# services/ai-perception/main.py
 import os
 import time
 import zmq
@@ -11,14 +10,12 @@ import torch
 
 from modules.depth_handler import DepthEstimator
 from modules.rfdetr_handler import RFDETRDetector
-# 🔥 hand_tracker 임포트 삭제 완료!
 
 sys.path.append('/app/schema')
 import InteriorPlatform.VisionMessage as VisionMessage
 import InteriorPlatform.DetectedObject as DetectedObject
 import InteriorPlatform.BoundingBox as BoundingBox
 import InteriorPlatform.Vec3 as Vec3
-# 🔥 HandTracking 스키마는 이제 유니티 내부에서 처리하므로 파이썬에서 쓰지 않습니다.
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -49,13 +46,11 @@ def main():
     os.makedirs(model_dir, exist_ok=True)
     os.makedirs(asset_dir, exist_ok=True)
     
-    # 엣지 아키텍처에서는 유니티가 웹캠 화면을 찍어서 ZMQ로 파이썬에 넘겨주는 것이 정석입니다.
-    # 현재는 테스트를 위해 다시 test_room.jpg를 스캔하도록 세팅합니다.
     image_path = os.path.join(model_dir, "test_room.jpg")
     rfdetr_weights = os.path.join(model_dir, "rfdetr_base.pth")
     model = RFDETRDetector(
         model_path=rfdetr_weights if os.path.exists(rfdetr_weights) else None,
-        confidence=0.5,
+        confidence=0.1,  # 🔥 확신도를 낮춰서 흐릿한 것도 다 잡습니다.
     )
     depth_estimator = DepthEstimator()
 
@@ -69,19 +64,35 @@ def main():
         builder = flatbuffers.Builder(1024)
         object_offsets = []
 
-        for j, det in enumerate(detections):
+        valid_id = 0  # 🔥 크기가 통과된 객체만 세기 위한 번호표
+
+        for det in detections:
             class_name = det["label"]
             x1, y1, x2, y2 = map(int, det["bbox"])
             x1, y1 = max(0, x1), max(0, y1)
             x2, y2 = min(original_img.shape[1], x2), min(original_img.shape[0], y2)
+
+            w = x2 - x1
+            h = y2 - y1
+            
+            # 🔥 [수정 1] 크기 필터링 대폭 완화! (50 -> 10픽셀)
+            # 이제 예전처럼 19개 객체를 싹 다 잡아낼 것입니다.
+            if w < 10 or h < 10:
+                print(f"[필터링] '{class_name}' 객체가 너무 작아 무시합니다. (크기: {w}x{h})")
+                continue
+
             cropped_img = original_img[y1:y2, x1:x2]
 
-            ply_filename = f"asset_{class_name}_{j}.ply"
+            ply_filename = f"asset_{class_name}_{valid_id}.ply"
             ply_filepath = os.path.join(asset_dir, ply_filename)
 
             generate_3dgs_dual_track(cropped_img, ply_filepath, asset_dir)
 
-            combined_label = f"{class_name}|{ply_filename}"
+            # 🔥 [수정 2] 카메라 하향각 및 물리적 크기(Scale) 동기화 함수 호출!
+            pos_x, pos_y, pos_z, scale_w, scale_h = depth_estimator.estimate_3d_position_and_scale(original_img.shape, (x1, y1, x2, y2))
+
+            # 🔥 [수정 3] 유니티로 스케일을 넘겨주기 위해 Label에 크기 정보를 합칩니다.
+            combined_label = f"{class_name}|{ply_filename}|{scale_w:.2f}|{scale_h:.2f}"
             label_offset = builder.CreateString(combined_label)
 
             BoundingBox.BoundingBoxStart(builder)
@@ -92,21 +103,19 @@ def main():
             bbox_offset = BoundingBox.BoundingBoxEnd(builder)
 
             DetectedObject.DetectedObjectStart(builder)
-            DetectedObject.DetectedObjectAddId(builder, j)
+            DetectedObject.DetectedObjectAddId(builder, valid_id)
             DetectedObject.DetectedObjectAddLabel(builder, label_offset)
             DetectedObject.DetectedObjectAddConfidence(builder, float(det["confidence"]))
             DetectedObject.DetectedObjectAddBbox(builder, bbox_offset)
 
-            center_x = (x1 + x2) / 2.0
-            center_y = (y1 + y2) / 2.0
-            estimated_z = depth_estimator.estimate_depth(original_img, (x1, y1, x2, y2))
-
             DetectedObject.DetectedObjectAddPosition3d(
                 builder,
-                Vec3.CreateVec3(builder, float(center_x), float(center_y), float(estimated_z))
+                Vec3.CreateVec3(builder, float(pos_x), float(pos_y), float(pos_z))
             )
             obj_offset = DetectedObject.DetectedObjectEnd(builder)
             object_offsets.append(obj_offset)
+
+            valid_id += 1
 
         VisionMessage.VisionMessageStartObjectsVector(builder, len(object_offsets))
         for obj in reversed(object_offsets):
@@ -116,13 +125,12 @@ def main():
         VisionMessage.VisionMessageStart(builder)
         VisionMessage.VisionMessageAddTimestamp(builder, int(time.time()))
         VisionMessage.VisionMessageAddObjects(builder, objects_vector)
-        # 🔥 Hands 데이터 전송 코드 삭제 완료!
         msg_offset = VisionMessage.VisionMessageEnd(builder)
         builder.Finish(msg_offset)
 
         binary_data = builder.Output()
         socket.send(binary_data)
-        print(f"[AI Perception] 추론 및 3DGS 배포 완료! ({len(object_offsets)}개 객체)")
+        print(f"[AI Perception] 추론 및 3DGS 배포 완료! (최종 {valid_id}개 객체)")
 
 if __name__ == "__main__":
     main()

@@ -30,14 +30,15 @@ services:
     build: 
       context: ./services/logic-cpp
     container_name: logic_core
-    volumes:
-      - ./services/logic-cpp/src:/app/src:ro       # 🔥 [추가] C++ 소스 코드 실시간 동기화
-      - ./shared/schema:/app/schema:rw             # 스키마(읽기/쓰기)
-      - ./shared/assets_3dgs:/app/assets           # 3DGS 메타데이터 접근용
-    networks:
+    # ❌ 삭제하세요: network_mode: "host"
+    networks:          # ✅ 추가: 같은 네트워크망에 합류
       - interior_net
-    ports:
-      - "5555:5555" # [중요] 외부(Unity)에서 접속할 포트 개방!
+    ports:             # ✅ [중요] 호스트 모드를 지웠으니 외부(유니티) 통신용 포트를 열어줘야 합니다
+      - "5555:5555"    # 5555번 포트를 열어서 유니티와 통신하게 합니다
+    volumes:
+      - ./services/logic-cpp/src:/app/src:ro
+      - ./shared/schema:/app/schema:rw
+      - ./shared/assets_3dgs:/app/assets
     depends_on:
       - postgres_db
 
@@ -60,6 +61,15 @@ services:
       - ./shared/assets_3dgs:/app/assets:rw # [중요] 생성된 .ply 파일을 유니티와 공유!
     networks:
       - interior_net
+    ports:
+      - "5556:5556"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu] # GPU 리소스 예약 (NVIDIA Docker 필요)
       
   # --------------------------------------------------------
   # 4. AI Reconstruction (3DGS 생성) - 기본 CPU 호환 모드
@@ -68,15 +78,26 @@ services:
     build: 
       context: ./services/ai-reconstruction
     container_name: ai_reconstruction
+    ports:
+      - "8000:8000"
     volumes:
       - ./services/ai-reconstruction/main.py:/app/main.py:ro # 🔥 [추가] 파이썬 메인 코드 실시간 동기화
       - ./services/ai-reconstruction/utils:/app/utils:ro     # 🔥 [추가] 유틸리티 로직 실시간 동기화
+      - ./services/ai-reconstruction/lgm_core:/app/lgm_core:ro
       - ./shared/models:/app/models:ro
       - ./shared/assets_3dgs:/app/output_assets # 생성된 .ply 저장
     networks:
       - interior_net
     environment:
       - ZMQ_TARGET_URL=tcp://logic-cpp:5557
+      - PYTHONUNBUFFERED=1
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu] # GPU 리소스 예약 (NVIDIA Docker 필요)
 
   # --------------------------------------------------------
   # 5. Matching Engine (GPT & DB) - Lightweight
