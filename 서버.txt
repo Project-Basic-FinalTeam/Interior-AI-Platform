@@ -1,29 +1,57 @@
-맥북(M1/M2) 및 일반 노트북 사용자:
-docker compose up --build
+🚀 1. 처음 켤 때 or 패키지(requirements.txt) 추가 시
+완전히 새로 빌드해서 백그라운드로 켭니다.
 
-NVIDIA GPU(RTX 등)가 장착된 데스크톱 사용자:
-docker compose -f docker-compose.yml -f docker-compose.gpu.yml up --build
+일반 사용자 (Mac/일반 노트북):
+docker compose up --build -d
 
-
-# AI와 C++ 양쪽 모두 최신 코드로 빌드
-docker compose build ai-perception logic-cpp
-
-# 빌드 완료 후 실행!
-docker compose up logic-cpp ai-perception
+GPU 장착 데스크톱 사용자:
+docker compose -f docker-compose.yml -f docker-compose.gpu.yml up --build -d
 
 
-처음 켤 때, 또는 requirements.txt에 패키지를 추가했을 때만!
-👉 docker compose up --build (도커 이미지를 새로 굽습니다)
 
-Python 로직(main.py 등)만 수정했을 때!
-👉 수정/저장 후 docker restart ai_perception (1초 컷)
+⚡ 2. 파이썬/C++ 코드만 수정했을 때 (1초 컷 적용)
+컨테이너를 새로 빌드할 필요 없이 서비스만 재시작합니다.
 
-C++ 로직만 수정했을 때!
-👉 수정/저장 후 docker exec -it logic_core bash -c "cd build && make" (바뀐 부분만 1초 컷 컴파일)
+3DGS 파이썬(main.py) 수정 시:
+docker compose restart ai-reconstruction
+
+YOLO 파이썬(main.py) 수정 시:
+docker compose restart ai-perception
+
+C++ 로직 수정 시 (컴파일 후 재시작):
+docker exec -it logic_core bash -c "cd build && make"
+docker compose restart logic-cpp
 
 
-# 1. 현재 실행 중인 서비스를 중지하고 컨테이너를 삭제합니다.
+🛑 3. 끄기 & 부분 실행
+꼬였을 때 다 끄거나, 특정 서비스만 따로 켤 때 씁니다.
+
+전체 서비스 종료 및 초기화:
 docker compose down
 
-# 2. 변경된 설정을 반영하여 다시 실행합니다.
-docker compose up -d ai-perception
+3DGS 서비스만 백그라운드로 켜기:
+docker compose up -d ai-reconstruction
+
+# 2. 이번엔 NVIDIA 베이스로 빌드 (이게 핵심입니다)
+docker compose build --no-cache ai-reconstruction
+
+
+🔎 4. 실시간 로그 보기 (가장 많이 씀!)	
+
+3DGS 통신/생성 로그 보기:
+docker compose logs -f ai-reconstruction
+
+RF-DETR 인식 로그 보기:
+docker compose logs -f ai-perception
+
+C++ 통제탑 로그 보기:
+docker compose logs -f logic-cpp
+
+
+
+🚀 전체 서비스 한 번에 띄우기 (백그라운드)
+docker compose up -d
+
+
+💡 전체 서비스 상태 한눈에 보기
+docker compose ps
