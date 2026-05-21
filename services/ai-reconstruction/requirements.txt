@@ -7,7 +7,7 @@ pyzmq
 # 2. 이미지 전처리 및 비전 (MobileSAM 전담)
 Pillow
 opencv-python-headless
-onnxruntime-gpu
+onnxruntime-gpu==1.17.1
 imageio
 imageio-ffmpeg
 
@@ -36,3 +36,5 @@ tyro
 tqdm
 ninja
 ultralytics
+
+rembg
