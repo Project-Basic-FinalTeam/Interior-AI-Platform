@@ -26,9 +26,9 @@ app.mount("/assets", StaticFiles(directory=SHARED_DIR), name="assets")
 
 print("[3DGS] 🚀 서버 초기화 완료 (YOLO 사전 Crop + SAM 무조건 강제 반전 누끼 모드)")
 
-print("[3DGS] Meta 정품 SAM-Base(ViT-B) 가중치 로드 중...")
-sam_model = SAM("sam_b.pt")
-print("[3DGS] ✅ SAM-Base 로드 완료!")
+print("[3DGS] Meta SAM 2.1 Base+ 가중치 로드 중...")
+sam_model = SAM("sam2.1_b.pt")
+print("[3DGS] ✅ SAM 2.1 Base+ 로드 완료!")
 
 def generate_3dgs_ply(object_id: str) -> str:
     print(f"\n[3DGS] 🚀 LGM 엔진 가동 시작! (가구 ID: {object_id})")
