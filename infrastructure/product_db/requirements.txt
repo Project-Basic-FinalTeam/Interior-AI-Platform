@@ -1,5 +1,6 @@
+﻿playwright
 requests
 beautifulsoup4
-playwright
 pymysql
 python-dotenv
+firebase-admin

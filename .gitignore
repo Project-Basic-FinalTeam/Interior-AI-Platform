@@ -91,3 +91,4 @@ shared/assets_3dgs/*.ply
 # shared/schema/InteriorPlatform/
 
 echo "infrastructure/postgres_db/data/"
+infrastructure/product_db/data/images/
