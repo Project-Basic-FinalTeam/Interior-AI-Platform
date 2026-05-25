@@ -340,7 +340,7 @@ def create_obstacle_mask_from_vision_objects(
         x_max = obj.x_max
         y_max = obj.y_max
 
-        # 선배님 답변 기준: 절대 pixel 좌표
+        # 절대 pixel 좌표
         if max(x_min, y_min, x_max, y_max) <= 1.5:
             x_min *= width
             x_max *= width

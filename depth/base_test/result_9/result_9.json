@@ -1,0 +1,231 @@
+{
+  "input_image": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Interior-AI-Platform\\depth\\base_test\\test_9.png",
+  "output_dir": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Interior-AI-Platform\\depth\\base_test\\result_9",
+  "output_json": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Interior-AI-Platform\\depth\\base_test\\result_9\\result_9.json",
+  "model": {
+    "name": "depth-anything/Depth-Anything-V2-Metric-Indoor-Large-hf",
+    "task": "single_image_metric_depth_estimation",
+    "scene_type": "indoor"
+  },
+  "image": {
+    "width": 1448,
+    "height": 1086
+  },
+  "camera_assumption": {
+    "note": "카메라 내부파라미터가 없어서 horizontal_fov_deg 기반으로 3D 좌표와 길이를 추정했습니다.",
+    "intrinsics": {
+      "fx": 1033.979156881291,
+      "fy": 1033.979156881291,
+      "cx": 724.0,
+      "cy": 543.0,
+      "horizontal_fov_deg": 70.0
+    }
+  },
+  "depth_statistics_m": {
+    "min_m": 2.2969841957092285,
+    "max_m": 7.7615156173706055,
+    "mean_m": 4.675428867340088,
+    "median_m": 4.573634147644043,
+    "p10_m": 3.1107301712036133,
+    "p90_m": 6.475041389465332
+  },
+  "floor_plane_estimation": {
+    "plane_normal_camera_coord": [
+      0.014241310767829418,
+      -0.9990173578262329,
+      -0.04196922853589058
+    ],
+    "plane_d": 1.5880547761917114,
+    "distance_threshold_m": 0.06860451221466064,
+    "inlier_count_sampled": 5813
+  },
+  "floor_wall_boundary_edges": [
+    {
+      "edge_id": "floor_wall_edge_1",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start": {
+        "x": 8,
+        "y": 845
+      },
+      "pixel_end": {
+        "x": 626,
+        "y": 703
+      },
+      "point_3d_start_m": {
+        "x": -3.0694212913513184,
+        "y": 1.2940714359283447,
+        "z": 4.4325666427612305
+      },
+      "point_3d_end_m": {
+        "x": -0.7252662777900696,
+        "y": 1.1841198205947876,
+        "z": 7.652144908905029
+      },
+      "length_m_estimated": 3.984072827791217,
+      "pixel_length": 634.1040924012398,
+      "mean_depth_m": 5.787107642491659,
+      "confidence_note": "카메라 FOV 또는 내부파라미터가 없으므로 길이는 추정값입니다."
+    },
+    {
+      "edge_id": "floor_wall_edge_2",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start": {
+        "x": 8,
+        "y": 844
+      },
+      "pixel_end": {
+        "x": 612,
+        "y": 705
+      },
+      "point_3d_start_m": {
+        "x": -3.069460868835449,
+        "y": 1.2903573513031006,
+        "z": 4.4325666427612305
+      },
+      "point_3d_end_m": {
+        "x": -0.8182076811790466,
+        "y": 1.1834789514541626,
+        "z": 7.5536580085754395
+      },
+      "length_m_estimated": 3.8497759962168434,
+      "pixel_length": 619.7878669351313,
+      "mean_depth_m": 5.7444743633270265,
+      "confidence_note": "카메라 FOV 또는 내부파라미터가 없으므로 길이는 추정값입니다."
+    },
+    {
+      "edge_id": "floor_wall_edge_3",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start": {
+        "x": 837,
+        "y": 749
+      },
+      "pixel_end": {
+        "x": 1359,
+        "y": 889
+      },
+      "point_3d_start_m": {
+        "x": 0.6901690363883972,
+        "y": 1.257947325706482,
+        "z": 6.315224647521973
+      },
+      "point_3d_end_m": {
+        "x": 2.534294605255127,
+        "y": 1.382007122039795,
+        "z": 4.126626491546631
+      },
+      "length_m_estimated": 2.864638168277622,
+      "pixel_length": 540.4479623423517,
+      "mean_depth_m": 5.0970333894093836,
+      "confidence_note": "카메라 FOV 또는 내부파라미터가 없으므로 길이는 추정값입니다."
+    },
+    {
+      "edge_id": "floor_wall_edge_4",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start": {
+        "x": 783,
+        "y": 736
+      },
+      "pixel_end": {
+        "x": 1366,
+        "y": 892
+      },
+      "point_3d_start_m": {
+        "x": 0.3790490925312042,
+        "y": 1.2398066520690918,
+        "z": 6.642861843109131
+      },
+      "point_3d_end_m": {
+        "x": 2.5393545627593994,
+        "y": 1.3801379203796387,
+        "z": 4.091116428375244
+      },
+      "length_m_estimated": 3.346343863260159,
+      "pixel_length": 603.5105632878351,
+      "mean_depth_m": 5.215708176294963,
+      "confidence_note": "카메라 FOV 또는 내부파라미터가 없으므로 길이는 추정값입니다."
+    },
+    {
+      "edge_id": "floor_wall_edge_5",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start": {
+        "x": 8,
+        "y": 843
+      },
+      "pixel_end": {
+        "x": 486,
+        "y": 733
+      },
+      "point_3d_start_m": {
+        "x": -3.0708649158477783,
+        "y": 1.2867790460586548,
+        "z": 4.435009002685547
+      },
+      "point_3d_end_m": {
+        "x": -1.5217537879943848,
+        "y": 1.2144246101379395,
+        "z": 6.6111836433410645
+      },
+      "length_m_estimated": 2.6722119147756205,
+      "pixel_length": 490.493628908674,
+      "mean_depth_m": 5.395486847559611,
+      "confidence_note": "카메라 FOV 또는 내부파라미터가 없으므로 길이는 추정값입니다."
+    },
+    {
+      "edge_id": "floor_wall_edge_6",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start": {
+        "x": 913,
+        "y": 768
+      },
+      "pixel_end": {
+        "x": 1275,
+        "y": 865
+      },
+      "point_3d_start_m": {
+        "x": 1.0771169662475586,
+        "y": 1.2823894023895264,
+        "z": 5.8926801681518555
+      },
+      "point_3d_end_m": {
+        "x": 2.3349950313568115,
+        "y": 1.3646525144577026,
+        "z": 4.381735324859619
+      },
+      "length_m_estimated": 1.9677344246014348,
+      "pixel_length": 374.7705964987115,
+      "mean_depth_m": 5.082619825998942,
+      "confidence_note": "카메라 FOV 또는 내부파라미터가 없으므로 길이는 추정값입니다."
+    },
+    {
+      "edge_id": "floor_wall_edge_7",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start": {
+        "x": 23,
+        "y": 839
+      },
+      "pixel_end": {
+        "x": 404,
+        "y": 751
+      },
+      "point_3d_start_m": {
+        "x": -3.044499635696411,
+        "y": 1.285582184791565,
+        "z": 4.490654945373535
+      },
+      "point_3d_end_m": {
+        "x": -1.8928009271621704,
+        "y": 1.2304919958114624,
+        "z": 6.115989685058594
+      },
+      "length_m_estimated": 1.9927764200201683,
+      "pixel_length": 391.0306893326916,
+      "mean_depth_m": 5.224381907780965,
+      "confidence_note": "카메라 FOV 또는 내부파라미터가 없으므로 길이는 추정값입니다."
+    }
+  ],
+  "llm_placement_context": {
+    "summary": "가구 배치 판단에 사용할 수 있는 바닥-벽 경계 후보선과 각 후보선의 추정 길이를 제공합니다.",
+    "main_use": "LLM 또는 메인 서버가 벽면 기준 가구 배치 가능 영역을 판단할 때 사용",
+    "important_warning": "정확한 실측 길이가 필요하면 카메라 intrinsic parameter 또는 촬영 기기의 FOV가 필요합니다."
+  }
+}

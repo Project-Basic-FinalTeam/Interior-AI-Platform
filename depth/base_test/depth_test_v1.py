@@ -1,3 +1,23 @@
+"""
+실내 이미지 기반 Depth 추정 및 바닥-벽 경계 후보선 추출 코드
+
+이 코드는 단일 실내 이미지를 입력으로 받아 Depth Anything V2 Metric Indoor 모델을 이용해
+픽셀 단위의 metric depth map(미터 단위 깊이 지도)을 생성한다. 이후 depth map을 카메라 좌표계
+기준의 3D point cloud로 변환하고, 이미지 하단부의 점들을 기반으로 RANSAC 알고리즘을 사용해
+바닥 plane(평면)을 추정한다.
+
+추정된 바닥 영역으로부터 바닥-벽 경계 후보선을 추출하고, 각 경계선의 픽셀 좌표, 3D 좌표,
+추정 길이, 평균 깊이값 등을 계산하여 JSON 파일로 저장한다. 또한 결과 검증을 위해 depth map,
+floor mask, boundary overlay 등의 디버그 이미지를 함께 저장한다.
+
+주의:
+- 카메라의 실제 intrinsic parameter(내부 파라미터)를 알 수 없기 때문에,
+  horizontal FOV 값을 가정하여 3D 좌표와 길이를 계산한다.
+- 따라서 출력되는 길이값은 실측값이 아니라 추정값이다.
+- 바닥이 충분히 보이지 않거나, 가구·그림자·조명 변화가 심한 이미지에서는
+  바닥 평면 및 경계선 추정 정확도가 낮아질 수 있다.
+"""
+
 import json
 import math
 from pathlib import Path
@@ -15,11 +35,11 @@ from transformers import AutoImageProcessor, AutoModelForDepthEstimation
 # 1. 경로 및 설정값
 # =========================
 
-INPUT_IMAGE_PATH = Path(r"C:\Users\khrha\Desktop\SWPJ_4\Interior-AI-Platform\shared\models\thumb-1920-1174099.jpg")
+INPUT_IMAGE_PATH = Path(r"C:\Users\khrha\Desktop\SWPJ_4\Interior-AI-Platform\depth\base_test\test_10.png")
 
 # 여기 숫자만 그때그때 바꾸면 됩니다.
 # 예: 1 -> result_1, 2 -> result_2, 3 -> result_3
-RESULT_NUMBER = 5
+RESULT_NUMBER = 10
 
 BASE_OUTPUT_DIR = Path(r"C:\Users\khrha\Desktop\SWPJ_4\Interior-AI-Platform\depth\base_test")
 RESULT_NAME = f"result_{RESULT_NUMBER}"
