@@ -1,0 +1,107 @@
+{
+  "input_image": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Interior-AI-Platform\\shared\\models\\thumb-1920-1174099.jpg",
+  "output_dir": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Interior-AI-Platform\\depth\\base_test\\v3_result_1",
+  "output_json": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Interior-AI-Platform\\depth\\base_test\\v3_result_1\\v3_result_1.json",
+  "model": {
+    "name": "depth-anything/Depth-Anything-V2-Metric-Indoor-Large-hf",
+    "task": "single_image_metric_depth_estimation",
+    "scene_type": "indoor"
+  },
+  "image": {
+    "width": 1920,
+    "height": 1080
+  },
+  "vision_message_input": {
+    "used": true,
+    "transport": "ZeroMQ REQ/REP",
+    "serialization": "FlatBuffers",
+    "endpoint": "tcp://127.0.0.1:5556",
+    "request_image_path": "shared/models/thumb-1920-1174099.jpg",
+    "objects_field": "objects",
+    "bbox_format": "x_min, y_min, x_max, y_max",
+    "bbox_unit": "absolute_pixel",
+    "used_object_count": 0,
+    "used_objects": [],
+    "obstacle_pixel_count": 0,
+    "obstacle_area_ratio": 0.0
+  },
+  "camera_assumption": {
+    "note": "horizontal_fov_deg 기반으로 3D 좌표와 길이를 추정했습니다.",
+    "intrinsics": {
+      "fx": 1371.0220864724301,
+      "fy": 1371.0220864724301,
+      "cx": 960.0,
+      "cy": 540.0,
+      "horizontal_fov_deg": 70.0
+    }
+  },
+  "depth_statistics_m": {
+    "min_m": 2.9326138496398926,
+    "max_m": 4.990839004516602,
+    "mean_m": 4.339583396911621,
+    "median_m": 4.587874889373779,
+    "p10_m": 3.5813674926757812,
+    "p90_m": 4.754920959472656
+  },
+  "floor_plane": {
+    "normal": [
+      0.03250795975327492,
+      0.83826744556427,
+      0.5442893505096436
+    ],
+    "d": -2.7948708534240723,
+    "distance_threshold_m": 0.06881812334060669,
+    "inlier_count_sampled": 3938
+  },
+  "front_wall_plane": {
+    "normal": [
+      0.004307580180466175,
+      -0.10358106344938278,
+      -0.9946116805076599
+    ],
+    "d": 4.577381134033203,
+    "distance_threshold_m": 0.08258174800872801,
+    "inlier_count_sampled": 13073,
+    "z_alignment": 0.9946116805076599,
+    "y_alignment": 0.10358106344938278
+  },
+  "floor_wall_intersection_line": {
+    "line_point_m": {
+      "x": -0.024365441873669624,
+      "y": 0.3720691204071045,
+      "z": 4.56332540512085
+    },
+    "line_direction": {
+      "x": -0.9989663362503052,
+      "y": 0.04456231743097305,
+      "z": -0.008967258967459202
+    },
+    "projected_segment": {
+      "pixel_start": {
+        "x": 37,
+        "y": 693
+      },
+      "pixel_end": {
+        "x": 1898,
+        "y": 609
+      },
+      "point_3d_start_m": {
+        "x": -3.054109573364258,
+        "y": 0.5072212219238281,
+        "z": 4.536128997802734
+      },
+      "point_3d_end_m": {
+        "x": 3.14025616645813,
+        "y": 0.2309003323316574,
+        "z": 4.591732978820801
+      },
+      "length_m_estimated": 6.200774669647217
+    },
+    "note": "바닥 plane과 정면 벽 plane의 3D 교선을 이미지에 투영한 결과입니다."
+  },
+  "llm_placement_context": {
+    "summary": "RF-DETR 객체 영역을 제외한 뒤, 바닥 plane과 정면 벽 plane의 교선을 계산하여 바닥-벽 경계선을 추정했습니다.",
+    "main_use": "가구 배치 가능 벽면과 바닥 경계 기준 좌표를 LLM 또는 메인 서버에 전달할 때 사용합니다.",
+    "important_warning": "벽과 바닥 plane 자체가 충분히 보이지 않으면 교선 추정도 불안정할 수 있습니다."
+  }
+}
