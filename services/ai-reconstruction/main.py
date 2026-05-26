@@ -59,11 +59,7 @@ def generate_3dgs_ply(object_id: str) -> str:
                     mask = cv2.resize(mask, (img_w, img_h), interpolation=cv2.INTER_NEAREST)
                     
                 mask = (mask * 255).astype(np.uint8)
-                
-                # 🔥 [사용자 명령 적용] 묻지도 따지지도 않고 마스크를 완벽하게 뒤집어버립니다!
-                print("[3DGS] 🔄 마스크 강제 반전(Invert) 실행!")
-                mask = 255 - mask
-                
+
                 # 끊어진 틈새 부드럽게 연결
                 kernel = np.ones((7, 7), np.uint8)
                 mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
