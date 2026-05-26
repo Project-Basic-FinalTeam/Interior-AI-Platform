@@ -2,6 +2,7 @@
 torch
 torchvision
 rfdetr
+supervision
 opencv-python-headless
 numpy
 pyzmq
@@ -10,4 +11,3 @@ mediapipe
 diffusers
 trimesh
 ultralytics
-git+https://github.com/ultralytics/CLIP.git
