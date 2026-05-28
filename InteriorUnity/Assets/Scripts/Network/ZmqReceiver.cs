@@ -56,15 +56,31 @@ public class ZmqReceiver : MonoBehaviour
                     reqSocket.Connect(serverUrl);
                     reqSocket.SendFrame(System.Text.Encoding.UTF8.GetBytes("SCAN_ROOM")); 
                     
+                    // 1차 응답 수신 대기
                     if (reqSocket.TryReceiveFrameString(TimeSpan.FromSeconds(30), out string initialResponse) && initialResponse.StartsWith("COUNT:"))
                     {
-                        int objectCount = int.Parse(initialResponse.Split(':')[1]);
+                        // 🔥 수정 1: "COUNT:3|EST_SEC:90" 형태의 문자열 분리 및 파싱
+                        string[] parts = initialResponse.Split('|');
+                        int objectCount = int.Parse(parts[0].Replace("COUNT:", ""));
+                        string estTime = parts.Length > 1 ? parts[1].Replace("EST_SEC:", "") : "알 수 없음";
+
+                        // 🔥 수정 2: 유니티 콘솔에 기대했던 안내 메시지 출력
+                        Debug.Log($"[3DGS] ✅ 스캔 완료! 총 {objectCount}개의 가구가 감지되었습니다. (렌더링 예상 대기 시간: 약 {estTime}초)");
+
                         if (objectCount > 0)
                         {
                             reqSocket.SendFrame(System.Text.Encoding.UTF8.GetBytes("GIVE_ME_FINAL_DATA"));
-                            if (reqSocket.TryReceiveFrameBytes(TimeSpan.FromSeconds(Math.Max(30, objectCount * 10)), out byte[] rawData))
+                            
+                            // 🔥 수정 3: 4090이 3DGS를 다 깎을 때까지 유니티가 통신을 끊지 않고 기다리도록 타임아웃 연장 (예상 시간 + 10초 여유 버퍼)
+                            int waitTimeout = parts.Length > 1 ? int.Parse(estTime) + 30 : Math.Max(60, objectCount * 50);
+                            
+                            if (reqSocket.TryReceiveFrameBytes(TimeSpan.FromSeconds(waitTimeout), out byte[] rawData))
                             {
                                 _mainThreadActionQueue.Enqueue(rawData);
+                            }
+                            else 
+                            {
+                                Debug.LogError($"[ZMQ] 🚨 3DGS 렌더링 응답 시간 초과 (Timeout: {waitTimeout}초)");
                             }
                         }
                     }
@@ -98,9 +114,13 @@ public class ZmqReceiver : MonoBehaviour
                 Vector3 finalWorldPosition = camTransform.TransformPoint(new Vector3(obj.Position3d.Value.X, obj.Position3d.Value.Y, obj.Position3d.Value.Z));
 
                 furnitureManager.AddFurniture(new FurnitureManager.FurnitureData {
-                    id = i,
-                    label = parts[0],
-                    plyPath = parts.Length > 1 ? parts[1] : "",
+                    id = (int)obj.Id, 
+                    label = parts[0], // 라벨은 디버깅용으로 놔둠 (tv, cat 등)
+                    
+                    // 🔥 핵심 수정: C++이 보내는 쓰레기 이름(parts[1])은 완전히 개나 줘버립니다!!
+                    // 무조건 TRELLIS가 방금 만들어낸 "furniture_{고유ID}.ply" 를 강제로 찾게 만듭니다.
+                    plyPath = $"furniture_{obj.Id}.ply", 
+                    
                     position = finalWorldPosition,
                     scale = new Vector3(scaleW, scaleH, scaleW)
                 });

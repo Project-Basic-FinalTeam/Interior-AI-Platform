@@ -1,3 +1,6 @@
+// 파일 위치: /InteriorPlatform_Workspace/InteriorUnity/Assets/Scripts/Core/
+// 파일 명: FurnitureManager.cs
+
 using UnityEngine;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -25,6 +28,8 @@ public class FurnitureManager : MonoBehaviour
     }
 
     public void AddFurniture(FurnitureData data) {
+        // 🔥 오지랖 부렸던 간격 조절(x += 1.5f) 로직 완벽히 삭제.
+        // C++ 백엔드와 ZmqReceiver가 계산해준 원본 좌표(data.position) 그대로 큐에 넣습니다.
         _furnitureQueue.Enqueue(data);
     }
 
@@ -44,7 +49,13 @@ public class FurnitureManager : MonoBehaviour
     }
 
     private IEnumerator DownloadAndSpawnPly(FurnitureData data) {
-        string fileName = "furniture_" + data.id + ".ply";
+        
+        string fileName = data.plyPath; 
+        
+        if (string.IsNullOrEmpty(fileName)) {
+            fileName = $"asset_unknown_{data.id}.ply";
+        }
+        
         string downloadUrl = serverUrl + fileName + "?t=" + System.DateTime.Now.Ticks;
         
         using (UnityWebRequest www = UnityWebRequest.Get(downloadUrl)) {
@@ -56,6 +67,8 @@ public class FurnitureManager : MonoBehaviour
                 File.WriteAllBytes(tempFilePath, plyData);
                 
                 GameObject plyObject = new GameObject($"{data.label}_{data.id}_PointMesh");
+                
+                // 백엔드에서 전달받은 진짜 월드 좌표 그대로 배치
                 plyObject.transform.position = data.position;
                 plyObject.transform.localScale = data.scale;
                 
@@ -66,6 +79,9 @@ public class FurnitureManager : MonoBehaviour
                 _spawnedFurniture.Add(data.id, plyObject);
                 
                 if (File.Exists(tempFilePath)) File.Delete(tempFilePath);
+            }
+            else {
+                Debug.LogError($"[3DGS 다운로드 실패] 가구 ID {data.id} | URL: {downloadUrl} | 사유: {www.error}");
             }
         }
     }
