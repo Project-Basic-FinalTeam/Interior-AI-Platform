@@ -1,0 +1,126 @@
+{
+  "input_image": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Interior-AI-Platform\\depth\\base_test\\test_10.png",
+  "output_dir": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Interior-AI-Platform\\depth\\base_test\\result_10-2",
+  "output_json": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Interior-AI-Platform\\depth\\base_test\\result_10-2\\result_10-2.json",
+  "model": {
+    "name": "depth-anything/Depth-Anything-V2-Metric-Indoor-Large-hf",
+    "task": "single_image_metric_depth_estimation",
+    "scene_type": "indoor"
+  },
+  "image": {
+    "width": 1448,
+    "height": 1086
+  },
+  "camera_assumption": {
+    "note": "카메라 내부파라미터가 없어서 horizontal_fov_deg 기반으로 3D 좌표와 길이를 추정했습니다.",
+    "intrinsics": {
+      "fx": 1033.979156881291,
+      "fy": 1033.979156881291,
+      "cx": 724.0,
+      "cy": 543.0,
+      "horizontal_fov_deg": 70.0
+    }
+  },
+  "depth_scale_calibration": {
+    "enabled": true,
+    "scale_factor": 0.74,
+    "mode": "single_demo_image_manual_calibration",
+    "note": "특정 시연 이미지에서 추정 길이가 실제 공간보다 크게 나타나 depth map 전체에 scale factor를 적용했습니다. 이 값은 일반 모델 보정값이 아니라 시연 이미지 기준 수동 보정값입니다."
+  },
+  "raw_depth_statistics_m": {
+    "min_m": 2.247715473175049,
+    "max_m": 8.162898063659668,
+    "mean_m": 4.851486682891846,
+    "median_m": 4.775509834289551,
+    "p10_m": 3.2513511180877686,
+    "p90_m": 6.715863227844238
+  },
+  "calibrated_depth_statistics_m": {
+    "min_m": 1.6633094549179077,
+    "max_m": 6.040544509887695,
+    "mean_m": 3.5900990962982178,
+    "median_m": 3.533877372741699,
+    "p10_m": 2.4059998989105225,
+    "p90_m": 4.969738960266113
+  },
+  "floor_plane_estimation": {
+    "plane_normal_camera_coord": [
+      0.010877053253352642,
+      -0.9987024664878845,
+      -0.04975038021802902
+    ],
+    "plane_d": 1.2578628063201904,
+    "distance_threshold_m": 0.05300816059112549,
+    "inlier_count_sampled": 5699
+  },
+  "boundary_postprocess": {
+    "mode": "demo_representative_edges",
+    "raw_edge_count": 18,
+    "selected_edge_count": 2,
+    "max_selected_edges": 2,
+    "note": "시연 안정성을 위해 중복 후보선을 제거하고 대표 바닥-벽 경계선만 저장했습니다. 길이값은 카메라 FOV 가정과 수동 scale factor 기반 추정값입니다."
+  },
+  "floor_wall_boundary_edges": [
+    {
+      "edge_id": "demo_floor_wall_edge_left",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start": {
+        "x": 9,
+        "y": 843
+      },
+      "pixel_end": {
+        "x": 613,
+        "y": 704
+      },
+      "point_3d_start_m": {
+        "x": -2.394855499267578,
+        "y": 1.0052688121795654,
+        "z": 3.464756727218628
+      },
+      "point_3d_end_m": {
+        "x": -0.63351970911026,
+        "y": 0.9200103282928467,
+        "z": 5.90231990814209
+      },
+      "length_m_estimated": 3.0085356962744303,
+      "pixel_length": 619.7878669351313,
+      "mean_depth_m": 4.4854864517847695,
+      "confidence_note": "시연용으로 중복 경계 후보를 제거한 대표 바닥-벽 경계선입니다. 카메라 FOV, 내부파라미터, 수동 scale factor 기반 추정값이며 실측값이 아닙니다.",
+      "is_demo_selected": true,
+      "selection_reason": "왼쪽 바닥-벽 경계 후보 중 가장 긴 선분을 대표선으로 선택"
+    },
+    {
+      "edge_id": "demo_floor_wall_edge_right",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start": {
+        "x": 1096,
+        "y": 818
+      },
+      "pixel_end": {
+        "x": 1368,
+        "y": 896
+      },
+      "point_3d_start_m": {
+        "x": 1.39010751247406,
+        "y": 1.0266666412353516,
+        "z": 3.8636553287506104
+      },
+      "point_3d_end_m": {
+        "x": 1.946118950843811,
+        "y": 1.067838191986084,
+        "z": 3.1247355937957764
+      },
+      "length_m_estimated": 0.9256598678212973,
+      "pixel_length": 282.9628950940388,
+      "mean_depth_m": 3.492118763923645,
+      "confidence_note": "시연용으로 중복 경계 후보를 제거한 대표 바닥-벽 경계선입니다. 카메라 FOV, 내부파라미터, 수동 scale factor 기반 추정값이며 실측값이 아닙니다.",
+      "is_demo_selected": true,
+      "selection_reason": "오른쪽 바닥-벽 경계 후보 중 가장 오른쪽에 위치한 선분을 대표선으로 선택"
+    }
+  ],
+  "llm_placement_context": {
+    "summary": "가구 배치 판단에 사용할 수 있는 바닥-벽 대표 경계선과 각 경계선의 보정된 추정 길이를 제공합니다.",
+    "main_use": "LLM 또는 메인 서버가 벽면 기준 가구 배치 가능 영역을 판단할 때 사용",
+    "important_warning": "정확한 실측 길이가 필요하면 카메라 intrinsic parameter, 촬영 FOV, 또는 실제 기준 길이 기반 calibration이 필요합니다."
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "input_image": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Interior-AI-Platform\\depth\\base_test\\test_10.png",
+  "output_dir": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Interior-AI-Platform\\depth\\base_test\\result_10",
+  "output_json": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Interior-AI-Platform\\depth\\base_test\\result_10\\result_10.json",
+  "model": {
+    "name": "depth-anything/Depth-Anything-V2-Metric-Indoor-Large-hf",
+    "task": "single_image_metric_depth_estimation",
+    "scene_type": "indoor"
+  },
+  "image": {
+    "width": 1448,
+    "height": 1086
+  },
+  "camera_assumption": {
+    "note": "카메라 내부파라미터가 없어서 horizontal_fov_deg 기반으로 3D 좌표와 길이를 추정했습니다.",
+    "intrinsics": {
+      "fx": 1033.979156881291,
+      "fy": 1033.979156881291,
+      "cx": 724.0,
+      "cy": 543.0,
+      "horizontal_fov_deg": 70.0
+    }
+  },
+  "depth_statistics_m": {
+    "min_m": 2.247715473175049,
+    "max_m": 8.162898063659668,
+    "mean_m": 4.851486682891846,
+    "median_m": 4.775509834289551,
+    "p10_m": 3.2513511180877686,
+    "p90_m": 6.715863227844238
+  },
+  "floor_plane_estimation": {
+    "plane_normal_camera_coord": [
+      0.01087704673409462,
+      -0.9987024664878845,
+      -0.04975053295493126
+    ],
+    "plane_d": 1.6998151540756226,
+    "distance_threshold_m": 0.07163264751434326,
+    "inlier_count_sampled": 5699
+  },
+  "boundary_postprocess": {
+    "mode": "demo_representative_edges",
+    "raw_edge_count": 18,
+    "selected_edge_count": 2,
+    "max_selected_edges": 2,
+    "note": "시연 안정성을 위해 중복 후보선을 제거하고 대표 바닥-벽 경계선만 저장했습니다. 길이값은 카메라 FOV 가정 기반 추정값입니다."
+  },
+  "floor_wall_boundary_edges": [
+    {
+      "edge_id": "demo_floor_wall_edge_left",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start": {
+        "x": 9,
+        "y": 843
+      },
+      "pixel_end": {
+        "x": 613,
+        "y": 704
+      },
+      "point_3d_start_m": {
+        "x": -3.2362911701202393,
+        "y": 1.358471393585205,
+        "z": 4.682103633880615
+      },
+      "point_3d_end_m": {
+        "x": -0.8561076521873474,
+        "y": 1.2432571649551392,
+        "z": 7.976107597351074
+      },
+      "length_m_estimated": 4.0655885193754315,
+      "pixel_length": 619.7878669351313,
+      "mean_depth_m": 6.061468076705933,
+      "confidence_note": "시연용으로 중복 경계 후보를 제거한 대표 바닥-벽 경계선입니다. 카메라 FOV 또는 내부파라미터가 없으므로 길이는 추정값입니다.",
+      "is_demo_selected": true,
+      "selection_reason": "왼쪽 바닥-벽 경계 후보 중 가장 긴 선분을 대표선으로 선택"
+    },
+    {
+      "edge_id": "demo_floor_wall_edge_right",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start": {
+        "x": 1096,
+        "y": 818
+      },
+      "pixel_end": {
+        "x": 1368,
+        "y": 896
+      },
+      "point_3d_start_m": {
+        "x": 1.8785234689712524,
+        "y": 1.3873872756958008,
+        "z": 5.221155643463135
+      },
+      "point_3d_end_m": {
+        "x": 2.6298904418945312,
+        "y": 1.4430246353149414,
+        "z": 4.222615718841553
+      },
+      "length_m_estimated": 1.2508916119506739,
+      "pixel_length": 282.9628950940388,
+      "mean_depth_m": 4.7190793514251705,
+      "confidence_note": "시연용으로 중복 경계 후보를 제거한 대표 바닥-벽 경계선입니다. 카메라 FOV 또는 내부파라미터가 없으므로 길이는 추정값입니다.",
+      "is_demo_selected": true,
+      "selection_reason": "오른쪽 바닥-벽 경계 후보 중 가장 오른쪽에 위치한 선분을 대표선으로 선택"
+    }
+  ],
+  "llm_placement_context": {
+    "summary": "가구 배치 판단에 사용할 수 있는 바닥-벽 대표 경계선과 각 후보선의 추정 길이를 제공합니다.",
+    "main_use": "LLM 또는 메인 서버가 벽면 기준 가구 배치 가능 영역을 판단할 때 사용",
+    "important_warning": "정확한 실측 길이가 필요하면 카메라 intrinsic parameter 또는 촬영 기기의 FOV가 필요합니다."
+  }
+}
