@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# 2. 필수 패키지 및 라이브러리 설치 (pkg-config 추가됨!)
+# 2. 필수 패키지 및 라이브러리 설치 (원본 유지 + RAG 통신용 ssl, curl 추가)
 RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
     libzmq3-dev \
     flatbuffers-compiler \
     libflatbuffers-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
     git \
     && rm -rf /var/lib/apt/lists/*
 

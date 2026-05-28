@@ -24,15 +24,19 @@ WORKDIR /app
 # 1. 일반 패키지 설치
 COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir https://github.com/Dao-AILab/flash-attention/releases/download/v2.5.6/flash_attn-2.5.6+cu118torch2.1cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
 
-# 2. LGM 소스코드 복사
-COPY lgm_core/ ./lgm_core/
+RUN git clone --recursive https://github.com/microsoft/TRELLIS.git /app/TRELLIS
+ENV PYTHONPATH="/app/TRELLIS:${PYTHONPATH}"
+# 2. TRELLIS 소스코드 복사
+COPY trellis_core/ ./trellis_core/
 
 ENV TORCH_CUDA_ARCH_LIST="7.5 8.0 8.6"
 
 # 3. 3DGS 라이브러리 빌드 (--no-build-isolation 필수!)
 RUN pip install --no-build-isolation git+https://github.com/graphdeco-inria/diff-gaussian-rasterization.git
+RUN pip install --no-build-isolation git+https://github.com/NVlabs/nvdiffrast.git
 
 # 나머지 소스코드 복사
 COPY . .

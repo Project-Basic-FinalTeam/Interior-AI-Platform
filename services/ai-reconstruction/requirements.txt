@@ -35,6 +35,17 @@ PyMCubes
 tyro
 tqdm
 ninja
-ultralytics
-
 rembg
+
+# 🔥 6. TRELLIS 전용 라이브러리
+spconv-cu118
+easydict
+open3d
+muid
+xatlas
+git+https://github.com/EasternJournalist/utils3d.git@9a4eb15e4021b67b12c460c7057d642626897ec8
+-f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.1.2_cu118.html
+kaolin
+pyvista
+pymeshfix
+igraph

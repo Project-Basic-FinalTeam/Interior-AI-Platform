@@ -27,10 +27,43 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(entt)
 
-# 5. 실행 파일 생성
+# =====================================================================
+# 🔥 [최소 추가 구간] RAG 통신을 위한 JSON과 CPR 라이브러리만 딱 추가합니다.
+# =====================================================================
+
+# 5. nlohmann_json (JSON 파싱 라이브러리) 가져오기
+FetchContent_Declare(
+  nlohmann_json
+  GIT_REPOSITORY https://github.com/nlohmann/json.git
+  GIT_TAG        v3.11.3
+)
+FetchContent_MakeAvailable(nlohmann_json)
+
+# 6. cpr (HTTP 통신 라이브러리) 가져오기
+# (이전에 발생한 SSL/빌드 에러를 막기 위해, 무거운 테스트는 다 끄고 시스템 curl을 쓰도록 강제합니다)
+set(CPR_ENABLE_TESTS OFF CACHE BOOL "" FORCE)
+set(CPR_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(CPR_USE_SYSTEM_CURL ON CACHE BOOL "" FORCE)
+FetchContent_Declare(
+  cpr
+  GIT_REPOSITORY https://github.com/libcpr/cpr.git
+  GIT_TAG        1.11.1
+)
+FetchContent_MakeAvailable(cpr)
+
+# =====================================================================
+
+# 7. 실행 파일 생성
 add_executable(logic_core src/zmq_server.cpp)
 
-# 6. 라이브러리 및 인클루드 경로 연결
-# ZMQ_LIBRARIES와 ZMQ_INCLUDE_DIRS는 위 pkg_check_modules에서 자동으로 찾아준 변수입니다.
-target_link_libraries(logic_core PRIVATE cppzmq EnTT::EnTT flatbuffers ${ZMQ_LIBRARIES})
+# 8. 라이브러리 및 인클루드 경로 연결
+# 🔥 원본 링킹 목록 맨 끝에 `cpr::cpr`과 `nlohmann_json::nlohmann_json`만 살포시 추가했습니다.
+target_link_libraries(logic_core PRIVATE 
+    cppzmq 
+    EnTT::EnTT 
+    flatbuffers 
+    ${ZMQ_LIBRARIES} 
+    cpr::cpr 
+    nlohmann_json::nlohmann_json
+)
 target_include_directories(logic_core PRIVATE ${ZMQ_INCLUDE_DIRS})

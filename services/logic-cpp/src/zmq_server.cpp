@@ -45,10 +45,13 @@ int main() {
                     object_count = vision_data->objects()->size();
                 }
 
-                std::cout << "[Logic Core] ✅ 3. 분석 완료! 총 " << object_count << "개의 객체 감지." << std::endl;
+                // 🔥 예상 소요 시간 계산 (객체당 30초)
+                int estimated_time_sec = object_count * 50;
 
-                // 🔥 [중요 변경] 1차 응답: 유니티에게 개수 먼저 알려주기
-                std::string count_msg = "COUNT:" + std::to_string(object_count);
+                std::cout << "[Logic Core] ✅ 3. 분석 완료! 총 " << object_count << "개의 객체 감지. (예상 소요 시간: " << estimated_time_sec << "초)" << std::endl;
+
+                // 🔥 [중요 변경] 1차 응답: 유니티에게 개수와 예상 시간을 함께 전달 ('|' 문자로 구분)
+                std::string count_msg = "COUNT:" + std::to_string(object_count) + "|EST_SEC:" + std::to_string(estimated_time_sec);
                 zmq::message_t reply_count(count_msg.c_str(), count_msg.size());
                 sock_unity.send(reply_count, zmq::send_flags::none);
 
