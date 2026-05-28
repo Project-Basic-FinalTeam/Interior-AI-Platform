@@ -40,6 +40,25 @@ public class SimplePlyLoader : MonoBehaviour
             byte[] vData = reader.ReadBytes(vertexCount * vertexSize);
 
             Vector3[] vertices = new Vector3[vertexCount];
+            Vector3 center = Vector3.zero; // 🔥 1. 중심점 계산을 위한 변수
+
+            for (int i = 0; i < vertexCount; i++)
+            {
+                int baseIdx = i * vertexSize;
+                vertices[i] = new Vector3(
+                    GetFloat(vData, propOffsets, baseIdx, "x"),
+                    -GetFloat(vData, propOffsets, baseIdx, "y"),
+                    GetFloat(vData, propOffsets, baseIdx, "z")
+                );
+                center += vertices[i]; // 점들을 더함
+            }
+            center /= vertexCount; // 🔥 2. 전체 점들의 평균(중심점)을 구함
+
+            // 🔥 3. 모든 점을 중심점(center)만큼 이동시켜 원점으로 정렬
+            for (int i = 0; i < vertexCount; i++) {
+                vertices[i] -= center;
+            }
+
             Color[] colors = new Color[vertexCount];
             int[] indices = new int[vertexCount];
 
@@ -55,7 +74,7 @@ public class SimplePlyLoader : MonoBehaviour
                 );
 
                 // 🔥 2. 위치 잡는 완벽한 로직 유지: 버퍼에 넣기 전에 월드 좌표로 구워버림!
-                vertices[i] = transform.TransformPoint(rawPos);
+                vertices[i] = rawPos;
 
                 float r = GetFloat(vData, propOffsets, baseIdx, "f_dc_0");
                 float g = GetFloat(vData, propOffsets, baseIdx, "f_dc_1");
@@ -78,6 +97,11 @@ public class SimplePlyLoader : MonoBehaviour
             // 🔥 4. 투명화/컬링 방지: 점 위치가 바뀌었으니 바운딩 박스 재계산!
             mesh.RecalculateBounds(); 
 
+            // 🔥 [추가] 선택을 위한 BoxCollider 자동 생성 (계산된 mesh.bounds 사용)
+            BoxCollider bc = gameObject.AddComponent<BoxCollider>();
+            bc.center = mesh.bounds.center;
+            bc.size = mesh.bounds.size;
+
             MeshFilter mf = GetComponent<MeshFilter>();
             if (mf == null) mf = gameObject.AddComponent<MeshFilter>();
             mf.mesh = mesh;
@@ -92,9 +116,9 @@ public class SimplePlyLoader : MonoBehaviour
             // 이미 월드 좌표로 점들을 옮겼으므로 트랜스폼은 원점 초기화
             transform.position = Vector3.zero;
             transform.rotation = Quaternion.identity;
-            transform.localScale = Vector3.one;
+            //transform.localScale = Vector3.one;
 
-            Debug.Log($"[SimplePlyLoader] 🎉 {vertexCount}개의 순수 점(Point) 렌더링 및 가시화 완료!");
+            Debug.Log($"[SimplePlyLoader] 🎉 {vertexCount}개의 순수 점(Point) 렌더링 + 콜라이더 장착 완료!");
         }
     }
 
