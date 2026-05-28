@@ -83,9 +83,6 @@ shared/models/*.onnx
 # 테스트용 이미지 및 결과물
 shared/models/test_room.jpg
 
-# 생성된 3DGS 가구 파일 (.ply)
-shared/assets_3dgs/*.ply
-
 # FlatBuffers 생성 파일 (선택 사항: 자동 생성이므로 제외 가능)
 # shared/schema/vision_data_generated.h
 # shared/schema/InteriorPlatform/

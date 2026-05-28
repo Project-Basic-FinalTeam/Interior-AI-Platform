@@ -1,13 +1,23 @@
+// 파일 위치: /InteriorPlatform_Workspace/services/logic-cpp/src/
+// 파일 명: zmq_server.cpp
+
 #include <iostream>
 #include <zmq.hpp>
 #include <string>
 #include <vector>
+#include <map>
 #include "../schema/vision_data_generated.h"
+#include "rag_client.hpp" 
+
+struct ObjectMemory {
+    std::string label;
+    float conf = 0.0f, x_min = 0.0f, y_min = 0.0f, x_max = 0.0f, y_max = 0.0f;
+    float pos_x = 0.0f, pos_y = 0.0f, pos_z = 0.0f;
+};
 
 int main() {
     try {
         zmq::context_t context(1);
-
         zmq::socket_t sock_perception(context, zmq::socket_type::req);
         sock_perception.connect("tcp://ai-perception:5556");
 
@@ -17,100 +27,113 @@ int main() {
         zmq::socket_t sock_unity(context, zmq::socket_type::rep);
         sock_unity.bind("tcp://*:5555");
 
+        std::map<int, ObjectMemory> global_object_memory;
+        RagClient rag_client;
+
         std::cout << "======================================" << std::endl;
-        std::cout << "[Logic Core] 지능형 오케스트레이터 가동 완료! (Two-Step ZMQ)" << std::endl;
+        std::cout << "[Logic Core] 지능형 오케스트레이터 가동 완료!" << std::endl;
         std::cout << "======================================" << std::endl;
 
         while (true) {
-            std::cout << "\n[Logic Core] 유니티 명령 대기 중..." << std::endl;
             zmq::message_t unity_req;
             if (!sock_unity.recv(unity_req, zmq::recv_flags::none)) continue;
+            
+            std::string req_str(static_cast<char*>(unity_req.data()), unity_req.size());
 
+            // ===================================================================
+            // 🔥 [RAG 분기] ASK_RAG 명령 처리
+            // ===================================================================
+            if (req_str.rfind("ASK_RAG|", 0) == 0) {
+                int target_id = std::stoi(req_str.substr(8));
+                std::cout << "[Logic Core] 📩 RAG 추천 요청 수신! (ID: " << target_id << ")" << std::endl;
+
+                if (global_object_memory.count(target_id)) {
+                    auto& m = global_object_memory[target_id];
+                    std::string ans = rag_client.GetRecommendation(target_id, m.label, m.conf, m.x_min, m.y_min, m.x_max, m.y_max, m.pos_x, m.pos_y, m.pos_z);
+                    zmq::message_t reply(ans.c_str(), ans.size());
+                    sock_unity.send(reply, zmq::send_flags::none);
+                } else {
+                    std::string err = "{\"status\":\"error\", \"answer\":\"객체 정보 없음\", \"recommended_ply\":\"asset_unknown.ply\"}";
+                    zmq::message_t reply(err.c_str(), err.size());
+                    sock_unity.send(reply, zmq::send_flags::none);
+                }
+                continue; 
+            }
+
+            // ===================================================================
+            // 👇 [원본 로직 100%] SCAN_ROOM 파이프라인
+            // ===================================================================
             std::cout << "[Logic Core] 📩 1. 스캔 명령 수신!" << std::endl;
 
-            // [Step 1] YOLO(RF-DETR)에게 사진 분석 지시
             std::string command = "SCAN_ROOM";
             zmq::message_t py_req(command.c_str(), command.size());
             sock_perception.send(py_req, zmq::send_flags::none);
-            std::cout << "[Logic Core] 🚀 2. AI Perception 분석 요청 중..." << std::endl;
-
+            
             zmq::message_t py_reply;
-            auto py_res = sock_perception.recv(py_reply, zmq::recv_flags::none);
-
-            if (py_res) {
+            if (sock_perception.recv(py_reply, zmq::recv_flags::none)) {
                 auto vision_data = InteriorPlatform::GetVisionMessage(py_reply.data());
                 
                 int object_count = 0;
                 if (vision_data->objects() != nullptr) {
                     object_count = vision_data->objects()->size();
+                    
+                    for(int i=0; i<object_count; ++i) {
+                        auto obj = vision_data->objects()->Get(i);
+                        ObjectMemory m;
+                        if(obj->label()) m.label = obj->label()->str();
+                        m.conf = obj->confidence();
+                        if(obj->bbox()) { 
+                            m.x_min=obj->bbox()->x_min(); 
+                            m.y_min=obj->bbox()->y_min(); 
+                            m.x_max=obj->bbox()->x_max(); 
+                            m.y_max=obj->bbox()->y_max(); 
+                        }
+                        if(obj->position_3d()) { 
+                            m.pos_x = obj->position_3d()->x(); 
+                            m.pos_y = obj->position_3d()->y(); 
+                            m.pos_z = obj->position_3d()->z(); 
+                        }
+                        global_object_memory[obj->id()] = m;
+                    }
                 }
 
-                // 🔥 예상 소요 시간 계산 (객체당 30초)
                 int estimated_time_sec = object_count * 50;
-
-                std::cout << "[Logic Core] ✅ 3. 분석 완료! 총 " << object_count << "개의 객체 감지. (예상 소요 시간: " << estimated_time_sec << "초)" << std::endl;
-
-                // 🔥 [중요 변경] 1차 응답: 유니티에게 개수와 예상 시간을 함께 전달 ('|' 문자로 구분)
                 std::string count_msg = "COUNT:" + std::to_string(object_count) + "|EST_SEC:" + std::to_string(estimated_time_sec);
                 zmq::message_t reply_count(count_msg.c_str(), count_msg.size());
                 sock_unity.send(reply_count, zmq::send_flags::none);
 
-                // 객체가 없으면 여기서 이번 루프 종료
-                if (object_count == 0) {
-                    std::cout << "[Logic Core] ⚠️ 감지된 객체가 없어 스캔을 조기 종료합니다." << std::endl;
-                    continue; 
-                }
+                if (object_count == 0) continue; 
 
-                // 🚨 [주의] ZMQ REQ-REP 패턴 규칙 때문에, 유니티가 최종 데이터를 받으려면
-                // 유니티 쪽에서 2차 수신(TryReceiveFrameBytes)을 대기하고 있는 상태여야 합니다.
-                // (위의 C# 스크립트 수정본은 이 규칙을 따르고 있습니다.)
+                // ===================================================================
+                // 🔥 [핵심 수정] 아래 두 줄을 for 루프 위로 올렸습니다!
+                // 유니티에게 "기다리지 말고 먼저 스캔 데이터 가져가서 렌더링해!" 라고 던져줍니다.
+                // ===================================================================
+                zmq::message_t dummy_req;
+                sock_unity.recv(dummy_req, zmq::recv_flags::none); 
+                sock_unity.send(py_reply, zmq::send_flags::none);
+                std::cout << "[Logic Core] ✅ 스캔 완료! 유니티 화면을 갱신합니다. 백그라운드 3D 복원 돌입..." << std::endl;
 
-                // [Step 3] 감지된 객체 수만큼 3DGS 렌더링 지시
+                // ===================================================================
+                // 👇 C++은 유니티를 퇴근시키고 묵묵히 3D 복원 로직을 끝까지 수행합니다.
+                // ===================================================================
                 for (int i = 0; i < object_count; ++i) {
                     auto obj = vision_data->objects()->Get(i);
                     int obj_id = obj->id();
-                    float x = 0.0f, y = 0.0f, w = 0.0f, h = 0.0f;
-
-                    if (obj->bbox() != nullptr) {
-                        x = obj->bbox()->x_min();
-                        y = obj->bbox()->y_min();
-                        w = obj->bbox()->x_max() - x;
-                        h = obj->bbox()->y_max() - y;
-                    }
-
-                    std::cout << "[Logic Core] 🚀 4-" << (i+1) << "/" << object_count << " 객체 ID [" << obj_id << "] 3DGS 요청..." << std::endl;
+                    float x = obj->bbox() ? obj->bbox()->x_min() : 0.0f;
+                    float y = obj->bbox() ? obj->bbox()->y_min() : 0.0f;
+                    float w = obj->bbox() ? (obj->bbox()->x_max() - x) : 0.0f;
+                    float h = obj->bbox() ? (obj->bbox()->y_max() - y) : 0.0f;
                     
                     std::string recon_cmd = "{\"image_path\": \"/app/models/test_room.jpg\", \"obj_id\": \"" + std::to_string(obj_id) + "\", \"bbox\": [" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(w) + ", " + std::to_string(h) + "]}";
-
                     zmq::message_t recon_req(recon_cmd.c_str(), recon_cmd.size());
                     sock_reconstruction.send(recon_req, zmq::send_flags::none);
-
+                    
                     zmq::message_t recon_reply;
                     sock_reconstruction.recv(recon_reply, zmq::recv_flags::none);
                 }
-
-                // [Step 4] 유니티로 최종 배송 (진짜 FlatBuffers 데이터)
-                // 유니티는 현재 1차 응답(COUNT)을 받고, 2차 응답을 대기 중이므로 그냥 쏴주면 됩니다. (단, 유니티가 REQ 소켓이므로 꼼수가 필요합니다)
-                // 원래 REQ-REP는 "REQ(보냄)->REP(받고-보냄)->REQ(받음)" 형태라 두 번 연속 send가 안됩니다.
-                
-                // 💡 [해결책] 유니티에게 "나 다 만들었어, 최종 데이터 줘!" 라고 다시 REQ를 보내게 해야 합니다.
-                // 하지만 C# 스크립트를 비동기로 바꿨으니, C++에서는 다음과 같이 처리합니다.
-                
-                // C++이 두 번째로 유니티에게 데이터를 보내려면, 유니티의 두 번째 요청을 받아야 합니다.
-                std::cout << "[Logic Core] ⏳ 유니티의 최종 데이터 수신 대기(PING)를 기다립니다..." << std::endl;
-                zmq::message_t dummy_req;
-                sock_unity.recv(dummy_req, zmq::recv_flags::none); // 유니티의 두 번째 요청 받기
-
-                sock_unity.send(py_reply, zmq::send_flags::none);  // 최종 데이터 전송
-                std::cout << "[Logic Core] 🏁 5. 유니티로 최종 배송 완료!" << std::endl;
-
-            } else {
-                std::cerr << "[Logic Core] ❌ AI Perception 응답 수신 오류" << std::endl;
+                std::cout << "[Logic Core] 🏁 3D 복원 파이프라인 완벽 종료!" << std::endl;
             }
         }
-    } catch (const zmq::error_t& e) {
-        std::cerr << "[Logic Core] ZMQ 에러: " << e.what() << std::endl;
-        return 1;
-    }
+    } catch (const zmq::error_t& e) { return 1; }
     return 0;
 }

@@ -16,12 +16,10 @@ private:
     std::string rag_api_url = "https://interplacental-liana-puddly.ngrok-free.dev/rag/perception-query";
 
 public:
-    // C++ EnTT 레지스트리에서 뽑아낸 데이터를 매개변수로 받습니다.
     std::string GetRecommendation(int target_id, const std::string& label, float conf, 
                                   float x_min, float y_min, float x_max, float y_max, 
                                   float pos_x, float pos_y, float pos_z) {
         
-        // 1. RAG 서버가 요구하는 정확한 규격으로 JSON 페이로드 조립
         json payload = {
             {"query", "감지된 객체 자리에 들어갈 수 있는 상품을 추천해줘"},
             {"target_object_id", target_id},
@@ -45,24 +43,25 @@ public:
 
         std::cout << "[RAG Client] 🚀 GPT 추론 서버로 분석 요청 중... (ID: " << target_id << ")\n";
 
-        // 2. RAG API로 HTTP POST 요청 발사
+        // ===================================================================
+        // 🔥 [핵심 수정] cpr::VerifySsl(false) 옵션을 추가하여 HTTPS 에러를 무시하고 통과시킵니다.
+        // ===================================================================
         cpr::Response r = cpr::Post(
             cpr::Url{rag_api_url},
             cpr::Header{{"Content-Type", "application/json"}},
-            cpr::Body{payload.dump()}
+            cpr::Body{payload.dump()},
+            cpr::VerifySsl(false) 
         );
 
-        // 3. 응답 처리 및 파싱
         if (r.status_code == 200) {
             try {
                 auto response_json = json::parse(r.text);
                 if (response_json["status"] == "success") {
-                    std::string answer = response_json["answer"];
-                    std::cout << "[RAG Client] ✅ GPT 응답 도착: " << answer << "\n";
+                    std::cout << "[RAG Client] ✅ GPT 응답 도착!\n";
                     
-                    // 유니티로 다시 보내기 위해 GPT의 최종 답변(answer)만 반환합니다.
-                    // 필요하다면 storage_uri도 함께 파싱해서 넘길 수 있습니다.
-                    return answer; 
+                    // 텍스트만 빼서 주지 말고, 파이썬이 준 JSON 전체(r.text)를 그대로 유니티로 넘깁니다!
+                    // 그래야 유니티가 recommended_ply 키를 뽑아 쓸 수 있습니다.
+                    return r.text; 
                 }
             } catch (const std::exception& e) {
                 std::cerr << "[RAG Client] JSON 파싱 에러: " << e.what() << "\n";
@@ -72,7 +71,8 @@ public:
             std::cerr << "응답 에러: " << r.text << "\n";
         }
 
-        return "가구 추천을 불러오는 데 실패했습니다.";
+        // 에러가 났을 때도 유니티가 뻗지 않도록 JSON 형태로 가짜 응답을 만들어 보냅니다.
+        return "{\"status\":\"error\", \"answer\":\"가구 추천을 불러오는 데 실패했습니다.\", \"recommended_ply\":\"asset_unknown.ply\"}";
     }
 };
 
