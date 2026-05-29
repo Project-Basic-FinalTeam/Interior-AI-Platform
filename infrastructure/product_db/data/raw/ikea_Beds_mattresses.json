@@ -1,0 +1,3239 @@
+[
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses"
+    ],
+    "middle_category_name": null,
+    "small_category_name": null,
+    "product_name": "VALEVÅG Pocket sprung mattress - firm/light blue 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/valevag-pocket-sprung-mattress-firm-light-blue-30450671/",
+    "price": 14,
+    "width_x": 150.0,
+    "depth_y": 200.0,
+    "height_z": 24.0,
+    "size_unit": "cm",
+    "color": "blue",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00001.jpg",
+    "image_filename": "Beds mattresses_00001.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses"
+    ],
+    "middle_category_name": null,
+    "small_category_name": null,
+    "product_name": "ÅGOTNES Foam mattress - firm/light blue 120x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/agotnes-foam-mattress-firm-light-blue-90480868/",
+    "price": 90000,
+    "width_x": 120.0,
+    "depth_y": 200.0,
+    "height_z": 10.0,
+    "size_unit": "cm",
+    "color": "blue",
+    "materials": null,
+    "texture_keywords": [
+      "smooth"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00002.jpg",
+    "image_filename": "Beds mattresses_00002.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses"
+    ],
+    "middle_category_name": null,
+    "small_category_name": null,
+    "product_name": "VADSÖ Sprung mattress - extra firm/light blue 90x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vadsoe-sprung-mattress-extra-firm-light-blue-40453589/",
+    "price": 99900,
+    "width_x": 90.0,
+    "depth_y": 200.0,
+    "height_z": 17.0,
+    "size_unit": "cm",
+    "color": "blue",
+    "materials": null,
+    "texture_keywords": [
+      "smooth"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00003.jpg",
+    "image_filename": "Beds mattresses_00003.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses"
+    ],
+    "middle_category_name": null,
+    "small_category_name": null,
+    "product_name": "VESTMARKA Sprung mattress - extra firm/light blue 120x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vestmarka-sprung-mattress-extra-firm-light-blue-40470150/",
+    "price": 159000,
+    "width_x": 120.0,
+    "depth_y": 200.0,
+    "height_z": 18.0,
+    "size_unit": "cm",
+    "color": "blue",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00004.jpg",
+    "image_filename": "Beds mattresses_00004.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses"
+    ],
+    "middle_category_name": null,
+    "small_category_name": null,
+    "product_name": "VESTERÖY Pocket sprung mattress - firm/light blue 120x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vesteroey-pocket-sprung-mattress-firm-light-blue-60450603/",
+    "price": 219000,
+    "width_x": 120.0,
+    "depth_y": 200.0,
+    "height_z": 20.0,
+    "size_unit": "cm",
+    "color": "blue",
+    "materials": null,
+    "texture_keywords": [
+      "fabric"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00005.jpg",
+    "image_filename": "Beds mattresses_00005.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses"
+    ],
+    "middle_category_name": null,
+    "small_category_name": null,
+    "product_name": "ÅFJÄLL Foam mattress - medium firm/white 140x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/afjaell-foam-mattress-medium-firm-white-40568651/",
+    "price": 179000,
+    "width_x": 140.0,
+    "depth_y": 200.0,
+    "height_z": 12.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00007.jpg",
+    "image_filename": "Beds mattresses_00007.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "MALM Bed frame, high, w 4 storage boxes - white 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/malm-bed-frame-high-w-4-storage-boxes-white-s19199213/",
+    "price": 4,
+    "width_x": 166.0,
+    "depth_y": 209.0,
+    "height_z": 100.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is constructed board? We use constructed boards when manufacturing many of our pieces of furniture, such as tables and wardrobes. They are light yet still stable and strong. Each board has a frame made of chipboard, fibreboard or solid wood, while the inside is a honeycomb filling structure made of mostly recycled paper, which is extra durable thanks to its special construction. The board is then covered with a protective paint, foil or veneer depending on the style wanted. Get the look Ideas based on your recently viewed products Skip listing More from the MALM series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "wood",
+      "veneer"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00008.jpg",
+    "image_filename": "Beds mattresses_00008.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "MALM Chest of 2 drawers - white 40x55 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/malm-chest-of-2-drawers-white-10354642/",
+    "price": 69900,
+    "width_x": 40.0,
+    "depth_y": 48.0,
+    "height_z": 55.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is particleboard? Particleboard is made from recycled wood and sawmill leftovers – so wood pieces with the wrong shade, woodchips and sawdust become a resource instead of possibly being discarded. We use boards for things like bookcases, bed frames, sofas and kitchen frames. To protect from wear and moisture, we apply varnish, veneer or foil that adds to the furniture's look. Get the look Ideas based on your recently viewed products Skip listing More from the MALM series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "smooth"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00009.jpg",
+    "image_filename": "Beds mattresses_00009.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "VIHALS Bedside table - white 37x37 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vihals-bedside-table-white-60488738/",
+    "price": 49900,
+    "width_x": 37.0,
+    "depth_y": 37.0,
+    "height_z": 58.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00014.jpg",
+    "image_filename": "Beds mattresses_00014.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "HEMNES Day-bed frame with 3 drawers - white 80x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/hemnes-day-bed-frame-with-3-drawers-white-70349327/",
+    "price": 399000,
+    "width_x": 91.0,
+    "depth_y": 209.0,
+    "height_z": 83.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "Start exploring Material What is fibreboard? Fibreboard is a stable and durable material made of leftover wood from the wood industry. A durable outer layer of paint or laminate is added to the board. The difference between various types of fibreboards, such as HDF and MDF, is mainly the thickness, yet also how impact-resistant they are. This determines if we will use them for bed frames, sofa frames, kitchen fronts, wardrobe doors, or something completely different. Function solution Sofa and bed in one Living in a small space or need an extra bed sometimes? Then a day-bed can be a smart solution since you get two types of furniture in one - a sofa by day and bed by night. And since some of our day-beds also have drawers, you get a practical place to store anything from pillows and duvets to clothes and toys. Get the look Ideas based on your recently viewed products Skip listing More from the HEMNES bedroom series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order",
+    "texture_keywords": [
+      "wood"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00024.jpg",
+    "image_filename": "Beds mattresses_00024.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "VEVELSTAD Bed frame - white 120x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vevelstad-bed-frame-white-80518273/",
+    "price": 6,
+    "width_x": 126.0,
+    "depth_y": 207.0,
+    "height_z": 27.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "metal",
+      "steel",
+      "coated",
+      "powder-coated"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00026.jpg",
+    "image_filename": "Beds mattresses_00026.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "VEVELSTAD Bed frame - white 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vevelstad-bed-frame-white-60506394/",
+    "price": 6,
+    "width_x": 156.0,
+    "depth_y": 207.0,
+    "height_z": 27.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "metal",
+      "coated",
+      "powder-coated"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00029.jpg",
+    "image_filename": "Beds mattresses_00029.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "MALM Bed frame, high - white stained oak veneer/Lönset 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/malm-bed-frame-high-white-stained-oak-veneer-loenset-s89175058/",
+    "price": 9,
+    "width_x": 166.0,
+    "depth_y": 209.0,
+    "height_z": 100.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is veneer? A veneer is a thin wooden sheet fixed on things like particleboards to add a durable surface and a natural wood look – so we enjoy the many benefits of wood without using solid wood. The most common veneer types are birch, ash, oak and beech and we’ve made a special UV lacquer that helps preserve the wood's natural structure. A benefit with a slightly thicker veneer is how you can repair and sand the surface if it’s damaged to give furniture a longer and more beautiful life. Get the look Ideas based on your recently viewed products Skip listing More from the MALM series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "oak",
+      "birch"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00031.jpg",
+    "image_filename": "Beds mattresses_00031.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "NORDLI Bed frame with storage - white 120x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/nordli-bed-frame-with-storage-white-50349856/",
+    "price": 399000,
+    "width_x": 120.0,
+    "depth_y": 202.0,
+    "height_z": 30.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is fibreboard? Fibreboard is a stable and durable material made of leftover wood from the wood industry. A durable outer layer of paint or laminate is added to the board. The difference between various types of fibreboards, such as HDF and MDF, is mainly the thickness, yet also how impact-resistant they are. This determines if we will use them for bed frames, sofa frames, kitchen fronts, wardrobe doors, or something completely different. Function solution Bed and storage in the same space Living in a small space often requires smart storage solutions. It’s all about taking advantage of every square inch. That’s why it can be smart to choose a bed with room for both you and your things. Quite simply - a bed with storage. Then the space under your bed turns into a practical place for storing everything from bedlinen and duvets to clothes, books, and toys. Get the look Ideas based on your recently viewed products Skip listing More from the NORDLI series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App",
+    "texture_keywords": [
+      "wood"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00032.jpg",
+    "image_filename": "Beds mattresses_00032.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "KLEPPSTAD Bed frame - white/Vissle beige 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/kleppstad-bed-frame-white-vissle-beige-30492671/",
+    "price": 10,
+    "width_x": 156.0,
+    "depth_y": 207.0,
+    "height_z": 86.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "metal",
+      "coated",
+      "powder-coated"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00035.jpg",
+    "image_filename": "Beds mattresses_00035.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "MALM Bed frame, high, w 2 storage boxes - white/Lönset 120x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/malm-bed-frame-high-w-2-storage-boxes-white-loenset-s29199854/",
+    "price": 2,
+    "width_x": 135.0,
+    "depth_y": 209.0,
+    "height_z": 100.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is constructed board? We use constructed boards when manufacturing many of our pieces of furniture, such as tables and wardrobes. They are light yet still stable and strong. Each board has a frame made of chipboard, fibreboard or solid wood, while the inside is a honeycomb filling structure made of mostly recycled paper, which is extra durable thanks to its special construction. The board is then covered with a protective paint, foil or veneer depending on the style wanted. Get the look Ideas based on your recently viewed products Skip listing More from the MALM series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "wood",
+      "veneer"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00036.jpg",
+    "image_filename": "Beds mattresses_00036.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "BRIMNES Bed frame with storage - white 120x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/brimnes-bed-frame-with-storage-white-50401043/",
+    "price": 259000,
+    "width_x": 126.0,
+    "depth_y": 206.0,
+    "height_z": 47.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is particleboard? Particleboard is made from recycled wood and sawmill leftovers – so wood pieces with the wrong shade, woodchips and sawdust become a resource instead of possibly being discarded. We use boards for things like bookcases, bed frames, sofas and kitchen frames. To protect from wear and moisture, we apply varnish, veneer or foil that adds to the furniture's look. Get the look Ideas based on your recently viewed products Skip listing More from the BRIMNES series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "wood",
+      "veneer"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00038.jpg",
+    "image_filename": "Beds mattresses_00038.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "UTÅKER Stackable bed with 2 mattresses - pine/Ågotnes firm 80x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/utaker-stackable-bed-with-2-mattresses-pine-agotnes-firm-s49428133/",
+    "price": 319000,
+    "width_x": 83.0,
+    "depth_y": 205.0,
+    "height_z": 23.0,
+    "size_unit": "cm",
+    "color": "blue",
+    "materials": "Start exploring Get the look Ideas based on your recently viewed products Skip listing More from the Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option Gift card",
+    "texture_keywords": [
+      "wood"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00040.jpg",
+    "image_filename": "Beds mattresses_00040.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "UTÅKER Stackable bed with 2 mattresses - pine/Åfjäll firm 80x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/utaker-stackable-bed-with-2-mattresses-pine-afjaell-firm-s29521518/",
+    "price": 457000,
+    "width_x": 83.0,
+    "depth_y": 205.0,
+    "height_z": 23.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "Start exploring Get the look Ideas based on your recently viewed products Skip listing More from the Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option Gift card",
+    "texture_keywords": [
+      "wood"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00041.jpg",
+    "image_filename": "Beds mattresses_00041.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "UTÅKER Stackable bed with 2 mattresses - pine/Vannareid extra firm 80x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/utaker-stackable-bed-with-2-mattresses-pine-vannareid-extra-firm-s19423863/",
+    "price": 417000,
+    "width_x": 83.0,
+    "depth_y": 205.0,
+    "height_z": 23.0,
+    "size_unit": "cm",
+    "color": "beige",
+    "materials": "Start exploring Get the look Ideas based on your recently viewed products Skip listing More from the Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option Gift card",
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00042.jpg",
+    "image_filename": "Beds mattresses_00042.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "UTÅKER Stackable bed with 2 mattresses - pine/Åfjäll medium firm 80x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/utaker-stackable-bed-with-2-mattresses-pine-afjaell-medium-firm-s09521519/",
+    "price": 457000,
+    "width_x": 83.0,
+    "depth_y": 205.0,
+    "height_z": 23.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "Start exploring Get the look Ideas based on your recently viewed products Skip listing More from the Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option Gift card",
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00043.jpg",
+    "image_filename": "Beds mattresses_00043.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "STJÄRNÖ Bed frame - anthracite 120x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/stjaernoe-bed-frame-anthracite-60575368/",
+    "price": 224000,
+    "width_x": 128.0,
+    "depth_y": 209.0,
+    "height_z": 118.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": null,
+    "texture_keywords": [
+      "steel"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00046.jpg",
+    "image_filename": "Beds mattresses_00046.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "RAMSTA Day-bed frame with slatted bed base - white 90x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/ramsta-day-bed-frame-with-slatted-bed-base-white-s99184378/",
+    "price": 125000,
+    "width_x": 97.0,
+    "depth_y": 210.0,
+    "height_z": 80.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "Start exploring Material What is steel? Steel has unique characteristics when it is stretched and shaped since it remains strong. It provides strength to everything from skyscrapers and cars to bed frames and outdoor furniture. The steel industry is moving in the direction of more energy-efficient production and stronger steel qualities. It doesn’t lose any of its properties when recycled and today steel is one of the most recycled materials in the world. Get the look Ideas based on your recently viewed products Skip listing More from the Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning",
+    "texture_keywords": [
+      "steel"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00047.jpg",
+    "image_filename": "Beds mattresses_00047.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "VIHALS Bed frame - white 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vihals-bed-frame-white-80602441/",
+    "price": 4,
+    "width_x": 156.0,
+    "depth_y": 206.0,
+    "height_z": 66.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00048.jpg",
+    "image_filename": "Beds mattresses_00048.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "TINGBY Side table on castors - white 50x50 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/tingby-side-table-on-castors-white-60295928/",
+    "price": 54900,
+    "width_x": 50.0,
+    "depth_y": 50.0,
+    "height_z": 45.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is constructed board? We use constructed boards when manufacturing many of our pieces of furniture, such as tables and wardrobes. They are light yet still stable and strong. Each board has a frame made of chipboard, fibreboard or solid wood, while the inside is a honeycomb filling structure made of mostly recycled paper, which is extra durable thanks to its special construction. The board is then covered with a protective paint, foil or veneer depending on the style wanted. Get the look Ideas based on your recently viewed products Skip listing More from the Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "smooth"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00050.jpg",
+    "image_filename": "Beds mattresses_00050.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "BRIMNES Day-bed frame with 2 drawers - white 80x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/brimnes-day-bed-frame-with-2-drawers-white-30503655/",
+    "price": 299000,
+    "width_x": 87.0,
+    "depth_y": 205.0,
+    "height_z": 58.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "Start exploring Get the look Ideas based on your recently viewed products Skip listing More from the BRIMNES series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option Gift card",
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00051.jpg",
+    "image_filename": "Beds mattresses_00051.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "VOXLÖV Chair - light bamboo",
+    "product_url": "https://www.ikea.com/kr/en/p/voxloev-chair-light-bamboo-10449264/",
+    "price": 129000,
+    "width_x": 43.0,
+    "depth_y": 53.0,
+    "height_z": 85.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": "Bending shapes with flexible bamboo Francis and the team used bamboo slats – thin layers of bamboo glued together in different dimensions. Thanks to the long fibre, bamboo is more flexible and easier to bend than most wood. “We explored different techniques to bend the bamboo and let the shapes become a part of the expression.” One challenge was to achieve just the right angle where the seat and backrest meet – with enough tilt and flexibility so that you can enjoy long meals at the dining table. “Bamboo behaves differently than wood, that was something we had to learn – and understand how to utilise. And, since the material is so hard, we could make the edge of the table really thin.” A chair to linger in Francis wanted the chair to feel strong and at the same time light and ”transparent”. “We tried with natural fibre on the seat and the backrest, but it made the chair look like a piece of outdoor furniture. Instead, we weaved twined paper cords by hand to get a built-in elasticity. It’s strong and has been used for years in furniture making.” The result is a chair just as flexible and soft as swaying bamboo – a comfortable place where good moments last longer. Learn more Material What is bamboo? Strong, flexible and one of the world's fastest growing plants – bamboo has many uses that make it an excellent renewable material. It’s a type of grass and usually grows without the need for fertilizers or irrigation. After being harvested, it grows new shoots that are ready for harvesting after 4-6 years. At IKEA we use bamboo for items like furniture, bathroom decor, baskets and lamps – and we are constantly exploring more areas of use for this versatile material. Form design process Swaying bamboo becomes timeless furniture Did you know that bamboo is actually a grass? After growing for some years, it becomes as hard as wood and at the same time stronger and easier to bend than most types of wood. So, we headed out on a creative excursion to make the most out of its unique qualities rather than copying wood. VOXLÖV is the first result, a timeless table, and a chair just as flexible and soft as swaying bamboo – a comfortable place where good moments last longer. Get the look Ideas based on your recently viewed products Skip listing More from the Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback",
+    "texture_keywords": [
+      "wood",
+      "bamboo"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00052.jpg",
+    "image_filename": "Beds mattresses_00052.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "MULIG Clothes rack - white 99x152 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/mulig-clothes-rack-white-80179433/",
+    "price": 15000,
+    "width_x": 99.0,
+    "depth_y": 46.0,
+    "height_z": 152.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is steel? Steel has unique characteristics when it is stretched and shaped since it remains strong. It provides strength to everything from skyscrapers and cars to bed frames and outdoor furniture. The steel industry is moving in the direction of more energy-efficient production and stronger steel qualities. It doesn’t lose any of its properties when recycled and today steel is one of the most recycled materials in the world. Get the look Ideas based on your recently viewed products Skip listing More from the MULIG series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "steel",
+      "plastic"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00060.jpg",
+    "image_filename": "Beds mattresses_00060.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "PÄRKLA Storage case 55x49x19 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/paerkla-storage-case-10395384/",
+    "price": 2500,
+    "width_x": 55.0,
+    "depth_y": 49.0,
+    "height_z": 19.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00063.jpg",
+    "image_filename": "Beds mattresses_00063.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "BEKVÄM Spice rack - aspen",
+    "product_url": "https://www.ikea.com/kr/en/p/bekvaem-spice-rack-aspen-00487176/",
+    "price": 5900,
+    "width_x": 40.0,
+    "depth_y": 10.0,
+    "height_z": 9.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": "What is solid wood? Solid wood is one of our favourite materials and is part of our Scandinavian heritage. It is also a timeless material with many uses. Regardless of the wood species, it is durable, beautiful and renewable. We strive to use this raw material as smartly and efficiently as possible to avoid waste – and we also invest in facilities and logistics so that we can increase the use of recycled wood. Get the look Ideas based on your recently viewed products Skip listing More from the Accessories for BEKVÄM Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide",
+    "texture_keywords": [
+      "wood"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00064.jpg",
+    "image_filename": "Beds mattresses_00064.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "HAUGA Bedside table - white 40x36 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/hauga-bedside-table-white-80488964/",
+    "price": 59900,
+    "width_x": 40.0,
+    "depth_y": 36.0,
+    "height_z": 63.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00065.jpg",
+    "image_filename": "Beds mattresses_00065.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds"
+    ],
+    "middle_category_name": "Beds",
+    "small_category_name": null,
+    "product_name": "FUBBLA LED wall lamp - white",
+    "product_url": "https://www.ikea.com/kr/en/p/fubbla-led-wall-lamp-white-50381605/",
+    "price": 34900,
+    "width_x": 10.0,
+    "depth_y": 20.0,
+    "height_z": 15.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is steel? Steel has unique characteristics when it is stretched and shaped since it remains strong. It provides strength to everything from skyscrapers and cars to bed frames and outdoor furniture. The steel industry is moving in the direction of more energy-efficient production and stronger steel qualities. It doesn’t lose any of its properties when recycled and today steel is one of the most recycled materials in the world. Get the look Ideas based on your recently viewed products Skip listing More from the Accessories for FUBBLA Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide",
+    "texture_keywords": [
+      "steel"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00068.jpg",
+    "image_filename": "Beds mattresses_00068.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "ÅKREHAMN Foam mattress - firm/white 180x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/akrehamn-foam-mattress-firm-white-20481654/",
+    "price": 12,
+    "width_x": 180.0,
+    "depth_y": 200.0,
+    "height_z": 20.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00070.jpg",
+    "image_filename": "Beds mattresses_00070.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "MALM Bed frame, high, w 2 storage boxes - white/Lönset 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/malm-bed-frame-high-w-2-storage-boxes-white-loenset-s89199889/",
+    "price": 2,
+    "width_x": 166.0,
+    "depth_y": 209.0,
+    "height_z": 100.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is constructed board? We use constructed boards when manufacturing many of our pieces of furniture, such as tables and wardrobes. They are light yet still stable and strong. Each board has a frame made of chipboard, fibreboard or solid wood, while the inside is a honeycomb filling structure made of mostly recycled paper, which is extra durable thanks to its special construction. The board is then covered with a protective paint, foil or veneer depending on the style wanted. Get the look Ideas based on your recently viewed products Skip listing More from the MALM series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "wood",
+      "veneer"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00071.jpg",
+    "image_filename": "Beds mattresses_00071.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "VALEVÅG Pocket sprung mattress - super firm/light blue 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/valevag-pocket-sprung-mattress-super-firm-light-blue-70569989/",
+    "price": 13,
+    "width_x": 150.0,
+    "depth_y": 200.0,
+    "height_z": 24.0,
+    "size_unit": "cm",
+    "color": "blue",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00072.jpg",
+    "image_filename": "Beds mattresses_00072.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "VESTERÖY Pocket sprung mattress - extra firm/light blue 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vesteroey-pocket-sprung-mattress-extra-firm-light-blue-50470060/",
+    "price": 8,
+    "width_x": 150.0,
+    "depth_y": 200.0,
+    "height_z": 20.0,
+    "size_unit": "cm",
+    "color": "blue",
+    "materials": null,
+    "texture_keywords": [
+      "fabric"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00073.jpg",
+    "image_filename": "Beds mattresses_00073.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "VÅGSTRANDA Pocket sprung mattress - super firm/light blue 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vagstranda-pocket-sprung-mattress-super-firm-light-blue-90569993/",
+    "price": 15,
+    "width_x": 150.0,
+    "depth_y": 200.0,
+    "height_z": 28.0,
+    "size_unit": "cm",
+    "color": "blue",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00074.jpg",
+    "image_filename": "Beds mattresses_00074.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "VADSÖ Sprung mattress - extra firm/light blue 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vadsoe-sprung-mattress-extra-firm-light-blue-80453587/",
+    "price": 7,
+    "width_x": 150.0,
+    "depth_y": 200.0,
+    "height_z": 17.0,
+    "size_unit": "cm",
+    "color": "blue",
+    "materials": null,
+    "texture_keywords": [
+      "smooth"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00075.jpg",
+    "image_filename": "Beds mattresses_00075.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "ÅFJÄLL Foam mattress - firm/white 90x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/afjaell-foam-mattress-firm-white-70568635/",
+    "price": 149000,
+    "width_x": 90.0,
+    "depth_y": 200.0,
+    "height_z": 12.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00076.jpg",
+    "image_filename": "Beds mattresses_00076.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "VESTMARKA Sprung mattress - extra firm/light blue 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vestmarka-sprung-mattress-extra-firm-light-blue-30451265/",
+    "price": 8,
+    "width_x": 150.0,
+    "depth_y": 200.0,
+    "height_z": 18.0,
+    "size_unit": "cm",
+    "color": "blue",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00077.jpg",
+    "image_filename": "Beds mattresses_00077.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "ÅGOTNES Foam mattress - firm/light blue 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/agotnes-foam-mattress-firm-light-blue-30480847/",
+    "price": 7,
+    "width_x": 150.0,
+    "depth_y": 200.0,
+    "height_z": 10.0,
+    "size_unit": "cm",
+    "color": "blue",
+    "materials": null,
+    "texture_keywords": [
+      "smooth"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00078.jpg",
+    "image_filename": "Beds mattresses_00078.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "ÅNNELAND Hybrid mattress - firm/white 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/anneland-hybrid-mattress-firm-white-40481709/",
+    "price": 14,
+    "width_x": 150.0,
+    "depth_y": 200.0,
+    "height_z": 24.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00079.jpg",
+    "image_filename": "Beds mattresses_00079.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "ÅKREHAMN Foam mattress - firm/white 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/akrehamn-foam-mattress-firm-white-80481646/",
+    "price": 12,
+    "width_x": 150.0,
+    "depth_y": 200.0,
+    "height_z": 20.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00081.jpg",
+    "image_filename": "Beds mattresses_00081.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "ÅBYGDA Foam mattress - firm/white 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/abygda-foam-mattress-firm-white-70481468/",
+    "price": 12,
+    "width_x": 150.0,
+    "depth_y": 200.0,
+    "height_z": 16.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00082.jpg",
+    "image_filename": "Beds mattresses_00082.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "VATNESTRÖM Pocket sprung mattress - extra firm/natural 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vatnestroem-pocket-sprung-mattress-extra-firm-natural-10478478/",
+    "price": 12,
+    "width_x": 150.0,
+    "depth_y": 200.0,
+    "height_z": 26.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": "5 comfort zones An extra-firm 26 cm high mattress with pocket springs and natural materials. Even distribution of body weight by comfort zones, softer support around hips and shoulders – and latex to add comfort. Article Number 104.784.78 Product details",
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00083.jpg",
+    "image_filename": "Beds mattresses_00083.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "MAUSUND Natural latex mattress - medium firm natural 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/mausund-natural-latex-mattress-medium-firm-natural-00387803/",
+    "price": 5,
+    "width_x": 150.0,
+    "depth_y": 200.0,
+    "height_z": 20.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": "Medium firm You’re right to be fussy about what you sleep on. Natural materials like latex, cotton and wool provide supple comfort and pull away moisture. This gives a pleasant sleeping environment with a cool and even sleep temperature. Article Number 003.878.03 Product details",
+    "texture_keywords": [
+      "cotton"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00085.jpg",
+    "image_filename": "Beds mattresses_00085.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "NÄSTABERG Mattress pad - white 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/naestaberg-mattress-pad-white-60566123/",
+    "price": 9,
+    "width_x": 150.0,
+    "depth_y": 200.0,
+    "height_z": 4.5,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00087.jpg",
+    "image_filename": "Beds mattresses_00087.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "VANNAREID Pocket sprung mattress - extra firm/beige 80x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vannareid-pocket-sprung-mattress-extra-firm-beige-70490222/",
+    "price": 119000,
+    "width_x": 80.0,
+    "depth_y": 200.0,
+    "height_z": 12.0,
+    "size_unit": "cm",
+    "color": "beige",
+    "materials": null,
+    "texture_keywords": [
+      "fabric"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00089.jpg",
+    "image_filename": "Beds mattresses_00089.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "VITHÄLL Mattress/pouffe - extra firm/Vissle grey 80x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vithaell-mattress-pouffe-extra-firm-vissle-grey-90565419/",
+    "price": 139000,
+    "width_x": 80.0,
+    "depth_y": 200.0,
+    "height_z": 13.0,
+    "size_unit": "cm",
+    "color": "grey",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00094.jpg",
+    "image_filename": "Beds mattresses_00094.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "NOPAKTE Mattress pad - white 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/nopakte-mattress-pad-white-20563428/",
+    "price": 8,
+    "width_x": 150.0,
+    "depth_y": 200.0,
+    "height_z": 2.5,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "fabric",
+      "smooth",
+      "woven"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00097.jpg",
+    "image_filename": "Beds mattresses_00097.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattresses"
+    ],
+    "middle_category_name": "Mattresses",
+    "small_category_name": null,
+    "product_name": "SLÄKT Pouffe/mattress, foldable - Vissle beige/green",
+    "product_url": "https://www.ikea.com/kr/en/p/slaekt-pouffe-mattress-foldable-vissle-beige-green-20590356/",
+    "price": 99900,
+    "width_x": 62.0,
+    "depth_y": 193.0,
+    "height_z": 9.0,
+    "size_unit": "cm",
+    "color": "beige",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00098.jpg",
+    "image_filename": "Beds mattresses_00098.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedding"
+    ],
+    "middle_category_name": "Bedding",
+    "small_category_name": null,
+    "product_name": "KLUBBSPORRE Ergonomic pillow, side/back sleeper 41x70 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/klubbsporre-ergonomic-pillow-side-back-sleeper-80446097/",
+    "price": 39900,
+    "width_x": 70.0,
+    "depth_y": 41.0,
+    "height_z": 13.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": "How to care for your ergonomic pillow",
+    "texture_keywords": [
+      "fabric",
+      "polyester"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00157.jpg",
+    "image_filename": "Beds mattresses_00157.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedding"
+    ],
+    "middle_category_name": "Bedding",
+    "small_category_name": null,
+    "product_name": "VEVELSTAD Bed frame with 2 headboards - white/Tolkning rattan 180x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vevelstad-bed-frame-with-2-headboards-white-tolkning-rattan-s69441727/",
+    "price": 2,
+    "width_x": 186.0,
+    "depth_y": 207.0,
+    "height_z": 27.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "rattan",
+      "metal",
+      "coated",
+      "powder-coated"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00170.jpg",
+    "image_filename": "Beds mattresses_00170.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "NESNA Bedside table - bamboo 36x35 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/nesna-bedside-table-bamboo-20247128/",
+    "price": 19900,
+    "width_x": 36.0,
+    "depth_y": 35.0,
+    "height_z": 45.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": "Article Number 202.471.28 Product details",
+    "texture_keywords": [
+      "bamboo",
+      "glass"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00178.jpg",
+    "image_filename": "Beds mattresses_00178.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "TONSTAD Bedside table - oak veneer 40x40x59 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/tonstad-bedside-table-oak-veneer-60489323/",
+    "price": 159000,
+    "width_x": 40.0,
+    "depth_y": 40.0,
+    "height_z": 59.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": null,
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "oak"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00179.jpg",
+    "image_filename": "Beds mattresses_00179.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "TONSTAD Bedside table - off-white 40x40x59 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/tonstad-bedside-table-off-white-60510008/",
+    "price": 129000,
+    "width_x": 40.0,
+    "depth_y": 40.0,
+    "height_z": 59.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "wood"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00180.jpg",
+    "image_filename": "Beds mattresses_00180.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "GULLABERG Bedside table - with 1 drawer with shelf/white 53x43x69 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/gullaberg-bedside-table-with-1-drawer-with-shelf-white-00561741/",
+    "price": 99900,
+    "width_x": 53.0,
+    "depth_y": 43.0,
+    "height_z": 69.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00181.jpg",
+    "image_filename": "Beds mattresses_00181.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "GULLABERG Bedside table - with 1 drawer with shelf/grey 53x43x69 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/gullaberg-bedside-table-with-1-drawer-with-shelf-grey-80561742/",
+    "price": 99900,
+    "width_x": 53.0,
+    "depth_y": 43.0,
+    "height_z": 69.0,
+    "size_unit": "cm",
+    "color": "grey",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00182.jpg",
+    "image_filename": "Beds mattresses_00182.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "GULLABERG Bedside table - yellow/with 1 drawer with shelf 53x43x69 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/gullaberg-bedside-table-yellow-with-1-drawer-with-shelf-50593443/",
+    "price": 109000,
+    "width_x": 53.0,
+    "depth_y": 43.0,
+    "height_z": 69.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "birch",
+      "bamboo"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00183.jpg",
+    "image_filename": "Beds mattresses_00183.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "KNARREVIK Bedside table - black 37x28 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/knarrevik-bedside-table-black-80576319/",
+    "price": 15000,
+    "width_x": 37.0,
+    "depth_y": 28.0,
+    "height_z": 45.0,
+    "size_unit": "cm",
+    "color": "black",
+    "materials": null,
+    "texture_keywords": [
+      "metal"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00184.jpg",
+    "image_filename": "Beds mattresses_00184.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "NORDKISA Bedside table - bamboo 40x40 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/nordkisa-bedside-table-bamboo-40447678/",
+    "price": 99900,
+    "width_x": 40.0,
+    "depth_y": 40.0,
+    "height_z": 67.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": "What is bamboo? Strong, flexible and one of the world's fastest growing plants – bamboo has many uses that make it an excellent renewable material. It’s a type of grass and usually grows without the need for fertilizers or irrigation. After being harvested, it grows new shoots that are ready for harvesting after 4-6 years. At IKEA we use bamboo for items like furniture, bathroom decor, baskets and lamps – and we are constantly exploring more areas of use for this versatile material. Get the look Ideas based on your recently viewed products Skip listing More from the NORDKISA series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "bamboo",
+      "glass"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00185.jpg",
+    "image_filename": "Beds mattresses_00185.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "NORDKISA Bedside table - bamboo 60x40 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/nordkisa-bedside-table-bamboo-40439466/",
+    "price": 119000,
+    "width_x": 60.0,
+    "depth_y": 40.0,
+    "height_z": 68.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": "What is bamboo? Strong, flexible and one of the world's fastest growing plants – bamboo has many uses that make it an excellent renewable material. It’s a type of grass and usually grows without the need for fertilizers or irrigation. After being harvested, it grows new shoots that are ready for harvesting after 4-6 years. At IKEA we use bamboo for items like furniture, bathroom decor, baskets and lamps – and we are constantly exploring more areas of use for this versatile material. Get the look Ideas based on your recently viewed products Skip listing More from the NORDKISA series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "bamboo",
+      "glass"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00186.jpg",
+    "image_filename": "Beds mattresses_00186.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "MALM Chest of 2 drawers - white stained oak veneer 40x55 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/malm-chest-of-2-drawers-white-stained-oak-veneer-10354656/",
+    "price": 89900,
+    "width_x": 40.0,
+    "depth_y": 48.0,
+    "height_z": 55.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is veneer? A veneer is a thin wooden sheet fixed on things like particleboards to add a durable surface and a natural wood look – so we enjoy the many benefits of wood without using solid wood. The most common veneer types are birch, ash, oak and beech and we’ve made a special UV lacquer that helps preserve the wood's natural structure. A benefit with a slightly thicker veneer is how you can repair and sand the surface if it’s damaged to give furniture a longer and more beautiful life. Get the look Ideas based on your recently viewed products Skip listing More from the MALM series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "oak",
+      "birch",
+      "smooth"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00187.jpg",
+    "image_filename": "Beds mattresses_00187.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "SONGESAND Bedside table - brown 42x40 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/songesand-bedside-table-brown-90367443/",
+    "price": 59900,
+    "width_x": 42.0,
+    "depth_y": 40.0,
+    "height_z": 55.0,
+    "size_unit": "cm",
+    "color": "brown",
+    "materials": "What is particleboard? Particleboard is made from recycled wood and sawmill leftovers – so wood pieces with the wrong shade, woodchips and sawdust become a resource instead of possibly being discarded. We use boards for things like bookcases, bed frames, sofas and kitchen frames. To protect from wear and moisture, we apply varnish, veneer or foil that adds to the furniture's look. Get the look Ideas based on your recently viewed products Skip listing More from the SONGESAND series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "wood",
+      "veneer"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00188.jpg",
+    "image_filename": "Beds mattresses_00188.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "SONGESAND Bedside table - white 42x40 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/songesand-bedside-table-white-20367446/",
+    "price": 59900,
+    "width_x": 42.0,
+    "depth_y": 40.0,
+    "height_z": 55.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is particleboard? Particleboard is made from recycled wood and sawmill leftovers – so wood pieces with the wrong shade, woodchips and sawdust become a resource instead of possibly being discarded. We use boards for things like bookcases, bed frames, sofas and kitchen frames. To protect from wear and moisture, we apply varnish, veneer or foil that adds to the furniture's look. Get the look Ideas based on your recently viewed products Skip listing More from the SONGESAND series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "wood",
+      "veneer"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00189.jpg",
+    "image_filename": "Beds mattresses_00189.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "RÅDMANSÖ Bedside table - brown walnut effect 54x38x58 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/radmansoe-bedside-table-brown-walnut-effect-00593822/",
+    "price": 99900,
+    "width_x": 54.0,
+    "depth_y": 38.0,
+    "height_z": 58.0,
+    "size_unit": "cm",
+    "color": "brown",
+    "materials": null,
+    "texture_keywords": [
+      "wood",
+      "walnut"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00190.jpg",
+    "image_filename": "Beds mattresses_00190.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "GRÅFJÄLLET Bedside table - white 45x36x59 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/grafjaellet-bedside-table-white-80583107/",
+    "price": 59900,
+    "width_x": 45.0,
+    "depth_y": 36.0,
+    "height_z": 59.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "metal",
+      "glass"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00191.jpg",
+    "image_filename": "Beds mattresses_00191.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "GRÅFJÄLLET Bedside table - anthracite 45x36x59 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/grafjaellet-bedside-table-anthracite-40570220/",
+    "price": 59900,
+    "width_x": 45.0,
+    "depth_y": 36.0,
+    "height_z": 59.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": null,
+    "texture_keywords": [
+      "metal",
+      "glass"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00192.jpg",
+    "image_filename": "Beds mattresses_00192.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "PERJOHAN Stool with storage - pine",
+    "product_url": "https://www.ikea.com/kr/en/p/perjohan-stool-with-storage-pine-40501321/",
+    "price": 39900,
+    "width_x": 49.0,
+    "depth_y": 28.0,
+    "height_z": 45.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": null,
+    "texture_keywords": [
+      "wood"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00193.jpg",
+    "image_filename": "Beds mattresses_00193.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "BRIMNES Bedside table - white 39x41x53 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/brimnes-bedside-table-white-00354063/",
+    "price": 69900,
+    "width_x": 39.0,
+    "depth_y": 41.0,
+    "height_z": 53.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is particleboard? Particleboard is made from recycled wood and sawmill leftovers – so wood pieces with the wrong shade, woodchips and sawdust become a resource instead of possibly being discarded. We use boards for things like bookcases, bed frames, sofas and kitchen frames. To protect from wear and moisture, we apply varnish, veneer or foil that adds to the furniture's look. Get the look Ideas based on your recently viewed products Skip listing More from the BRIMNES series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "wood",
+      "veneer"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00196.jpg",
+    "image_filename": "Beds mattresses_00196.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "TYSSEDAL Bedside table - white 51x40 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/tyssedal-bedside-table-white-60357474/",
+    "price": 139000,
+    "width_x": 51.0,
+    "depth_y": 40.0,
+    "height_z": 59.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is fibreboard? Fibreboard is a stable and durable material made of leftover wood from the wood industry. A durable outer layer of paint or laminate is added to the board. The difference between various types of fibreboards, such as HDF and MDF, is mainly the thickness, yet also how impact-resistant they are. This determines if we will use them for bed frames, sofa frames, kitchen fronts, wardrobe doors, or something completely different. Get the look Ideas based on your recently viewed products Skip listing More from the TYSSEDAL series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "wood",
+      "smooth"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00197.jpg",
+    "image_filename": "Beds mattresses_00197.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "STOMSÖ Wall-mounted bedside table - birch effect white/blue 36x29x20 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/stomsoe-wall-mounted-bedside-table-birch-effect-white-blue-80578525/",
+    "price": 39900,
+    "width_x": 36.0,
+    "depth_y": 29.0,
+    "height_z": 20.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "wood",
+      "birch",
+      "metal"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00201.jpg",
+    "image_filename": "Beds mattresses_00201.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "GILLERSBERG Bedside table - bamboo/white 39x39x56 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/gillersberg-bedside-table-bamboo-white-40617920/",
+    "price": 49900,
+    "width_x": 39.0,
+    "depth_y": 39.0,
+    "height_z": 56.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "bamboo"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00202.jpg",
+    "image_filename": "Beds mattresses_00202.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "PLÖJKER Bedside table - dark grey 41x41x50 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/ploejker-bedside-table-dark-grey-70613553/",
+    "price": 99900,
+    "width_x": 41.0,
+    "depth_y": 41.0,
+    "height_z": 50.0,
+    "size_unit": "cm",
+    "color": "grey",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00203.jpg",
+    "image_filename": "Beds mattresses_00203.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "PLÖJKER Bedside table - grey-beige 41x41x50 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/ploejker-bedside-table-grey-beige-90613552/",
+    "price": 99900,
+    "width_x": 41.0,
+    "depth_y": 41.0,
+    "height_z": 50.0,
+    "size_unit": "cm",
+    "color": "beige",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00204.jpg",
+    "image_filename": "Beds mattresses_00204.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "HATTÅSEN Bedside table/shelf unit - white",
+    "product_url": "https://www.ikea.com/kr/en/p/hattasen-bedside-table-shelf-unit-white-60569980/",
+    "price": 29900,
+    "width_x": 27.0,
+    "depth_y": 43.0,
+    "height_z": 58.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "metal"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00205.jpg",
+    "image_filename": "Beds mattresses_00205.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "IDANÄS Bedside table - white 47x40 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/idanaes-bedside-table-white-70458811/",
+    "price": 159000,
+    "width_x": 47.0,
+    "depth_y": 40.0,
+    "height_z": 68.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00206.jpg",
+    "image_filename": "Beds mattresses_00206.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "IDANÄS Bedside table - dark brown stained 47x40 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/idanaes-bedside-table-dark-brown-stained-60458816/",
+    "price": 159000,
+    "width_x": 47.0,
+    "depth_y": 40.0,
+    "height_z": 68.0,
+    "size_unit": "cm",
+    "color": "brown",
+    "materials": "What is veneer? A veneer is a thin wooden sheet fixed on things like particleboards to add a durable surface and a natural wood look – so we enjoy the many benefits of wood without using solid wood. The most common veneer types are birch, ash, oak and beech and we’ve made a special UV lacquer that helps preserve the wood's natural structure. A benefit with a slightly thicker veneer is how you can repair and sand the surface if it’s damaged to give furniture a longer and more beautiful life. Get the look Ideas based on your recently viewed products Skip listing More from the IDANÄS bedroom series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "oak",
+      "birch"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00207.jpg",
+    "image_filename": "Beds mattresses_00207.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "VIKHAMMER Bedside table - black 40x39 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vikhammer-bedside-table-black-00388973/",
+    "price": 89900,
+    "width_x": 40.0,
+    "depth_y": 39.0,
+    "height_z": 65.0,
+    "size_unit": "cm",
+    "color": "black",
+    "materials": "What is fibreboard? Fibreboard is a stable and durable material made of leftover wood from the wood industry. A durable outer layer of paint or laminate is added to the board. The difference between various types of fibreboards, such as HDF and MDF, is mainly the thickness, yet also how impact-resistant they are. This determines if we will use them for bed frames, sofa frames, kitchen fronts, wardrobe doors, or something completely different. Get the look Ideas based on your recently viewed products Skip listing More from the Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "wood",
+      "metal"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00208.jpg",
+    "image_filename": "Beds mattresses_00208.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "BLÄSTÅSEN Bedside table - white 50x37x76 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/blaestasen-bedside-table-white-70601606/",
+    "price": 99900,
+    "width_x": 50.0,
+    "depth_y": 37.0,
+    "height_z": 76.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "wood"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00209.jpg",
+    "image_filename": "Beds mattresses_00209.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "BLÄSTÅSEN Bedside table - black 50x37x76 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/blaestasen-bedside-table-black-60617575/",
+    "price": 99900,
+    "width_x": 50.0,
+    "depth_y": 37.0,
+    "height_z": 76.0,
+    "size_unit": "cm",
+    "color": "black",
+    "materials": null,
+    "texture_keywords": [
+      "wood"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00210.jpg",
+    "image_filename": "Beds mattresses_00210.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "BAGGBODA Side table - white 71x50 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/baggboda-side-table-white-60570827/",
+    "price": 89900,
+    "width_x": 50.0,
+    "depth_y": 71.0,
+    "height_z": 47.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00211.jpg",
+    "image_filename": "Beds mattresses_00211.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "BRUKSVARA Side table - white 42x30 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/bruksvara-side-table-white-80556062/",
+    "price": 24900,
+    "width_x": 42.0,
+    "depth_y": 30.0,
+    "height_z": 61.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "plastic"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00212.jpg",
+    "image_filename": "Beds mattresses_00212.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bedside tables"
+    ],
+    "middle_category_name": "Bedside tables",
+    "small_category_name": null,
+    "product_name": "KULLEN Chest of 2 drawers - white 35x49 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/kullen-chest-of-2-drawers-white-70355728/",
+    "price": 49900,
+    "width_x": 35.0,
+    "depth_y": 40.0,
+    "height_z": 49.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is particleboard? Particleboard is made from recycled wood and sawmill leftovers – so wood pieces with the wrong shade, woodchips and sawdust become a resource instead of possibly being discarded. We use boards for things like bookcases, bed frames, sofas and kitchen frames. To protect from wear and moisture, we apply varnish, veneer or foil that adds to the furniture's look. Get the look Ideas based on your recently viewed products Skip listing More from the Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "smooth"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00213.jpg",
+    "image_filename": "Beds mattresses_00213.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "SONGESAND Bed storage box, set of 2 - white 200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/songesand-bed-storage-box-set-of-2-white-10372537/",
+    "price": 2,
+    "width_x": 199.0,
+    "depth_y": 67.0,
+    "height_z": 23.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is particleboard? Particleboard is made from recycled wood and sawmill leftovers – so wood pieces with the wrong shade, woodchips and sawdust become a resource instead of possibly being discarded. We use boards for things like bookcases, bed frames, sofas and kitchen frames. To protect from wear and moisture, we apply varnish, veneer or foil that adds to the furniture's look. Get the look Ideas based on your recently viewed products Skip listing More from the SONGESAND series Accessories for SONGESAND Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide",
+    "texture_keywords": [
+      "wood",
+      "veneer"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00214.jpg",
+    "image_filename": "Beds mattresses_00214.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "SKUBB Storage case - white 90x53x19 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/skubb-storage-case-white-00591050/",
+    "price": 9,
+    "width_x": 90.0,
+    "depth_y": 53.0,
+    "height_z": 19.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "polyester"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00215.jpg",
+    "image_filename": "Beds mattresses_00215.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "SKUBB Storage case - dark grey 90x53x19 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/skubb-storage-case-dark-grey-30591063/",
+    "price": 6,
+    "width_x": 90.0,
+    "depth_y": 53.0,
+    "height_z": 19.0,
+    "size_unit": "cm",
+    "color": "grey",
+    "materials": null,
+    "texture_keywords": [
+      "polyester"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00216.jpg",
+    "image_filename": "Beds mattresses_00216.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "SOCKERBIT Storage box with lid - white 50x77x19 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/sockerbit-storage-box-with-lid-white-10411534/",
+    "price": 17900,
+    "width_x": 50.0,
+    "depth_y": 77.0,
+    "height_z": 19.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00217.jpg",
+    "image_filename": "Beds mattresses_00217.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "VARDÖ Bed storage box - white 65x70 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vardoe-bed-storage-box-white-90354515/",
+    "price": 3,
+    "width_x": 65.0,
+    "depth_y": 70.0,
+    "height_z": 18.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is particleboard? Particleboard is made from recycled wood and sawmill leftovers – so wood pieces with the wrong shade, woodchips and sawdust become a resource instead of possibly being discarded. We use boards for things like bookcases, bed frames, sofas and kitchen frames. To protect from wear and moisture, we apply varnish, veneer or foil that adds to the furniture's look. Get the look Ideas based on your recently viewed products Skip listing More from the Accessories for VARDÖ Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide",
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "fabric"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00218.jpg",
+    "image_filename": "Beds mattresses_00218.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "VARDÖ Bed storage box - black 65x70 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vardoe-bed-storage-box-black-20354514/",
+    "price": 4,
+    "width_x": 65.0,
+    "depth_y": 70.0,
+    "height_z": 18.0,
+    "size_unit": "cm",
+    "color": "black",
+    "materials": "What is particleboard? Particleboard is made from recycled wood and sawmill leftovers – so wood pieces with the wrong shade, woodchips and sawdust become a resource instead of possibly being discarded. We use boards for things like bookcases, bed frames, sofas and kitchen frames. To protect from wear and moisture, we apply varnish, veneer or foil that adds to the furniture's look. Get the look Ideas based on your recently viewed products Skip listing More from the Accessories for VARDÖ Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide",
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "fabric"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00219.jpg",
+    "image_filename": "Beds mattresses_00219.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "SAMLA Box - transparent 78x56x18 cm/55 l",
+    "product_url": "https://www.ikea.com/kr/en/p/samla-box-transparent-30180943/",
+    "price": 7,
+    "width_x": 78.0,
+    "depth_y": 56.0,
+    "height_z": 18.0,
+    "size_unit": "cm",
+    "color": "transparent",
+    "materials": null,
+    "texture_keywords": [
+      "plastic"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00220.jpg",
+    "image_filename": "Beds mattresses_00220.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "MALM Bed storage box for high bed frame - white 200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/malm-bed-storage-box-for-high-bed-frame-white-00354497/",
+    "price": 5,
+    "width_x": 100.0,
+    "depth_y": 62.0,
+    "height_z": 29.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is particleboard? Particleboard is made from recycled wood and sawmill leftovers – so wood pieces with the wrong shade, woodchips and sawdust become a resource instead of possibly being discarded. We use boards for things like bookcases, bed frames, sofas and kitchen frames. To protect from wear and moisture, we apply varnish, veneer or foil that adds to the furniture's look. Get the look Ideas based on your recently viewed products Skip listing More from the MALM series Accessories for MALM Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide",
+    "texture_keywords": [
+      "wood",
+      "veneer"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00221.jpg",
+    "image_filename": "Beds mattresses_00221.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "MALM Bed storage box for high bed frame - white stained oak veneer 200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/malm-bed-storage-box-for-high-bed-frame-white-stained-oak-veneer-40354508/",
+    "price": 6,
+    "width_x": 100.0,
+    "depth_y": 62.0,
+    "height_z": 29.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is veneer? A veneer is a thin wooden sheet fixed on things like particleboards to add a durable surface and a natural wood look – so we enjoy the many benefits of wood without using solid wood. The most common veneer types are birch, ash, oak and beech and we’ve made a special UV lacquer that helps preserve the wood's natural structure. A benefit with a slightly thicker veneer is how you can repair and sand the surface if it’s damaged to give furniture a longer and more beautiful life. Get the look Ideas based on your recently viewed products Skip listing More from the MALM series Accessories for MALM Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide",
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "oak",
+      "birch"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00222.jpg",
+    "image_filename": "Beds mattresses_00222.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "GLADSTAD Upholstered bed storage box - Kabusa light grey 200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/gladstad-upholstered-bed-storage-box-kabusa-light-grey-80498425/",
+    "price": 6,
+    "width_x": 100.0,
+    "depth_y": 60.0,
+    "height_z": 19.0,
+    "size_unit": "cm",
+    "color": "grey",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00223.jpg",
+    "image_filename": "Beds mattresses_00223.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "TOLKNING Basket - handmade rattan 50x43x19 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/tolkning-basket-handmade-rattan-90512652/",
+    "price": 8,
+    "width_x": 50.0,
+    "depth_y": 43.0,
+    "height_z": 19.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": "Form and function hand in hand When each natural fibre is treated right, it can be transformed into almost anything. “We can create products that are as beautiful as functional. It’s impossible to manufacture two that look exactly the same since every natural fibre shifts in colour and texture. On the other hand, customers get something unique with lots of character,” says Kristin. Cooperation between man and nature Simi says that working with natural fibres can be challenging, but that is also a part of the charm. “The TOLKNING series reflects a heritage that is worth preserving – man and nature together and skills passed on from generation to generation. I think that’s one of the reasons why these kinds of products are so loved. They have a soul and warmth that many people like – perfect if you want to add genuine materials and natural beauty to your home.” Learn more Material What is rattan? Rattan is a strong yet lightweight and flexible material made from the rattan plant’s stem. It can be used both whole and split into thinner materials that are braided into things like furniture and baskets. Rattan belongs to the palm family and climbs along trees, though no trees are required to be felled when the rattan cane is harvested. Since it is a natural material and the products are often handmade by skilled craftspeople, each object gets a completely unique look. Get the look Ideas based on your recently viewed products Skip listing More from the TOLKNING series Accessories for TOLKNING Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop",
+    "texture_keywords": [
+      "rattan",
+      "woven"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00224.jpg",
+    "image_filename": "Beds mattresses_00224.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "SKUBB Storage case - white 65x53x19 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/skubb-storage-case-white-90591060/",
+    "price": 8,
+    "width_x": 65.0,
+    "depth_y": 53.0,
+    "height_z": 19.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "polyester"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00225.jpg",
+    "image_filename": "Beds mattresses_00225.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "SKUBB Storage case - dark grey 65x53x19 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/skubb-storage-case-dark-grey-50591057/",
+    "price": 7,
+    "width_x": 65.0,
+    "depth_y": 53.0,
+    "height_z": 19.0,
+    "size_unit": "cm",
+    "color": "grey",
+    "materials": null,
+    "texture_keywords": [
+      "polyester"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00226.jpg",
+    "image_filename": "Beds mattresses_00226.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "VIHALS Bed storage box, set of 2 - white 200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/vihals-bed-storage-box-set-of-2-white-10595118/",
+    "price": 2,
+    "width_x": 201.0,
+    "depth_y": 58.0,
+    "height_z": 24.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00227.jpg",
+    "image_filename": "Beds mattresses_00227.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "SKUBB Storage case - white 43x53x19 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/skubb-storage-case-white-40591048/",
+    "price": 11,
+    "width_x": 43.0,
+    "depth_y": 53.0,
+    "height_z": 19.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "polyester"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00229.jpg",
+    "image_filename": "Beds mattresses_00229.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "SKUBB Storage case - dark grey 43x53x19 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/skubb-storage-case-dark-grey-40591053/",
+    "price": 7,
+    "width_x": 43.0,
+    "depth_y": 53.0,
+    "height_z": 19.0,
+    "size_unit": "cm",
+    "color": "grey",
+    "materials": null,
+    "texture_keywords": [
+      "polyester"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00230.jpg",
+    "image_filename": "Beds mattresses_00230.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "SMYGA Bed storage box - light grey 99x91x29 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/smyga-bed-storage-box-light-grey-90507839/",
+    "price": 99900,
+    "width_x": 99.0,
+    "depth_y": 91.0,
+    "height_z": 29.0,
+    "size_unit": "cm",
+    "color": "grey",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00231.jpg",
+    "image_filename": "Beds mattresses_00231.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "GÖRSNYGG Storage case - white/transparent 55x49x19 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/goersnygg-storage-case-white-transparent-70504196/",
+    "price": 3900,
+    "width_x": 55.0,
+    "depth_y": 49.0,
+    "height_z": 19.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00232.jpg",
+    "image_filename": "Beds mattresses_00232.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "PURRPINGLA Storage case - textile/beige 43x53x19 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/purrpingla-storage-case-textile-beige-80612256/",
+    "price": 8,
+    "width_x": 43.0,
+    "depth_y": 53.0,
+    "height_z": 19.0,
+    "size_unit": "cm",
+    "color": "beige",
+    "materials": "Anonymous reviewer, United States 4.7 Review: 4.7 out of 5 stars. Total reviews: 81 Average rating 81 Reviews Show all reviews Accessories for PURRPINGLA Show all accessories +4 +4 +4 +4 +4 Recommended for you Explore more options Clothes boxes63 Shoe cabinets31 Hanging clothes organisers12 Shoe boxes & organisers10 All Clothes organisers Similar products IKEA Kreativ Explore your options Try furniture and decor together virtually before you buy to find a perfect fit for your home. Try it out Get the look Ideas based on your recently viewed products Skip listing More from the Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way.",
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00233.jpg",
+    "image_filename": "Beds mattresses_00233.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "STUK Storage case - white/grey 71x51x18 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/stuk-storage-case-white-grey-30309578/",
+    "price": 6,
+    "width_x": 71.0,
+    "depth_y": 51.0,
+    "height_z": 18.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "What is recycled polyester? When we create products from recycled polyester, PET bottles and other sources of polyester get a new life in products like textiles, storage boxes, kitchen fronts and even lamps. When using them, you get to enjoy exactly the same quality and function as with virgin polyester products. And naturally, they’re just as clean and safe in every way. And perhaps the very best part – you contribute to using less new raw materials too. Get the look Ideas based on your recently viewed products Skip listing More from the STUK series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option",
+    "texture_keywords": [
+      "polyester"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00234.jpg",
+    "image_filename": "Beds mattresses_00234.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "STUK Storage case - white/black 71x51x18 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/stuk-storage-case-white-black-80621543/",
+    "price": 11,
+    "width_x": 71.0,
+    "depth_y": 51.0,
+    "height_z": 18.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "polyester"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00235.jpg",
+    "image_filename": "Beds mattresses_00235.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "SKUBB Storage case with mesh window - white 69x55x19 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/skubb-storage-case-with-mesh-window-white-00573367/",
+    "price": 4,
+    "width_x": 69.0,
+    "depth_y": 55.0,
+    "height_z": 19.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "polyester"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00236.jpg",
+    "image_filename": "Beds mattresses_00236.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Under bed storage"
+    ],
+    "middle_category_name": "Under bed storage",
+    "small_category_name": null,
+    "product_name": "STUK Storage case - white/black 51x51x18 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/stuk-storage-case-white-black-60621539/",
+    "price": 10,
+    "width_x": 51.0,
+    "depth_y": 51.0,
+    "height_z": 18.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "polyester"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00237.jpg",
+    "image_filename": "Beds mattresses_00237.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattress bases"
+    ],
+    "middle_category_name": "Mattress bases",
+    "small_category_name": null,
+    "product_name": "LYNGÖR Mattress base 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/lyngoer-mattress-base-30566148/",
+    "price": 2,
+    "width_x": 150.0,
+    "depth_y": 200.0,
+    "height_z": 20.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00240.jpg",
+    "image_filename": "Beds mattresses_00240.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattress bases"
+    ],
+    "middle_category_name": "Mattress bases",
+    "small_category_name": null,
+    "product_name": "LYNGÖR Mattress base 180x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/lyngoer-mattress-base-20566139/",
+    "price": 2,
+    "width_x": 180.0,
+    "depth_y": 200.0,
+    "height_z": 20.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00241.jpg",
+    "image_filename": "Beds mattresses_00241.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattress bases"
+    ],
+    "middle_category_name": "Mattress bases",
+    "small_category_name": null,
+    "product_name": "LYNGÖR Mattress base 90x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/lyngoer-mattress-base-80566136/",
+    "price": 230000,
+    "width_x": 90.0,
+    "depth_y": 200.0,
+    "height_z": 20.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00242.jpg",
+    "image_filename": "Beds mattresses_00242.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattress bases"
+    ],
+    "middle_category_name": "Mattress bases",
+    "small_category_name": null,
+    "product_name": "LYNGÖR Mattress base 120x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/lyngoer-mattress-base-50566147/",
+    "price": 270000,
+    "width_x": 120.0,
+    "depth_y": 200.0,
+    "height_z": 20.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00243.jpg",
+    "image_filename": "Beds mattresses_00243.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattress bases"
+    ],
+    "middle_category_name": "Mattress bases",
+    "small_category_name": null,
+    "product_name": "LYNGÖR Slatted mattress base - dark grey 90x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/lyngoer-slatted-mattress-base-dark-grey-s69554390/",
+    "price": 269000,
+    "width_x": 90.0,
+    "depth_y": 200.0,
+    "height_z": 20.0,
+    "size_unit": "cm",
+    "color": "grey",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00246.jpg",
+    "image_filename": "Beds mattresses_00246.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattress bases"
+    ],
+    "middle_category_name": "Mattress bases",
+    "small_category_name": null,
+    "product_name": "LYNGÖR Slatted mattress base - dark grey 120x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/lyngoer-slatted-mattress-base-dark-grey-s29554354/",
+    "price": 319000,
+    "width_x": 120.0,
+    "depth_y": 200.0,
+    "height_z": 20.0,
+    "size_unit": "cm",
+    "color": "grey",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00247.jpg",
+    "image_filename": "Beds mattresses_00247.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattress bases"
+    ],
+    "middle_category_name": "Mattress bases",
+    "small_category_name": null,
+    "product_name": "LYNGÖR Slatted mattress base with legs - dark grey 180x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/lyngoer-slatted-mattress-base-with-legs-dark-grey-s99554586/",
+    "price": 7,
+    "width_x": 180.0,
+    "depth_y": 200.0,
+    "height_z": 40.0,
+    "size_unit": "cm",
+    "color": "grey",
+    "materials": null,
+    "texture_keywords": [
+      "oak"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00253.jpg",
+    "image_filename": "Beds mattresses_00253.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattress bases"
+    ],
+    "middle_category_name": "Mattress bases",
+    "small_category_name": null,
+    "product_name": "LYNGÖR Slatted mattress base with legs - dark grey 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/lyngoer-slatted-mattress-base-with-legs-dark-grey-s19554590/",
+    "price": 6,
+    "width_x": 150.0,
+    "depth_y": 200.0,
+    "height_z": 40.0,
+    "size_unit": "cm",
+    "color": "grey",
+    "materials": null,
+    "texture_keywords": [
+      "oak"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00254.jpg",
+    "image_filename": "Beds mattresses_00254.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattress bases"
+    ],
+    "middle_category_name": "Mattress bases",
+    "small_category_name": null,
+    "product_name": "LYNGÖR Slatted mattress base with legs - dark grey 90x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/lyngoer-slatted-mattress-base-with-legs-dark-grey-s09554519/",
+    "price": 299000,
+    "width_x": 90.0,
+    "depth_y": 200.0,
+    "height_z": 40.0,
+    "size_unit": "cm",
+    "color": "grey",
+    "materials": null,
+    "texture_keywords": [
+      "oak"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00255.jpg",
+    "image_filename": "Beds mattresses_00255.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Mattress bases"
+    ],
+    "middle_category_name": "Mattress bases",
+    "small_category_name": null,
+    "product_name": "LYNGÖR Slatted mattress base with legs - dark grey 120x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/lyngoer-slatted-mattress-base-with-legs-dark-grey-s39554594/",
+    "price": 349000,
+    "width_x": 120.0,
+    "depth_y": 200.0,
+    "height_z": 40.0,
+    "size_unit": "cm",
+    "color": "grey",
+    "materials": null,
+    "texture_keywords": [
+      "oak"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00256.jpg",
+    "image_filename": "Beds mattresses_00256.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bed slats"
+    ],
+    "middle_category_name": "Bed slats",
+    "small_category_name": null,
+    "product_name": "LURÖY Slatted bed base 90x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/luroey-slatted-bed-base-80163173/",
+    "price": 35000,
+    "width_x": 90.0,
+    "depth_y": 200.0,
+    "height_z": 4.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": "What is layer-glued wood? With layer-glued wood it’s possible to create flexible and extra strong constructions with curved shapes, like frames for armchairs. The secret is a technique where many layers of thin wood veneer are glued together and then pressed into the desired shape. We often use wood like birch, beech, ash and even bamboo – and strive to use the raw material as smartly and efficiently as possible to avoid waste. Just like solid wood, it has natural variations in structure and colour. Get the look Ideas based on your recently viewed products Skip listing More from the Accessories for LURÖY Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide",
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "birch",
+      "bamboo"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00257.jpg",
+    "image_filename": "Beds mattresses_00257.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bed slats"
+    ],
+    "middle_category_name": "Bed slats",
+    "small_category_name": null,
+    "product_name": "LURÖY Slatted bed base 120x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/luroey-slatted-bed-base-80162890/",
+    "price": 45000,
+    "width_x": 120.0,
+    "depth_y": 200.0,
+    "height_z": 4.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": "What is layer-glued wood? With layer-glued wood it’s possible to create flexible and extra strong constructions with curved shapes, like frames for armchairs. The secret is a technique where many layers of thin wood veneer are glued together and then pressed into the desired shape. We often use wood like birch, beech, ash and even bamboo – and strive to use the raw material as smartly and efficiently as possible to avoid waste. Just like solid wood, it has natural variations in structure and colour. Get the look Ideas based on your recently viewed products Skip listing More from the Accessories for LURÖY Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide",
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "birch",
+      "bamboo"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00258.jpg",
+    "image_filename": "Beds mattresses_00258.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bed slats"
+    ],
+    "middle_category_name": "Bed slats",
+    "small_category_name": null,
+    "product_name": "LURÖY Slatted bed base 80x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/luroey-slatted-bed-base-00278724/",
+    "price": 30000,
+    "width_x": 80.0,
+    "depth_y": 200.0,
+    "height_z": 4.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": "What is layer-glued wood? With layer-glued wood it’s possible to create flexible and extra strong constructions with curved shapes, like frames for armchairs. The secret is a technique where many layers of thin wood veneer are glued together and then pressed into the desired shape. We often use wood like birch, beech, ash and even bamboo – and strive to use the raw material as smartly and efficiently as possible to avoid waste. Just like solid wood, it has natural variations in structure and colour. Get the look Ideas based on your recently viewed products Skip listing More from the Accessories for LURÖY Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide",
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "birch",
+      "bamboo"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00260.jpg",
+    "image_filename": "Beds mattresses_00260.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bed slats"
+    ],
+    "middle_category_name": "Bed slats",
+    "small_category_name": null,
+    "product_name": "LURÖY Slatted bed base 70x160 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/luroey-slatted-bed-base-10285093/",
+    "price": 30000,
+    "width_x": 70.0,
+    "depth_y": 160.0,
+    "height_z": 4.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": "What is veneer? A veneer is a thin wooden sheet fixed on things like particleboards to add a durable surface and a natural wood look – so we enjoy the many benefits of wood without using solid wood. The most common veneer types are birch, ash, oak and beech and we’ve made a special UV lacquer that helps preserve the wood's natural structure. A benefit with a slightly thicker veneer is how you can repair and sand the surface if it’s damaged to give furniture a longer and more beautiful life. Get the look Ideas based on your recently viewed products Skip listing More from the Accessories for LURÖY Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide",
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "oak",
+      "birch"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00267.jpg",
+    "image_filename": "Beds mattresses_00267.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Bed legs"
+    ],
+    "middle_category_name": "Bed legs",
+    "small_category_name": null,
+    "product_name": "BURFJORD Leg - oak effect 20 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/burfjord-leg-oak-effect-40608077/",
+    "price": 2,
+    "width_x": 5.5,
+    "depth_y": 5.5,
+    "height_z": 20.0,
+    "size_unit": "cm",
+    "color": "clear",
+    "materials": null,
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "oak"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00271.jpg",
+    "image_filename": "Beds mattresses_00271.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds with mattresses included"
+    ],
+    "middle_category_name": "Beds with mattresses included",
+    "small_category_name": null,
+    "product_name": "HEMNES Day-bed w 3 drawers/2 mattresses - white/Åfjäll medium firm 80x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/hemnes-day-bed-w-3-drawers-2-mattresses-white-afjaell-medium-firm-s29521504/",
+    "price": 677000,
+    "width_x": 89.0,
+    "depth_y": 209.0,
+    "height_z": 83.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "Start exploring Get the look Ideas based on your recently viewed products Skip listing More from the HEMNES bedroom series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option Gift card",
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00277.jpg",
+    "image_filename": "Beds mattresses_00277.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds with mattresses included"
+    ],
+    "middle_category_name": "Beds with mattresses included",
+    "small_category_name": null,
+    "product_name": "HEMNES Day-bed w 3 drawers/2 mattresses - white/Åfjäll firm 80x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/hemnes-day-bed-w-3-drawers-2-mattresses-white-afjaell-firm-s59521507/",
+    "price": 677000,
+    "width_x": 89.0,
+    "depth_y": 209.0,
+    "height_z": 83.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "Start exploring Get the look Ideas based on your recently viewed products Skip listing More from the HEMNES bedroom series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option Gift card",
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00278.jpg",
+    "image_filename": "Beds mattresses_00278.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds with mattresses included"
+    ],
+    "middle_category_name": "Beds with mattresses included",
+    "small_category_name": null,
+    "product_name": "HEMNES Day-bed w 3 drawers/2 mattresses - grey/Ågotnes firm 80x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/hemnes-day-bed-w-3-drawers-2-mattresses-grey-agotnes-firm-s39428157/",
+    "price": 539000,
+    "width_x": 89.0,
+    "depth_y": 209.0,
+    "height_z": 83.0,
+    "size_unit": "cm",
+    "color": "grey",
+    "materials": "Start exploring Get the look Ideas based on your recently viewed products Skip listing More from the HEMNES bedroom series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option Gift card",
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00279.jpg",
+    "image_filename": "Beds mattresses_00279.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds with mattresses included"
+    ],
+    "middle_category_name": "Beds with mattresses included",
+    "small_category_name": null,
+    "product_name": "HEMNES Day-bed w 3 drawers/2 mattresses - white/Ågotnes firm 80x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/hemnes-day-bed-w-3-drawers-2-mattresses-white-agotnes-firm-s59428118/",
+    "price": 539000,
+    "width_x": 89.0,
+    "depth_y": 209.0,
+    "height_z": 83.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "Start exploring Get the look Ideas based on your recently viewed products Skip listing More from the HEMNES bedroom series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option Gift card",
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00280.jpg",
+    "image_filename": "Beds mattresses_00280.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds with mattresses included"
+    ],
+    "middle_category_name": "Beds with mattresses included",
+    "small_category_name": null,
+    "product_name": "HEMNES Day-bed w 3 drawers/2 mattresses - grey/Åfjäll firm 80x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/hemnes-day-bed-w-3-drawers-2-mattresses-grey-afjaell-firm-s19521496/",
+    "price": 677000,
+    "width_x": 89.0,
+    "depth_y": 209.0,
+    "height_z": 83.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "Start exploring Get the look Ideas based on your recently viewed products Skip listing More from the HEMNES bedroom series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option Gift card",
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00281.jpg",
+    "image_filename": "Beds mattresses_00281.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds with mattresses included"
+    ],
+    "middle_category_name": "Beds with mattresses included",
+    "small_category_name": null,
+    "product_name": "MALM Bed frame with mattress - white stained oak veneer/Valevåg super firm 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/malm-bed-frame-with-mattress-white-stained-oak-veneer-valevag-super-firm-s19544327/",
+    "price": 17,
+    "width_x": 166.0,
+    "depth_y": 209.0,
+    "height_z": 100.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "oak"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00282.jpg",
+    "image_filename": "Beds mattresses_00282.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds with mattresses included"
+    ],
+    "middle_category_name": "Beds with mattresses included",
+    "small_category_name": null,
+    "product_name": "MALM Bed frame with mattress - white stained oak veneer/Valevåg firm 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/malm-bed-frame-with-mattress-white-stained-oak-veneer-valevag-firm-s09544323/",
+    "price": 17,
+    "width_x": 166.0,
+    "depth_y": 209.0,
+    "height_z": 100.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "oak"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00283.jpg",
+    "image_filename": "Beds mattresses_00283.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds with mattresses included"
+    ],
+    "middle_category_name": "Beds with mattresses included",
+    "small_category_name": null,
+    "product_name": "MALM Bed frame with mattress - white/Vesteröy extra firm 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/malm-bed-frame-with-mattress-white-vesteroey-extra-firm-s89544767/",
+    "price": 13,
+    "width_x": 166.0,
+    "depth_y": 209.0,
+    "height_z": 100.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00284.jpg",
+    "image_filename": "Beds mattresses_00284.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds with mattresses included"
+    ],
+    "middle_category_name": "Beds with mattresses included",
+    "small_category_name": null,
+    "product_name": "MALM Bed frame with mattress - white stained oak veneer/Vesteröy firm 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/malm-bed-frame-with-mattress-white-stained-oak-veneer-vesteroey-firm-s89544324/",
+    "price": 14,
+    "width_x": 166.0,
+    "depth_y": 209.0,
+    "height_z": 100.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [
+      "wood",
+      "veneer",
+      "oak"
+    ],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00285.jpg",
+    "image_filename": "Beds mattresses_00285.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds with mattresses included"
+    ],
+    "middle_category_name": "Beds with mattresses included",
+    "small_category_name": null,
+    "product_name": "MALM Bed frame with mattress - white/Vesteröy firm 150x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/malm-bed-frame-with-mattress-white-vesteroey-firm-s69544768/",
+    "price": 13,
+    "width_x": 166.0,
+    "depth_y": 209.0,
+    "height_z": 100.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00286.jpg",
+    "image_filename": "Beds mattresses_00286.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds with mattresses included"
+    ],
+    "middle_category_name": "Beds with mattresses included",
+    "small_category_name": null,
+    "product_name": "NORDLI Bed frame with storage and mattress - white/Vågstranda firm 90x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/nordli-bed-frame-with-storage-and-mattress-white-vagstranda-firm-s69537659/",
+    "price": 708000,
+    "width_x": 90.0,
+    "depth_y": 202.0,
+    "height_z": 30.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00297.jpg",
+    "image_filename": "Beds mattresses_00297.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds with mattresses included"
+    ],
+    "middle_category_name": "Beds with mattresses included",
+    "small_category_name": null,
+    "product_name": "NORDLI Bed frame with storage and mattress - white/Valevåg firm 90x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/nordli-bed-frame-with-storage-and-mattress-white-valevag-firm-s89537658/",
+    "price": 558000,
+    "width_x": 90.0,
+    "depth_y": 202.0,
+    "height_z": 30.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": null,
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00298.jpg",
+    "image_filename": "Beds mattresses_00298.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds with mattresses included"
+    ],
+    "middle_category_name": "Beds with mattresses included",
+    "small_category_name": null,
+    "product_name": "BRIMNES Day-bed w 2 drawers/2 mattresses - white/Ågotnes firm 80x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/brimnes-day-bed-w-2-drawers-2-mattresses-white-agotnes-firm-s29427064/",
+    "price": 439000,
+    "width_x": 87.0,
+    "depth_y": 205.0,
+    "height_z": 57.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "Start exploring Get the look Ideas based on your recently viewed products Skip listing More from the BRIMNES series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option Gift card",
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00299.jpg",
+    "image_filename": "Beds mattresses_00299.jpg"
+  },
+  {
+    "top_category_code": "beds_mattresses",
+    "top_category_name": "Beds & mattresses",
+    "category_path": [
+      "Beds & mattresses",
+      "Beds with mattresses included"
+    ],
+    "middle_category_name": "Beds with mattresses included",
+    "small_category_name": null,
+    "product_name": "BRIMNES Day-bed w 2 drawers/2 mattresses - white/Åfjäll firm 80x200 cm",
+    "product_url": "https://www.ikea.com/kr/en/p/brimnes-day-bed-w-2-drawers-2-mattresses-white-afjaell-firm-s79521163/",
+    "price": 577000,
+    "width_x": 87.0,
+    "depth_y": 205.0,
+    "height_z": 57.0,
+    "size_unit": "cm",
+    "color": "white",
+    "materials": "Start exploring Get the look Ideas based on your recently viewed products Skip listing More from the BRIMNES series Tell us about your experience! Share feedback Footer IKEA Family Bring your ideas to life with rewards, inspiration, discounts and a few surprises along the way. Learn more Join now IKEA Business Network Enjoy the unique benefits to create a better life at work. Learn more Join now Help Customer Service FAQ Contact us Delivery Tracking Returns and Claims Guarantees Product Recalls Feedback Spare parts Shop How to Shop Phone Order IKEA for Business IKEA App Online Planning Product Tip/Guide Finance Option Gift card",
+    "texture_keywords": [],
+    "image_path": "data/images/Beds_mattresses/Beds mattresses_00300.jpg",
+    "image_filename": "Beds mattresses_00300.jpg"
+  }
+]
