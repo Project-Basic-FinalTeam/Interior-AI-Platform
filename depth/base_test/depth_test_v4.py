@@ -1,32 +1,28 @@
 """
 실내 이미지 기반 Depth 추정 및 바닥-벽 경계 후보선 추출 코드
+- 후보정(post-processing) 포함 버전
 
 이 코드는 단일 실내 이미지를 입력으로 받아 Depth Anything V2 Metric Indoor 모델을 이용해
 픽셀 단위의 metric depth map(미터 단위 깊이 지도)을 생성한다. 이후 depth map을 카메라 좌표계
-기준의 3D point cloud로 변환하고, 이미지 하단부의 점들을 기반으로 RANSAC 알고리즘을 사용해
-바닥 plane(평면)을 추정한다.
+기준의 3D point cloud(포인트 클라우드)로 변환하고, 이미지 하단부의 점들을 기반으로 RANSAC
+알고리즘을 사용해 바닥 plane(평면)을 추정한다.
 
-추정된 바닥 영역으로부터 바닥-벽 경계 후보선을 추출하고, 각 경계선의 픽셀 좌표, 3D 좌표,
-추정 길이, 평균 깊이값 등을 계산하여 JSON 파일로 저장한다. 또한 결과 검증을 위해 depth map,
-floor mask, boundary overlay 등의 디버그 이미지를 함께 저장한다.
-
-시연용 보정:
-- RANSAC 결과가 실행마다 달라지지 않도록 random seed를 고정한다.
-- HoughLinesP로 중복 검출된 바닥-벽 후보선 중 대표 경계선만 선택한다.
-- 최종 JSON에는 대표 경계선 2개만 저장한다.
-- boundary overlay에서는 빨간 raw boundary 후보점을 숨기고 파란 대표선만 표시한다.
+후보정 포함 사항:
+1. floor mask(바닥 마스크) 추가 정리
+2. 선택적 object exclusion mask(객체 제외 마스크) 반영
+3. 바닥-벽 경계 후보선 중 수평선만 필터링
+4. 유사한 y 좌표와 x 구간을 가진 중복 edge(경계선) 병합
+5. 필요 시 길이 scale factor(스케일 계수) 보정
 
 주의:
 - 카메라의 실제 intrinsic parameter(내부 파라미터)를 알 수 없기 때문에,
   horizontal FOV 값을 가정하여 3D 좌표와 길이를 계산한다.
 - 따라서 출력되는 길이값은 실측값이 아니라 추정값이다.
-- 바닥이 충분히 보이지 않거나, 가구·그림자·조명 변화가 심한 이미지에서는
-  바닥 평면 및 경계선 추정 정확도가 낮아질 수 있다.
+- 정확한 실측 길이가 필요한 경우, 카메라 calibration(보정) 또는 기준 객체 기반 scale 보정이 필요하다.
 """
 
 import json
 import math
-import copy
 from pathlib import Path
 
 import cv2
@@ -42,17 +38,13 @@ from transformers import AutoImageProcessor, AutoModelForDepthEstimation
 # 1. 경로 및 설정값
 # =========================
 
-INPUT_IMAGE_PATH = Path(
-    r"C:\Users\khrha\Desktop\SWPJ_4\Interior-AI-Platform\depth\base_test\test_11.jpg"
-)
+INPUT_IMAGE_PATH = Path(r"C:\Users\khrha\Desktop\SWPJ_4\Interior-AI-Platform\depth\base_test\test_11.jpg")
 
 # 여기 숫자만 그때그때 바꾸면 됩니다.
-# 예: 1 -> result_1, 2 -> result_2, 10 -> result_10
-RESULT_NUMBER = "11"
+# 예: 1 -> result_1, 2 -> result_2, 11 -> result_11
+RESULT_NUMBER = '11_1'
 
-BASE_OUTPUT_DIR = Path(
-    r"C:\Users\khrha\Desktop\SWPJ_4\Interior-AI-Platform\depth\base_test"
-)
+BASE_OUTPUT_DIR = Path(r"C:\Users\khrha\Desktop\SWPJ_4\Interior-AI-Platform\depth\base_test")
 RESULT_NAME = f"result_{RESULT_NUMBER}"
 
 # 최종 output(출력) 폴더
@@ -70,11 +62,50 @@ HORIZONTAL_FOV_DEG = 70.0
 # 디버그 이미지 저장 여부
 SAVE_DEBUG_IMAGES = True
 
-# 시연용 결과 고정
-RANDOM_SEED = 42
 
-# 시연용으로 최종 JSON에 남길 대표 경계선 개수
-DEMO_MAX_EDGES = 2
+# =========================
+# 1-1. 후보정 설정값
+# =========================
+
+USE_DEMO_POSTPROCESSING = True
+
+# 실제 기준 길이가 없으면 1.0 유지하세요.
+# 예: 수납장 실제 너비가 1.60m인데 코드가 1.45m로 추정했다면 1.60 / 1.45 입력
+LENGTH_SCALE_FACTOR = 1.0
+
+# 수평선으로 인정할 기울기 허용치
+# dy / dx 값이 이 값보다 작아야 수평선으로 인정합니다.
+HORIZONTAL_SLOPE_TOL = 0.03
+
+# 바닥-벽 경계선이 나올 수 있는 y 위치 범위
+# test_11 기준 경계는 이미지 높이의 약 70% 부근입니다.
+BOUNDARY_Y_MIN_RATIO = 0.55
+BOUNDARY_Y_MAX_RATIO = 0.82
+
+# 너무 짧은 후보선 제거 기준
+MIN_BOUNDARY_PIXEL_LENGTH = 200
+
+# 비슷한 y 좌표의 중복 선분을 병합할 때 허용할 y 차이
+MERGE_Y_TOLERANCE_PX = 8
+
+# 같은 선으로 볼 수 있는 x 방향 간격
+MERGE_X_GAP_TOLERANCE_PX = 80
+
+# 최종적으로 남길 최대 바닥-벽 경계 후보선 개수
+# test_11처럼 가구가 경계를 가리는 경우 2~3개 정도가 적절합니다.
+MAX_BOUNDARY_SEGMENTS = 3
+
+# floor mask 후보정 시 상단 제거 비율
+POSTPROCESS_FLOOR_UPPER_CUT_RATIO = 0.45
+
+# 객체 제외 마스크가 있다면 경로를 넣으세요.
+# YOLO/SAM 결과로 만든 객체 mask가 있을 때 사용합니다.
+# 흰색/양수 픽셀 영역을 바닥 후보에서 제거합니다.
+# 예: Path(r"C:\...\object_mask.png")
+OBJECT_EXCLUSION_MASK_PATH = None
+
+# 객체 제외 마스크를 조금 넓혀서 가구 가장자리 오탐을 줄이는 값
+OBJECT_EXCLUSION_DILATE_KERNEL = 21
 
 
 # =========================
@@ -199,9 +230,7 @@ def estimate_floor_plane_ransac(points_3d: np.ndarray, depth_m: np.ndarray):
     candidate_points = points_3d[candidate_mask]
 
     if len(candidate_points) < 500:
-        raise RuntimeError(
-            "바닥 후보 점이 너무 적습니다. 이미지에 바닥이 충분히 보이는지 확인하세요."
-        )
+        raise RuntimeError("바닥 후보 점이 너무 적습니다. 이미지에 바닥이 충분히 보이는지 확인하세요.")
 
     # 연산량 제한을 위한 샘플링
     max_sample_points = 12000
@@ -243,12 +272,7 @@ def estimate_floor_plane_ransac(points_3d: np.ndarray, depth_m: np.ndarray):
     if best_normal is None:
         raise RuntimeError("바닥 평면 추정에 실패했습니다.")
 
-    all_dist = plane_distance(
-        points_3d.reshape(-1, 3),
-        best_normal,
-        best_d,
-    ).reshape(height, width)
-
+    all_dist = plane_distance(points_3d.reshape(-1, 3), best_normal, best_d).reshape(height, width)
     floor_mask = (all_dist < distance_threshold) & valid_mask
 
     # 이미지 상단의 잘못된 바닥 후보 제거
@@ -270,6 +294,84 @@ def estimate_floor_plane_ransac(points_3d: np.ndarray, depth_m: np.ndarray):
         "inlier_count_sampled": int(best_inlier_count),
         "floor_mask": floor_mask,
     }
+
+
+# =========================
+# 5-1. 후보정: 객체 제외 마스크 로딩
+# =========================
+
+def load_optional_object_exclusion_mask(mask_path, image_size):
+    """
+    YOLO/SAM 등에서 얻은 객체 mask가 있을 때 바닥 후보에서 제외하기 위한 함수.
+    mask_path가 None이면 사용하지 않는다.
+
+    image_size: PIL image.size 형식의 (width, height)
+    """
+    if mask_path is None:
+        return None
+
+    mask_path = Path(mask_path)
+    if not mask_path.exists():
+        raise FileNotFoundError(f"객체 제외 마스크가 존재하지 않습니다: {mask_path}")
+
+    width, height = image_size
+    mask = cv2.imread(str(mask_path), cv2.IMREAD_GRAYSCALE)
+
+    if mask is None:
+        raise RuntimeError(f"객체 제외 마스크를 읽을 수 없습니다: {mask_path}")
+
+    if mask.shape[:2] != (height, width):
+        mask = cv2.resize(mask, (width, height), interpolation=cv2.INTER_NEAREST)
+
+    object_mask = mask > 0
+
+    # 객체 가장자리까지 넉넉하게 제외
+    if OBJECT_EXCLUSION_DILATE_KERNEL > 1:
+        k = OBJECT_EXCLUSION_DILATE_KERNEL
+        if k % 2 == 0:
+            k += 1
+        kernel = np.ones((k, k), np.uint8)
+        object_mask_uint8 = object_mask.astype(np.uint8) * 255
+        object_mask_uint8 = cv2.dilate(object_mask_uint8, kernel, iterations=1)
+        object_mask = object_mask_uint8 > 0
+
+    return object_mask
+
+
+# =========================
+# 5-2. 후보정: floor mask 정리
+# =========================
+
+def postprocess_floor_mask_for_demo(floor_mask: np.ndarray, object_exclusion_mask=None) -> np.ndarray:
+    """
+    시연용 floor mask(바닥 마스크) 후보정 함수.
+    모델 추론 결과 자체는 유지하고, 바닥 영역 마스크만 후처리한다.
+    """
+    height, width = floor_mask.shape
+
+    mask = floor_mask.astype(np.uint8) * 255
+
+    # 너무 위쪽에서 잡힌 바닥 후보 제거
+    # test_11에서는 바닥-벽 경계가 이미지 높이의 약 70% 부근이므로
+    # 상단 45% 정도는 바닥 후보에서 제외해도 안전함
+    mask[:int(height * POSTPROCESS_FLOOR_UPPER_CUT_RATIO), :] = 0
+
+    # 작은 노이즈 제거
+    open_kernel = np.ones((9, 9), np.uint8)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, open_kernel)
+
+    # 끊긴 바닥 영역 연결
+    close_kernel = np.ones((15, 15), np.uint8)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, close_kernel)
+
+    # 객체 영역 제외는 마지막에 적용한다.
+    # 앞에서 적용하면 close 연산이 객체 영역을 다시 메울 수 있다.
+    if object_exclusion_mask is not None:
+        if object_exclusion_mask.shape != mask.shape:
+            raise ValueError("object_exclusion_mask와 floor_mask의 크기가 다릅니다.")
+        mask[object_exclusion_mask] = 0
+
+    return mask > 0
 
 
 # =========================
@@ -323,11 +425,7 @@ def extract_floor_wall_boundary_lines(floor_mask: np.ndarray):
         boundary_mask[y_int, x] = 255
 
     # 선을 조금 두껍게 만들어 HoughLinesP가 잡기 쉽게 처리
-    boundary_mask = cv2.dilate(
-        boundary_mask,
-        np.ones((3, 3), np.uint8),
-        iterations=1,
-    )
+    boundary_mask = cv2.dilate(boundary_mask, np.ones((3, 3), np.uint8), iterations=1)
 
     lines = cv2.HoughLinesP(
         boundary_mask,
@@ -372,6 +470,158 @@ def extract_floor_wall_boundary_lines(floor_mask: np.ndarray):
         })
 
     return line_segments, boundary_mask
+
+
+# =========================
+# 6-1. 후보정: 경계선 필터링 및 병합
+# =========================
+
+def normalize_line_segment(line):
+    """
+    x1이 x2보다 크면 좌우를 정렬한다.
+    """
+    x1, y1 = line["x1"], line["y1"]
+    x2, y2 = line["x2"], line["y2"]
+
+    if x1 <= x2:
+        return dict(line)
+
+    return {
+        "x1": x2,
+        "y1": y2,
+        "x2": x1,
+        "y2": y1,
+        "pixel_length": float(line["pixel_length"]),
+    }
+
+
+def is_valid_horizontal_boundary(line, image_height: int) -> bool:
+    """
+    시연용으로 사용할 수 있는 수평 바닥-벽 경계 후보선만 남긴다.
+    """
+    x1, y1 = line["x1"], line["y1"]
+    x2, y2 = line["x2"], line["y2"]
+
+    dx = abs(x2 - x1)
+    dy = abs(y2 - y1)
+
+    if dx < MIN_BOUNDARY_PIXEL_LENGTH:
+        return False
+
+    slope = dy / (dx + 1e-6)
+    if slope > HORIZONTAL_SLOPE_TOL:
+        return False
+
+    y_mean = (y1 + y2) / 2.0
+    y_min = image_height * BOUNDARY_Y_MIN_RATIO
+    y_max = image_height * BOUNDARY_Y_MAX_RATIO
+
+    if not (y_min <= y_mean <= y_max):
+        return False
+
+    return True
+
+
+def postprocess_boundary_lines(line_segments, image_width: int, image_height: int):
+    """
+    경계 후보선 후보정 함수.
+
+    처리 내용:
+    1. 좌우 방향 정렬
+    2. 너무 짧은 선 제거
+    3. 기울어진 선 제거
+    4. y 위치가 비슷하고 x 구간이 겹치거나 가까운 선 병합
+    5. 긴 선 우선으로 최종 후보 개수 제한
+    """
+    if not line_segments:
+        return []
+
+    valid_lines = []
+
+    for line in line_segments:
+        line = normalize_line_segment(line)
+
+        if is_valid_horizontal_boundary(line, image_height):
+            valid_lines.append(line)
+
+    if not valid_lines:
+        return []
+
+    # y 위치와 x 시작점 기준 정렬
+    valid_lines.sort(
+        key=lambda l: (
+            int(((l["y1"] + l["y2"]) / 2) // MERGE_Y_TOLERANCE_PX),
+            l["x1"],
+        )
+    )
+
+    clusters = []
+
+    for line in valid_lines:
+        x1, y1 = line["x1"], line["y1"]
+        x2, y2 = line["x2"], line["y2"]
+        y_mean = (y1 + y2) / 2.0
+
+        merged = False
+
+        for cluster in clusters:
+            cluster_y = cluster["y_mean"]
+            cluster_x1 = cluster["x1"]
+            cluster_x2 = cluster["x2"]
+
+            similar_y = abs(y_mean - cluster_y) <= MERGE_Y_TOLERANCE_PX
+            close_or_overlap_x = (
+                x1 <= cluster_x2 + MERGE_X_GAP_TOLERANCE_PX
+                and x2 >= cluster_x1 - MERGE_X_GAP_TOLERANCE_PX
+            )
+
+            if similar_y and close_or_overlap_x:
+                cluster["x1"] = min(cluster["x1"], x1)
+                cluster["x2"] = max(cluster["x2"], x2)
+                cluster["ys"].append(y_mean)
+                cluster["source_count"] += 1
+                cluster["y_mean"] = float(np.median(cluster["ys"]))
+                merged = True
+                break
+
+        if not merged:
+            clusters.append({
+                "x1": x1,
+                "x2": x2,
+                "ys": [y_mean],
+                "y_mean": y_mean,
+                "source_count": 1,
+            })
+
+    merged_lines = []
+
+    for cluster in clusters:
+        x1 = int(cluster["x1"])
+        x2 = int(cluster["x2"])
+        y = int(round(cluster["y_mean"]))
+
+        pixel_length = float(abs(x2 - x1))
+
+        if pixel_length < MIN_BOUNDARY_PIXEL_LENGTH:
+            continue
+
+        merged_lines.append({
+            "x1": x1,
+            "y1": y,
+            "x2": x2,
+            "y2": y,
+            "pixel_length": pixel_length,
+            "postprocess_source_count": int(cluster["source_count"]),
+            "postprocess_note": "수평선 필터링 및 유사 경계선 병합 후 생성된 후보선입니다.",
+        })
+
+    # 긴 선 우선 정렬 후 개수 제한
+    merged_lines.sort(key=lambda l: l["pixel_length"], reverse=True)
+
+    if MAX_BOUNDARY_SEGMENTS is not None and MAX_BOUNDARY_SEGMENTS > 0:
+        merged_lines = merged_lines[:MAX_BOUNDARY_SEGMENTS]
+
+    return merged_lines
 
 
 # =========================
@@ -424,7 +674,7 @@ def enrich_lines_with_metric_length(line_segments, points_3d: np.ndarray):
 
         mean_depth_m = float(np.mean(depth_values)) if depth_values else None
 
-        enriched.append({
+        edge = {
             "edge_id": f"floor_wall_edge_{i}",
             "type": "floor_wall_boundary_candidate",
             "pixel_start": {"x": int(x1), "y": int(y1)},
@@ -443,188 +693,72 @@ def enrich_lines_with_metric_length(line_segments, points_3d: np.ndarray):
             "pixel_length": float(line["pixel_length"]),
             "mean_depth_m": mean_depth_m,
             "confidence_note": "카메라 FOV 또는 내부파라미터가 없으므로 길이는 추정값입니다.",
-        })
+        }
+
+        # 후보정 관련 부가 정보가 있으면 JSON에 같이 저장
+        if "postprocess_source_count" in line:
+            edge["postprocess_source_count"] = int(line["postprocess_source_count"])
+        if "postprocess_note" in line:
+            edge["postprocess_note"] = str(line["postprocess_note"])
+
+        enriched.append(edge)
 
     return enriched
 
 
 # =========================
-# 7-1. 시연용 대표 경계선 선택
+# 7-1. 후보정: 길이 scale factor 보정
 # =========================
 
-def get_edge_angle_deg(edge):
-    x1 = edge["pixel_start"]["x"]
-    y1 = edge["pixel_start"]["y"]
-    x2 = edge["pixel_end"]["x"]
-    y2 = edge["pixel_end"]["y"]
-
-    dx = x2 - x1
-    dy = y2 - y1
-
-    if dx == 0:
-        return 90.0
-
-    return math.degrees(math.atan2(dy, dx))
-
-
-def get_edge_mid_x(edge):
-    return (edge["pixel_start"]["x"] + edge["pixel_end"]["x"]) / 2.0
-
-
-def get_edge_mid_y(edge):
-    return (edge["pixel_start"]["y"] + edge["pixel_end"]["y"]) / 2.0
-
-
-def clone_selected_edge(edge, new_id, reason):
-    selected = copy.deepcopy(edge)
-    selected["edge_id"] = new_id
-    selected["is_demo_selected"] = True
-    selected["selection_reason"] = reason
-    selected["confidence_note"] = (
-        "시연용으로 중복 경계 후보를 제거한 대표 바닥-벽 경계선입니다. "
-        "카메라 FOV 또는 내부파라미터가 없으므로 길이는 추정값입니다."
-    )
-    return selected
-
-
-def select_demo_boundary_edges(edges, image_width, image_height, max_edges=2):
+def apply_length_scale_correction(edges):
     """
-    시연용 후처리 함수입니다.
-
-    목적:
-    - HoughLinesP로 중복 검출된 바닥-벽 경계 후보선을 줄입니다.
-    - 최종 JSON에는 대표 경계선 2개 정도만 남깁니다.
-    - 왼쪽 방향 경계선 1개, 오른쪽 방향 경계선 1개를 우선 선택합니다.
+    FOV(시야각) 가정 기반 길이에 scale factor(스케일 계수)를 적용한다.
+    실제 기준 길이가 없으면 LENGTH_SCALE_FACTOR = 1.0 유지.
     """
-
-    if len(edges) == 0:
-        return []
-
-    filtered = []
+    corrected_edges = []
 
     for edge in edges:
-        angle = get_edge_angle_deg(edge)
-        mid_y = get_edge_mid_y(edge)
-        pixel_length = edge["pixel_length"]
+        edge = dict(edge)
 
-        # 1. 너무 짧은 선 제거
-        if pixel_length < image_width * 0.18:
-            continue
+        raw_length = float(edge["length_m_estimated"])
+        corrected_length = raw_length * float(LENGTH_SCALE_FACTOR)
 
-        # 2. 바닥-벽 경계는 보통 이미지 하단~중단부에 위치
-        if not (image_height * 0.55 <= mid_y <= image_height * 0.85):
-            continue
+        edge["length_m_raw_fov_based"] = raw_length
+        edge["length_m_estimated"] = corrected_length
+        edge["length_scale_factor"] = float(LENGTH_SCALE_FACTOR)
 
-        # 3. 거의 수직이거나 너무 급격히 기울어진 선 제거
-        if abs(angle) > 35:
-            continue
+        if LENGTH_SCALE_FACTOR == 1.0:
+            edge["calibration_note"] = "별도 스케일 보정 없이 FOV 가정 기반 추정 길이를 사용했습니다."
+        else:
+            edge["calibration_note"] = "시연용 기준 길이를 이용해 scale factor를 적용했습니다."
 
-        filtered.append(edge)
+        corrected_edges.append(edge)
 
-    # 필터링 결과가 없으면 기존 edge 중 긴 것만 사용
-    if len(filtered) == 0:
-        fallback_edges = sorted(edges, key=lambda e: e["pixel_length"], reverse=True)
-        selected = []
-
-        for i, edge in enumerate(fallback_edges[:max_edges], start=1):
-            selected.append(
-                clone_selected_edge(
-                    edge,
-                    f"demo_floor_wall_edge_fallback_{i}",
-                    "필터링 결과가 없어 긴 선분 기준으로 대표 경계선을 선택",
-                )
-            )
-
-        return selected
-
-    # 왼쪽 벽-바닥 경계 후보: 이미지 기준 오른쪽으로 갈수록 y가 작아지는 선
-    left_candidates = [
-        edge for edge in filtered
-        if get_edge_angle_deg(edge) < -3
-    ]
-
-    # 오른쪽 벽-바닥 경계 후보: 이미지 기준 오른쪽으로 갈수록 y가 커지는 선
-    right_candidates = [
-        edge for edge in filtered
-        if get_edge_angle_deg(edge) > 3
-    ]
-
-    selected = []
-
-    # 왼쪽 대표선: 가장 긴 선분 선택
-    if left_candidates:
-        left_edge = max(left_candidates, key=lambda e: e["pixel_length"])
-        selected.append(
-            clone_selected_edge(
-                left_edge,
-                "demo_floor_wall_edge_left",
-                "왼쪽 바닥-벽 경계 후보 중 가장 긴 선분을 대표선으로 선택",
-            )
-        )
-
-    # 오른쪽 대표선: 화면 오른쪽에 가장 가까운 후보 선택
-    if right_candidates:
-        right_edge = max(
-            right_candidates,
-            key=lambda e: (get_edge_mid_x(e), e["pixel_length"]),
-        )
-        selected.append(
-            clone_selected_edge(
-                right_edge,
-                "demo_floor_wall_edge_right",
-                "오른쪽 바닥-벽 경계 후보 중 가장 오른쪽에 위치한 선분을 대표선으로 선택",
-            )
-        )
-
-    # 대표선 개수가 부족하면 긴 선분 기준으로 추가
-    if len(selected) < max_edges:
-        selected_keys = {
-            (
-                edge["pixel_start"]["x"],
-                edge["pixel_start"]["y"],
-                edge["pixel_end"]["x"],
-                edge["pixel_end"]["y"],
-            )
-            for edge in selected
-        }
-
-        remaining_edges = []
-
-        for edge in filtered:
-            key = (
-                edge["pixel_start"]["x"],
-                edge["pixel_start"]["y"],
-                edge["pixel_end"]["x"],
-                edge["pixel_end"]["y"],
-            )
-
-            if key not in selected_keys:
-                remaining_edges.append(edge)
-
-        remaining_edges = sorted(
-            remaining_edges,
-            key=lambda e: e["pixel_length"],
-            reverse=True,
-        )
-
-        for edge in remaining_edges:
-            if len(selected) >= max_edges:
-                break
-
-            selected.append(
-                clone_selected_edge(
-                    edge,
-                    f"demo_floor_wall_edge_extra_{len(selected) + 1}",
-                    "대표선 개수가 부족하여 긴 선분 기준으로 추가 선택",
-                )
-            )
-
-    return selected[:max_edges]
+    return corrected_edges
 
 
 # =========================
 # 8. 디버그 이미지 저장
 # =========================
+
+def save_raw_boundary_overlay(image: Image.Image, raw_line_segments, output_json_path: Path):
+    """
+    후보정 전 raw boundary line(원본 경계 후보선)을 별도 이미지로 저장한다.
+    """
+    if raw_line_segments is None:
+        return
+
+    base = output_json_path.with_suffix("")
+    image_bgr = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+    raw_vis = image_bgr.copy()
+
+    for line in raw_line_segments:
+        x1, y1 = int(line["x1"]), int(line["y1"])
+        x2, y2 = int(line["x2"]), int(line["y2"])
+        cv2.line(raw_vis, (x1, y1), (x2, y2), (0, 0, 255), 2)
+
+    cv2.imwrite(str(base) + "_boundary_overlay_raw.png", raw_vis)
+
 
 def save_debug_images(
     image: Image.Image,
@@ -633,10 +767,11 @@ def save_debug_images(
     boundary_mask,
     edges,
     output_json_path: Path,
+    raw_line_segments=None,
 ):
     # 예:
-    # output_json_path = ...\base_test\result_10\result_10.json
-    # base = ...\base_test\result_10\result_10
+    # output_json_path = ...\base_test\result_1\result_1.json
+    # base = ...\base_test\result_1\result_1
     base = output_json_path.with_suffix("")
 
     image_bgr = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
@@ -661,10 +796,12 @@ def save_debug_images(
     floor_vis = cv2.addWeighted(floor_vis, 0.75, floor_overlay, 0.25, 0)
     cv2.imwrite(str(base) + "_floor_mask.png", floor_vis)
 
-    # boundary overlay(경계 오버레이)
+    # raw boundary overlay(후보정 전 경계 후보선)
+    save_raw_boundary_overlay(image, raw_line_segments, output_json_path)
+
+    # boundary overlay(최종 경계 오버레이)
     boundary_vis = image_bgr.copy()
 
-    # 시연용에서는 boundary_mask를 None으로 넘겨서 raw 후보점은 숨긴다.
     if boundary_mask is not None:
         boundary_vis[boundary_mask > 0] = (0, 0, 255)
 
@@ -706,7 +843,7 @@ def build_output_json(
     intrinsics,
     floor_plane,
     edges,
-    raw_edge_count=None,
+    postprocess_info=None,
 ):
     width, height = image.size
     valid_depth = depth_m[depth_m > 0.05]
@@ -758,19 +895,10 @@ def build_output_json(
             "distance_threshold_m": float(floor_plane["distance_threshold_m"]),
             "inlier_count_sampled": int(floor_plane["inlier_count_sampled"]),
         },
-        "boundary_postprocess": {
-            "mode": "demo_representative_edges",
-            "raw_edge_count": int(raw_edge_count) if raw_edge_count is not None else None,
-            "selected_edge_count": int(len(edges)),
-            "max_selected_edges": int(DEMO_MAX_EDGES),
-            "note": (
-                "시연 안정성을 위해 중복 후보선을 제거하고 대표 바닥-벽 경계선만 저장했습니다. "
-                "길이값은 카메라 FOV 가정 기반 추정값입니다."
-            ),
-        },
+        "postprocessing": postprocess_info,
         "floor_wall_boundary_edges": edges,
         "llm_placement_context": {
-            "summary": "가구 배치 판단에 사용할 수 있는 바닥-벽 대표 경계선과 각 후보선의 추정 길이를 제공합니다.",
+            "summary": "가구 배치 판단에 사용할 수 있는 바닥-벽 경계 후보선과 각 후보선의 추정 길이를 제공합니다.",
             "main_use": "LLM 또는 메인 서버가 벽면 기준 가구 배치 가능 영역을 판단할 때 사용",
             "important_warning": "정확한 실측 길이가 필요하면 카메라 intrinsic parameter 또는 촬영 기기의 FOV가 필요합니다.",
         },
@@ -784,10 +912,6 @@ def build_output_json(
 # =========================
 
 def main():
-    # 시연용 결과 고정
-    np.random.seed(RANDOM_SEED)
-    torch.manual_seed(RANDOM_SEED)
-
     # result_1, result_2 같은 output(출력) 폴더 생성
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -806,24 +930,67 @@ def main():
 
     print("[4/6] 바닥 평면 추정 중...")
     floor_plane = estimate_floor_plane_ransac(points_3d, depth_m)
-    floor_mask = floor_plane["floor_mask"]
+    floor_mask_raw = floor_plane["floor_mask"]
 
-    print("[5/6] 바닥-벽 경계 후보선 추출 중...")
-    line_segments, boundary_mask = extract_floor_wall_boundary_lines(floor_mask)
+    print("[5/6] 바닥-벽 경계 후보선 추출 및 후보정 중...")
 
-    # 원본 후보선 전체
-    raw_edges = enrich_lines_with_metric_length(line_segments, points_3d)
-
-    # 시연용 대표 경계선만 선택
-    edges = select_demo_boundary_edges(
-        raw_edges,
-        image_width=image.size[0],
-        image_height=image.size[1],
-        max_edges=DEMO_MAX_EDGES,
+    object_exclusion_mask = load_optional_object_exclusion_mask(
+        OBJECT_EXCLUSION_MASK_PATH,
+        image_size=image.size,
     )
 
-    print(f"[INFO] 원본 후보 경계선 개수: {len(raw_edges)}")
-    print(f"[INFO] 시연용 대표 경계선 개수: {len(edges)}")
+    if USE_DEMO_POSTPROCESSING:
+        floor_mask = postprocess_floor_mask_for_demo(
+            floor_mask_raw,
+            object_exclusion_mask=object_exclusion_mask,
+        )
+    else:
+        floor_mask = floor_mask_raw
+
+    # JSON 및 debug image에도 후보정된 floor_mask가 반영되도록 갱신
+    floor_plane["floor_mask"] = floor_mask
+
+    # 1) raw boundary line 추출
+    raw_line_segments, boundary_mask = extract_floor_wall_boundary_lines(floor_mask)
+
+    # 2) boundary line 후보정
+    if USE_DEMO_POSTPROCESSING:
+        line_segments = postprocess_boundary_lines(
+            line_segments=raw_line_segments,
+            image_width=image.size[0],
+            image_height=image.size[1],
+        )
+
+        if len(line_segments) == 0 and len(raw_line_segments) > 0:
+            print("[WARN] 후보정 후 남은 경계선이 없어 raw 후보선을 사용합니다.")
+            line_segments = raw_line_segments
+    else:
+        line_segments = raw_line_segments
+
+    # 3) 3D 길이 계산
+    edges = enrich_lines_with_metric_length(line_segments, points_3d)
+
+    # 4) scale factor 적용
+    if USE_DEMO_POSTPROCESSING:
+        edges = apply_length_scale_correction(edges)
+
+    postprocess_info = {
+        "enabled": bool(USE_DEMO_POSTPROCESSING),
+        "floor_mask_postprocessed": bool(USE_DEMO_POSTPROCESSING),
+        "object_exclusion_mask_used": OBJECT_EXCLUSION_MASK_PATH is not None,
+        "object_exclusion_mask_path": str(OBJECT_EXCLUSION_MASK_PATH) if OBJECT_EXCLUSION_MASK_PATH is not None else None,
+        "raw_boundary_line_count": int(len(raw_line_segments)),
+        "final_boundary_line_count": int(len(edges)),
+        "horizontal_slope_tolerance": float(HORIZONTAL_SLOPE_TOL),
+        "boundary_y_min_ratio": float(BOUNDARY_Y_MIN_RATIO),
+        "boundary_y_max_ratio": float(BOUNDARY_Y_MAX_RATIO),
+        "min_boundary_pixel_length": int(MIN_BOUNDARY_PIXEL_LENGTH),
+        "merge_y_tolerance_px": int(MERGE_Y_TOLERANCE_PX),
+        "merge_x_gap_tolerance_px": int(MERGE_X_GAP_TOLERANCE_PX),
+        "max_boundary_segments": int(MAX_BOUNDARY_SEGMENTS) if MAX_BOUNDARY_SEGMENTS is not None else None,
+        "length_scale_factor": float(LENGTH_SCALE_FACTOR),
+        "note": "후보정은 모델 재학습이 아니라 floor mask와 boundary line에 대한 후처리입니다.",
+    }
 
     print("[6/6] JSON 저장 중...")
     result_json = build_output_json(
@@ -835,7 +1002,7 @@ def main():
         intrinsics=intrinsics,
         floor_plane=floor_plane,
         edges=edges,
-        raw_edge_count=len(raw_edges),
+        postprocess_info=postprocess_info,
     )
 
     with open(OUTPUT_JSON_PATH, "w", encoding="utf-8") as f:
@@ -846,22 +1013,24 @@ def main():
             image=image,
             depth_m=depth_m,
             floor_mask=floor_mask,
-            boundary_mask=None,  # 시연용: 빨간 raw boundary 후보점 숨김
+            boundary_mask=boundary_mask,
             edges=edges,
             output_json_path=OUTPUT_JSON_PATH,
+            raw_line_segments=raw_line_segments,
         )
 
     print("[완료] 저장 완료")
     print(f"[완료] 출력 폴더: {OUTPUT_DIR}")
     print(f"[완료] JSON 저장 위치: {OUTPUT_JSON_PATH}")
-    print(f"[완료] 원본 후보 경계선 개수: {len(raw_edges)}")
-    print(f"[완료] 시연용 대표 경계선 개수: {len(edges)}")
+    print(f"[완료] raw 경계 후보선 개수: {len(raw_line_segments)}")
+    print(f"[완료] 후보정 후 경계 후보선 개수: {len(edges)}")
 
     print("[완료] 생성 파일:")
     print(f"- {OUTPUT_JSON_PATH}")
     print(f"- {OUTPUT_JSON_PATH.with_suffix('')}_depth.png")
     print(f"- {OUTPUT_JSON_PATH.with_suffix('')}_floor_mask.png")
     print(f"- {OUTPUT_JSON_PATH.with_suffix('')}_boundary_overlay.png")
+    print(f"- {OUTPUT_JSON_PATH.with_suffix('')}_boundary_overlay_raw.png")
 
     for edge in edges:
         print(

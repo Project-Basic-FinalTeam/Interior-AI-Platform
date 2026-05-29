@@ -1,0 +1,128 @@
+{
+  "input_image": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Interior-AI-Platform\\depth\\base_test\\test_11.jpg",
+  "output_dir": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Interior-AI-Platform\\depth\\base_test\\result_11_1",
+  "output_json": "C:\\Users\\khrha\\Desktop\\SWPJ_4\\Interior-AI-Platform\\depth\\base_test\\result_11_1\\result_11_1.json",
+  "model": {
+    "name": "depth-anything/Depth-Anything-V2-Metric-Indoor-Large-hf",
+    "task": "single_image_metric_depth_estimation",
+    "scene_type": "indoor"
+  },
+  "image": {
+    "width": 1448,
+    "height": 1086
+  },
+  "camera_assumption": {
+    "note": "카메라 내부파라미터가 없어서 horizontal_fov_deg 기반으로 3D 좌표와 길이를 추정했습니다.",
+    "intrinsics": {
+      "fx": 1033.979156881291,
+      "fy": 1033.979156881291,
+      "cx": 724.0,
+      "cy": 543.0,
+      "horizontal_fov_deg": 70.0
+    }
+  },
+  "depth_statistics_m": {
+    "min_m": 2.7651724815368652,
+    "max_m": 6.588303565979004,
+    "mean_m": 5.100746154785156,
+    "median_m": 5.351122856140137,
+    "p10_m": 3.421454429626465,
+    "p90_m": 5.848137378692627
+  },
+  "floor_plane_estimation": {
+    "plane_normal_camera_coord": [
+      -0.004678866360336542,
+      0.9949104189872742,
+      0.10065459460020065
+    ],
+    "plane_d": -1.8114104270935059,
+    "distance_threshold_m": 0.08026684284210205,
+    "inlier_count_sampled": 6187
+  },
+  "postprocessing": {
+    "enabled": true,
+    "floor_mask_postprocessed": true,
+    "object_exclusion_mask_used": false,
+    "object_exclusion_mask_path": null,
+    "raw_boundary_line_count": 6,
+    "final_boundary_line_count": 2,
+    "horizontal_slope_tolerance": 0.03,
+    "boundary_y_min_ratio": 0.55,
+    "boundary_y_max_ratio": 0.82,
+    "min_boundary_pixel_length": 200,
+    "merge_y_tolerance_px": 8,
+    "merge_x_gap_tolerance_px": 80,
+    "max_boundary_segments": 3,
+    "length_scale_factor": 1.0,
+    "note": "후보정은 모델 재학습이 아니라 floor mask와 boundary line에 대한 후처리입니다."
+  },
+  "floor_wall_boundary_edges": [
+    {
+      "edge_id": "floor_wall_edge_1",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start": {
+        "x": 116,
+        "y": 780
+      },
+      "pixel_end": {
+        "x": 535,
+        "y": 780
+      },
+      "point_3d_start_m": {
+        "x": -3.241076946258545,
+        "y": 1.2633802890777588,
+        "z": 5.511851787567139
+      },
+      "point_3d_end_m": {
+        "x": -0.9616569876670837,
+        "y": 1.205966591835022,
+        "z": 5.261368274688721
+      },
+      "length_m_estimated": 2.2938599936526405,
+      "pixel_length": 419.0,
+      "mean_depth_m": 5.4623544375101725,
+      "confidence_note": "카메라 FOV 또는 내부파라미터가 없으므로 길이는 추정값입니다.",
+      "postprocess_source_count": 3,
+      "postprocess_note": "수평선 필터링 및 유사 경계선 병합 후 생성된 후보선입니다.",
+      "length_m_raw_fov_based": 2.2938599936526405,
+      "length_scale_factor": 1.0,
+      "calibration_note": "별도 스케일 보정 없이 FOV 가정 기반 추정 길이를 사용했습니다."
+    },
+    {
+      "edge_id": "floor_wall_edge_2",
+      "type": "floor_wall_boundary_candidate",
+      "pixel_start": {
+        "x": 676,
+        "y": 776
+      },
+      "pixel_end": {
+        "x": 987,
+        "y": 776
+      },
+      "point_3d_start_m": {
+        "x": -0.24685385823249817,
+        "y": 1.1982697248458862,
+        "z": 5.317536354064941
+      },
+      "point_3d_end_m": {
+        "x": 1.3556517362594604,
+        "y": 1.2010146379470825,
+        "z": 5.32971715927124
+      },
+      "length_m_estimated": 1.60255423837742,
+      "pixel_length": 311.0,
+      "mean_depth_m": 5.343773492177328,
+      "confidence_note": "카메라 FOV 또는 내부파라미터가 없으므로 길이는 추정값입니다.",
+      "postprocess_source_count": 3,
+      "postprocess_note": "수평선 필터링 및 유사 경계선 병합 후 생성된 후보선입니다.",
+      "length_m_raw_fov_based": 1.60255423837742,
+      "length_scale_factor": 1.0,
+      "calibration_note": "별도 스케일 보정 없이 FOV 가정 기반 추정 길이를 사용했습니다."
+    }
+  ],
+  "llm_placement_context": {
+    "summary": "가구 배치 판단에 사용할 수 있는 바닥-벽 경계 후보선과 각 후보선의 추정 길이를 제공합니다.",
+    "main_use": "LLM 또는 메인 서버가 벽면 기준 가구 배치 가능 영역을 판단할 때 사용",
+    "important_warning": "정확한 실측 길이가 필요하면 카메라 intrinsic parameter 또는 촬영 기기의 FOV가 필요합니다."
+  }
+}

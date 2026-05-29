@@ -35,11 +35,11 @@ from transformers import AutoImageProcessor, AutoModelForDepthEstimation
 # 1. 경로 및 설정값
 # =========================
 
-INPUT_IMAGE_PATH = Path(r"C:\Users\khrha\Desktop\SWPJ_4\Interior-AI-Platform\depth\base_test\test_10.png")
+INPUT_IMAGE_PATH = Path(r"C:\Users\khrha\Desktop\SWPJ_4\Interior-AI-Platform\depth\base_test\test_11.jpg")
 
 # 여기 숫자만 그때그때 바꾸면 됩니다.
 # 예: 1 -> result_1, 2 -> result_2, 3 -> result_3
-RESULT_NUMBER = 10
+RESULT_NUMBER = 11
 
 BASE_OUTPUT_DIR = Path(r"C:\Users\khrha\Desktop\SWPJ_4\Interior-AI-Platform\depth\base_test")
 RESULT_NAME = f"result_{RESULT_NUMBER}"
