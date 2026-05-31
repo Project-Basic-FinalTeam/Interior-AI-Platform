@@ -1,3 +1,6 @@
+# 파일 위치: /InteriorPlatform_Workspace/services/ai-perception/
+# 파일 명: requirements.txt
+
 --extra-index-url https://download.pytorch.org/whl/cpu
 torch
 torchvision
@@ -11,3 +14,5 @@ mediapipe
 diffusers
 trimesh
 ultralytics
+pillow-avif-plugin
+transformers
