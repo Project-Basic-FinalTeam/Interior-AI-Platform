@@ -28,8 +28,6 @@ public class FurnitureManager : MonoBehaviour
     }
 
     public void AddFurniture(FurnitureData data) {
-        // 🔥 오지랖 부렸던 간격 조절(x += 1.5f) 로직 완벽히 삭제.
-        // C++ 백엔드와 ZmqReceiver가 계산해준 원본 좌표(data.position) 그대로 큐에 넣습니다.
         _furnitureQueue.Enqueue(data);
     }
 
@@ -74,7 +72,9 @@ public class FurnitureManager : MonoBehaviour
                 
                 // 백엔드에서 전달받은 진짜 월드 좌표 그대로 배치
                 plyObject.transform.position = data.position; 
-                plyObject.transform.localScale = Vector3.one;
+
+                // 🔥 핵심 해결 부분: 무조건 (1,1,1)을 넣던 것을 파이썬에서 계산한 원본 비율로 변경!!
+                plyObject.transform.localScale = data.scale; 
                 
                 _spawnedFurniture.Add(data.id, plyObject);
                 
@@ -86,25 +86,22 @@ public class FurnitureManager : MonoBehaviour
         }
     }
 
-    // 🔥 [추가] RAG 추천을 받은 후 가구를 교체하는 함수
     public void SwapFurniture(int targetId, string newPlyFileName, string newLabel) {
         if (_spawnedFurniture.TryGetValue(targetId, out GameObject oldObj)) {
-            // 1. 기존 가구의 '위치' 기억
             Vector3 originalPosition = oldObj.transform.position;
+            Vector3 originalScale = oldObj.transform.localScale; // 🔥 스왑 시에도 기존 스케일 기억
 
-            // 2. 화면에서 낡은 가구 철거
             Destroy(oldObj);
             _spawnedFurniture.Remove(targetId);
 
             Debug.Log($"[FurnitureManager] 🔄 가구 스왑 진행 중... 원래 위치: {originalPosition}");
 
-            // 3. RAG가 추천한 새 가구 URL과 라벨로 교체하여 렌더링 큐에 삽입!
             AddFurniture(new FurnitureData {
                 id = targetId,
                 label = newLabel,
-                plyPath = newPlyFileName, // DB에서 끌어온 새 ply 파일명!
-                position = originalPosition, // 원래 그 자리 그대로
-                scale = Vector3.one // 원본 비율
+                plyPath = newPlyFileName, 
+                position = originalPosition, 
+                scale = originalScale // 🔥 새 가구에도 기존의 현실적인 비율을 그대로 적용!
             });
         } else {
             Debug.LogWarning($"[FurnitureManager] 스왑 실패: ID {targetId} 가구를 찾을 수 없습니다.");

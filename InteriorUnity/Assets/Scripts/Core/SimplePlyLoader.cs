@@ -39,24 +39,39 @@ public class SimplePlyLoader : MonoBehaviour
 
             byte[] vData = reader.ReadBytes(vertexCount * vertexSize);
 
-            Vector3[] vertices = new Vector3[vertexCount];
-            Vector3 center = Vector3.zero; // 🔥 1. 중심점 계산을 위한 변수
+            Vector3[] rawVertices = new Vector3[vertexCount];
+            Vector3 center = Vector3.zero;
 
             for (int i = 0; i < vertexCount; i++)
             {
                 int baseIdx = i * vertexSize;
-                vertices[i] = new Vector3(
+                rawVertices[i] = new Vector3(
                     GetFloat(vData, propOffsets, baseIdx, "x"),
                     -GetFloat(vData, propOffsets, baseIdx, "y"),
                     GetFloat(vData, propOffsets, baseIdx, "z")
                 );
-                center += vertices[i]; // 점들을 더함
+                center += rawVertices[i];
             }
-            center /= vertexCount; // 🔥 2. 전체 점들의 평균(중심점)을 구함
+            center /= vertexCount;
 
-            // 🔥 3. 모든 점을 중심점(center)만큼 이동시켜 원점으로 정렬
-            for (int i = 0; i < vertexCount; i++) {
-                vertices[i] -= center;
+            Vector3[] vertices = new Vector3[vertexCount];
+            float maxBound = 0f;
+
+            // 원점으로 옮기면서 모델의 '가장 긴 축'의 길이를 구합니다.
+            for (int i = 0; i < vertexCount; i++)
+            {
+                vertices[i] = rawVertices[i] - center;
+                maxBound = Mathf.Max(maxBound, Mathf.Abs(vertices[i].x), Mathf.Abs(vertices[i].y), Mathf.Abs(vertices[i].z));
+            }
+
+            // 🔥 초소형 미니미 탈출: AI가 만든 점들을 1m(1.0) 크기로 꽉 차게 팽창시킵니다.
+            // 모델의 원래 비율은 100% 보존되면서, 크기만 1단위로 커집니다.
+            if (maxBound > 0)
+            {
+                for (int i = 0; i < vertexCount; i++)
+                {
+                    vertices[i] /= (maxBound * 2f);
+                }
             }
 
             Color[] colors = new Color[vertexCount];
@@ -65,24 +80,11 @@ public class SimplePlyLoader : MonoBehaviour
             for (int i = 0; i < vertexCount; i++)
             {
                 int baseIdx = i * vertexSize;
-
-                // 1. PLY 내부의 로컬 원점 좌표 읽기
-                Vector3 rawPos = new Vector3(
-                    GetFloat(vData, propOffsets, baseIdx, "x"),
-                    -GetFloat(vData, propOffsets, baseIdx, "y"),
-                    GetFloat(vData, propOffsets, baseIdx, "z")
-                );
-
-                // 🔥 2. 위치 잡는 완벽한 로직 유지: 버퍼에 넣기 전에 월드 좌표로 구워버림!
-                vertices[i] = rawPos;
-
                 float r = GetFloat(vData, propOffsets, baseIdx, "f_dc_0");
                 float g = GetFloat(vData, propOffsets, baseIdx, "f_dc_1");
                 float b = GetFloat(vData, propOffsets, baseIdx, "f_dc_2");
                 
                 colors[i] = new Color(r, g, b, 1f);
-                
-                // 순수 점(Point) 렌더링을 위한 인덱스
                 indices[i] = i; 
             }
 
@@ -91,13 +93,9 @@ public class SimplePlyLoader : MonoBehaviour
             mesh.SetVertices(vertices);
             mesh.SetColors(colors);
             
-            // 🔥 3. 점선면(Quad) 절대 안 씀! 오직 촘촘한 점(Points) 위상으로만 출력!
             mesh.SetIndices(indices, MeshTopology.Points, 0);
-
-            // 🔥 4. 투명화/컬링 방지: 점 위치가 바뀌었으니 바운딩 박스 재계산!
             mesh.RecalculateBounds(); 
 
-            // 🔥 [추가] 선택을 위한 BoxCollider 자동 생성 (계산된 mesh.bounds 사용)
             BoxCollider bc = gameObject.AddComponent<BoxCollider>();
             bc.center = mesh.bounds.center;
             bc.size = mesh.bounds.size;
@@ -108,17 +106,12 @@ public class SimplePlyLoader : MonoBehaviour
 
             MeshRenderer mr = GetComponent<MeshRenderer>();
             if (mr == null) mr = gameObject.AddComponent<MeshRenderer>();
-
-            // 🔥 5. 투명화 원인 완벽 제거: 점을 그릴 수 있는 유니티 기본 정점 셰이더를 강제 주입하여 
-            // F를 누르지 않아도 무조건 선명하게 눈에 보이도록 만듭니다!
             mr.material = new Material(Shader.Find("Sprites/Default"));
 
-            // 이미 월드 좌표로 점들을 옮겼으므로 트랜스폼은 원점 초기화
-            transform.position = Vector3.zero;
-            transform.rotation = Quaternion.identity;
-            //transform.localScale = Vector3.one;
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
 
-            Debug.Log($"[SimplePlyLoader] 🎉 {vertexCount}개의 순수 점(Point) 렌더링 + 콜라이더 장착 완료!");
+            Debug.Log($"[SimplePlyLoader] 🎉 {vertexCount}개의 점 렌더링 및 1m 기본 뼈대 정규화 완료!");
         }
     }
 
