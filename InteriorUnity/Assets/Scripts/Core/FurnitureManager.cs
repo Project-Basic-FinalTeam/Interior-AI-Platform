@@ -57,6 +57,7 @@ public class FurnitureManager : MonoBehaviour
         string downloadUrl = serverUrl + fileName + "?t=" + System.DateTime.Now.Ticks;
         
         using (UnityWebRequest www = UnityWebRequest.Get(downloadUrl)) {
+            www.timeout = 180;
             yield return www.SendWebRequest();
             if (www.result == UnityWebRequest.Result.Success) {
                 byte[] plyData = www.downloadHandler.data;

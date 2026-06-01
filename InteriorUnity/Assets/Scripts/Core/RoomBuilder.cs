@@ -2,7 +2,6 @@
 // 파일 명: RoomBuilder.cs
 
 using UnityEngine;
-using System.IO;
 using System;
 using System.Collections;
 using UnityEngine.Networking;
@@ -78,6 +77,40 @@ public class RoomBuilder : MonoBehaviour
     private Vector3 ToUnity(float x, float y, float z) => new Vector3(x, -y, z);
     private Vector3 ToUnity(Point3D p) => ToUnity(p.x, p.y, p.z);
 
+    // ✅ 분홍색 방지: 프로젝트 렌더 파이프라인에 맞는 셰이더 자동 탐색
+    private Material CreateMaterial(Color color)
+    {
+        // URP → Built-in 순서로 사용 가능한 셰이더 탐색
+        string[] shaderCandidates = {
+            "Universal Render Pipeline/Lit",
+            "Universal Render Pipeline/Unlit",
+            "Unlit/Color",
+            "Standard",
+            "Sprites/Default"
+        };
+
+        Shader shader = null;
+        foreach (var name in shaderCandidates)
+        {
+            shader = Shader.Find(name);
+            if (shader != null)
+            {
+                Debug.Log($"[RoomBuilder] 셰이더 선택: {name}");
+                break;
+            }
+        }
+
+        if (shader == null)
+        {
+            Debug.LogError("[RoomBuilder] 사용 가능한 셰이더 없음 - Material 생성 실패");
+            return new Material(Shader.Find("Hidden/InternalErrorShader"));
+        }
+
+        Material mat = new Material(shader);
+        mat.color = color;
+        return mat;
+    }
+
     private void BuildFloor(RoomData data)
     {
         float[] n  = data.floor_plane_estimation.plane_normal_camera_coord;
@@ -91,13 +124,12 @@ public class RoomBuilder : MonoBehaviour
         floor.transform.up         = normal;
         floor.transform.localScale = CalcFloorScale(data);
 
-        var mat = floorMaterial != null
+        // ✅ Inspector에 Material이 연결되면 그걸 쓰고, 없으면 코드로 생성
+        floor.GetComponent<Renderer>().material = floorMaterial != null
             ? floorMaterial
-            : new Material(Shader.Find("Standard"));
-        if (floorMaterial == null) mat.color = new Color(0.85f, 0.85f, 0.85f); 
-        floor.GetComponent<Renderer>().material = mat;
+            : CreateMaterial(new Color(0.85f, 0.85f, 0.85f)); // 연한 회색
 
-        Debug.Log($"[RoomBuilder] 바닥 생성 완료 | pos={pos} normal={normal}");
+        Debug.Log($"[RoomBuilder] 바닥 생성 완료 | pos={pos} | normal={normal}");
     }
 
     private Vector3 CalcFloorScale(RoomData data)
@@ -112,7 +144,7 @@ public class RoomBuilder : MonoBehaviour
                 ToUnity(edge.point_3d_start_m).magnitude,
                 ToUnity(edge.point_3d_end_m).magnitude);
         }
-        float size = Mathf.Max(maxDist * 2.5f, 8f) / 10f;
+        float size = Mathf.Max(maxDist * 3.5f, 10f) / 10f;
         return new Vector3(size, 1f, size);
     }
 
@@ -124,59 +156,65 @@ public class RoomBuilder : MonoBehaviour
             return;
         }
 
-        const float wallHeight = 3.0f;
+        const float wallHeight = 30.0f;
+        const float wallThick  = 0.1f; // Cube 두께
 
-        // ✅ 엣지 좌표들의 실제 중심점 계산 (카메라 기준 월드 좌표)
-        Vector3 boundsMin = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
-        Vector3 boundsMax = new Vector3(float.MinValue, float.MinValue, float.MinValue);
+        Vector3 floorScale = CalcFloorScale(data);
+        float roomW = floorScale.x * 10f;
+        float roomD = floorScale.z * 10f;
 
-        foreach (var edge in data.floor_wall_boundary_edges)
-        {
-            Vector3 s = ToUnity(edge.point_3d_start_m);
-            Vector3 e = ToUnity(edge.point_3d_end_m);
-            boundsMin = Vector3.Min(boundsMin, Vector3.Min(s, e));
-            boundsMax = Vector3.Max(boundsMax, Vector3.Max(s, e));
-        }
+        float[] n    = data.floor_plane_estimation.plane_normal_camera_coord;
+        float   d    = data.floor_plane_estimation.plane_d;
+        Vector3 normal   = ToUnity(n[0], n[1], n[2]).normalized;
+        Vector3 floorPos = -d * normal;
 
-        Vector3 roomCenter = (boundsMin + boundsMax) * 0.5f;
-        float roomW = boundsMax.x - boundsMin.x;
-        float roomD = boundsMax.z - boundsMin.z;
-        float floorY = boundsMin.y;
+        float floorY  = floorPos.y;
+        float centerX = floorPos.x;
+        float centerZ = floorPos.z;
+        float halfW   = roomW * 0.5f;
+        float halfD   = roomD * 0.5f;
 
-        // ✅ 엣지 실제 좌표 기반으로 4면 벽 생성
-        var walls = new (Vector3 pos, Quaternion rot, float width)[]
-        {
-            // 앞벽 (+Z 끝)
-            (new Vector3(roomCenter.x, floorY + wallHeight * 0.5f, boundsMax.z),
-            Quaternion.LookRotation(Vector3.back,    Vector3.up), roomW),
-            // 뒷벽 (-Z 끝)
-            (new Vector3(roomCenter.x, floorY + wallHeight * 0.5f, boundsMin.z),
-            Quaternion.LookRotation(Vector3.forward, Vector3.up), roomW),
-            // 오른벽 (+X 끝)
-            (new Vector3(boundsMax.x,  floorY + wallHeight * 0.5f, roomCenter.z),
-            Quaternion.LookRotation(Vector3.left,    Vector3.up), roomD),
-            // 왼벽 (-X 끝)
-            (new Vector3(boundsMin.x,  floorY + wallHeight * 0.5f, roomCenter.z),
-            Quaternion.LookRotation(Vector3.right,   Vector3.up), roomD),
-        };
+        Color woodColor = new Color(0.72f, 0.53f, 0.35f);
 
-        string[] wallNames = { "AI_Wall_Front", "AI_Wall_Back", "AI_Wall_Right", "AI_Wall_Left" };
+        // ✅ Cube로 벽 생성 (양면 보임, 두께 있음)
+        // 뒷벽: Z+ 끝, X방향으로 늘림
+        CreateWallCube("AI_Wall_Back",
+            new Vector3(centerX,        floorY + wallHeight * 0.5f, centerZ + halfD),
+            new Vector3(roomW, wallHeight, wallThick),
+            woodColor);
 
-        for (int i = 0; i < walls.Length; i++)
-        {
-            GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Quad);
-            wall.name = wallNames[i];
-            wall.transform.position   = walls[i].pos;
-            wall.transform.localScale = new Vector3(walls[i].width, wallHeight, 1f);
-            wall.transform.rotation   = walls[i].rot;
+        // 앞벽: Z- 끝
+        CreateWallCube("AI_Wall_Front",
+            new Vector3(centerX,        floorY + wallHeight * 0.5f, centerZ - halfD),
+            new Vector3(roomW, wallHeight, wallThick),
+            woodColor);
 
-            var mat = wallMaterial != null
-                ? wallMaterial
-                : new Material(Shader.Find("Standard"));
-            if (wallMaterial == null) mat.color = Color.white;
-            wall.GetComponent<Renderer>().material = mat;
+        // 오른벽: X+ 끝, Z방향으로 늘림
+        CreateWallCube("AI_Wall_Right",
+            new Vector3(centerX + halfW, floorY + wallHeight * 0.5f, centerZ),
+            new Vector3(wallThick, wallHeight, roomD),
+            woodColor);
 
-            Debug.Log($"[RoomBuilder] {wallNames[i]} 생성 | pos={walls[i].pos} | 너비={walls[i].width:F2}m");
-        }
+        // 왼벽: X- 끝
+        CreateWallCube("AI_Wall_Left",
+            new Vector3(centerX - halfW, floorY + wallHeight * 0.5f, centerZ),
+            new Vector3(wallThick, wallHeight, roomD),
+            woodColor);
+    }
+
+    private void CreateWallCube(string wallName, Vector3 pos, Vector3 scale, Color color)
+    {
+        // ✅ Cube는 회전 불필요 - scale로 방향 결정
+        GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        wall.name = wallName;
+        wall.transform.position   = pos;
+        wall.transform.localScale = scale;
+        wall.transform.rotation   = Quaternion.identity;
+
+        wall.GetComponent<Renderer>().material = wallMaterial != null
+            ? wallMaterial
+            : CreateMaterial(color);
+
+        Debug.Log($"[RoomBuilder] {wallName} 생성 | pos={pos} | scale={scale}");
     }
 }
