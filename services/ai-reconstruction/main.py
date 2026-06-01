@@ -92,8 +92,7 @@ def generate_3dgs_ply(object_id: str) -> str:
     output_path = os.path.join(SHARED_DIR, f"furniture_{object_id}.ply")
     
     if os.path.exists(expected_ply_path):
-        if os.path.exists(output_path): os.remove(output_path)
-        os.rename(expected_ply_path, output_path)
+        os.replace(expected_ply_path, output_path)
     
     if target_image_path != yolo_crop_path and os.path.exists(target_image_path):
         os.remove(target_image_path)
