@@ -70,6 +70,9 @@ public class FurnitureManager : MonoBehaviour
                 SimplePlyLoader loader = plyObject.AddComponent<SimplePlyLoader>();
                 loader.pointMaterial = pointMaterial;
                 loader.LoadPly(tempFilePath);
+
+                FurnitureClicker clicker = plyObject.AddComponent<FurnitureClicker>();
+                clicker.furnitureId = data.id;
                 
                 // 백엔드에서 전달받은 진짜 월드 좌표 그대로 배치
                 plyObject.transform.position = data.position; 

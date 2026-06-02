@@ -4,6 +4,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Networking;
 
 [Serializable] public class Point3D { public float x; public float y; public float z; }
@@ -28,7 +29,17 @@ public class RoomBuilder : MonoBehaviour
     [Header("JSON 서버 경로")]
     public string httpUrl = "http://100.118.177.19:8000/assets/depth_result/result.json";
 
+    // ✅ ZmqReceiver로부터 전달받은 가구 월드 좌표 목록
+    private List<Vector3> _furniturePositions = new List<Vector3>();
+
     void Start() { }
+
+    // ✅ ZmqReceiver가 가구 위치 목록을 주입하는 메서드
+    public void SetFurniturePositions(List<Vector3> positions)
+    {
+        _furniturePositions = positions;
+        Debug.Log($"[RoomBuilder] 가구 위치 {positions.Count}개 수신 완료");
+    }
 
     public void TriggerBuild()
     {
@@ -77,10 +88,8 @@ public class RoomBuilder : MonoBehaviour
     private Vector3 ToUnity(float x, float y, float z) => new Vector3(x, -y, z);
     private Vector3 ToUnity(Point3D p) => ToUnity(p.x, p.y, p.z);
 
-    // ✅ 분홍색 방지: 프로젝트 렌더 파이프라인에 맞는 셰이더 자동 탐색
     private Material CreateMaterial(Color color)
     {
-        // URP → Built-in 순서로 사용 가능한 셰이더 탐색
         string[] shaderCandidates = {
             "Universal Render Pipeline/Lit",
             "Universal Render Pipeline/Unlit",
@@ -102,7 +111,7 @@ public class RoomBuilder : MonoBehaviour
 
         if (shader == null)
         {
-            Debug.LogError("[RoomBuilder] 사용 가능한 셰이더 없음 - Material 생성 실패");
+            Debug.LogError("[RoomBuilder] 사용 가능한 셰이더 없음");
             return new Material(Shader.Find("Hidden/InternalErrorShader"));
         }
 
@@ -124,10 +133,9 @@ public class RoomBuilder : MonoBehaviour
         floor.transform.up         = normal;
         floor.transform.localScale = CalcFloorScale(data);
 
-        // ✅ Inspector에 Material이 연결되면 그걸 쓰고, 없으면 코드로 생성
         floor.GetComponent<Renderer>().material = floorMaterial != null
             ? floorMaterial
-            : CreateMaterial(new Color(0.85f, 0.85f, 0.85f)); // 연한 회색
+            : CreateMaterial(new Color(0.85f, 0.85f, 0.85f));
 
         Debug.Log($"[RoomBuilder] 바닥 생성 완료 | pos={pos} | normal={normal}");
     }
@@ -156,8 +164,8 @@ public class RoomBuilder : MonoBehaviour
             return;
         }
 
-        const float wallHeight = 30.0f;
-        const float wallThick  = 0.1f; // Cube 두께
+        const float wallHeight = 8.0f;
+        const float wallThick  = 0.1f;
 
         Vector3 floorScale = CalcFloorScale(data);
         float roomW = floorScale.x * 10f;
@@ -174,37 +182,69 @@ public class RoomBuilder : MonoBehaviour
         float halfW   = roomW * 0.5f;
         float halfD   = roomD * 0.5f;
 
+        // ✅ 가구 위치 기준으로 벽이 항상 가구 뒤에 오도록 경계 보정
+        if (_furniturePositions != null && _furniturePositions.Count > 0)
+        {
+            float maxFurnitureZ = float.MinValue;
+            float maxFurnitureX = float.MinValue;
+            float minFurnitureX = float.MaxValue;
+
+            foreach (var fp in _furniturePositions)
+            {
+                maxFurnitureZ = Mathf.Max(maxFurnitureZ, fp.z);
+                maxFurnitureX = Mathf.Max(maxFurnitureX, fp.x);
+                minFurnitureX = Mathf.Min(minFurnitureX, fp.x);
+            }
+
+            // 가구 최대 Z보다 뒷벽이 앞에 오면 → 가구 뒤로 밀어냄
+            float backWallZ = centerZ + halfD;
+            if (backWallZ < maxFurnitureZ + 1.0f)
+            {
+                float diff = (maxFurnitureZ + 1.0f) - backWallZ;
+                halfD += diff;
+                Debug.Log($"[RoomBuilder] 뒷벽 보정: +{diff:F2}m (가구 최대Z={maxFurnitureZ:F2})");
+            }
+
+            // 가구 최대/최소 X보다 좌우벽이 안쪽에 오면 → 바깥으로 밀어냄
+            float rightWallX = centerX + halfW;
+            float leftWallX  = centerX - halfW;
+            if (rightWallX < maxFurnitureX + 0.5f)
+            {
+                float diff = (maxFurnitureX + 0.5f) - rightWallX;
+                halfW += diff;
+                Debug.Log($"[RoomBuilder] 오른벽 보정: +{diff:F2}m");
+            }
+            if (leftWallX > minFurnitureX - 0.5f)
+            {
+                float diff = leftWallX - (minFurnitureX - 0.5f);
+                halfW += diff;
+                Debug.Log($"[RoomBuilder] 왼벽 보정: +{diff:F2}m");
+            }
+
+            roomW = halfW * 2f;
+            roomD = halfD * 2f;
+        }
+
         Color woodColor = new Color(0.72f, 0.53f, 0.35f);
 
-        // ✅ Cube로 벽 생성 (양면 보임, 두께 있음)
-        // 뒷벽: Z+ 끝, X방향으로 늘림
         CreateWallCube("AI_Wall_Back",
-            new Vector3(centerX,        floorY + wallHeight * 0.5f, centerZ + halfD),
+            new Vector3(centerX,         floorY + wallHeight * 0.5f, centerZ + halfD),
             new Vector3(roomW, wallHeight, wallThick),
             woodColor);
 
-        // 앞벽: Z- 끝
-        CreateWallCube("AI_Wall_Front",
-            new Vector3(centerX,        floorY + wallHeight * 0.5f, centerZ - halfD),
-            new Vector3(roomW, wallHeight, wallThick),
-            woodColor);
-
-        // 오른벽: X+ 끝, Z방향으로 늘림
         CreateWallCube("AI_Wall_Right",
-            new Vector3(centerX + halfW, floorY + wallHeight * 0.5f, centerZ),
+            new Vector3(centerX + halfW,  floorY + wallHeight * 0.5f, centerZ),
             new Vector3(wallThick, wallHeight, roomD),
             woodColor);
 
-        // 왼벽: X- 끝
         CreateWallCube("AI_Wall_Left",
-            new Vector3(centerX - halfW, floorY + wallHeight * 0.5f, centerZ),
+            new Vector3(centerX - halfW,  floorY + wallHeight * 0.5f, centerZ),
             new Vector3(wallThick, wallHeight, roomD),
             woodColor);
     }
 
     private void CreateWallCube(string wallName, Vector3 pos, Vector3 scale, Color color)
     {
-        // ✅ Cube는 회전 불필요 - scale로 방향 결정
         GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
         wall.name = wallName;
         wall.transform.position   = pos;

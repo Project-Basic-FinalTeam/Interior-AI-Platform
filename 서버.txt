@@ -35,6 +35,9 @@ docker compose up -d ai-reconstruction
 ai-perception 부분 재 빌드
 docker compose build ai-perception
 
+docker compose build ai-reconstruction
+
+
 # 2. 이번엔 NVIDIA 베이스로 빌드 (이게 핵심입니다)
 docker compose build --no-cache ai-reconstruction
 
