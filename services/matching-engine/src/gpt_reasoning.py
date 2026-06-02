@@ -1,80 +1,49 @@
-# 파일 위치: /InteriorPlatform_Workspace/services/matching-engine/src/
-# 파일 명: gpt_reasoning.py
+# 파일 위치: /InteriorPlatform_Workspace/services/matching-engine/main.py
 
+from fastapi import FastAPI, Request
+import uvicorn
 import json
-import os
-from openai import OpenAI
 
-# OpenAI 클라이언트 초기화 (환경 변수 또는 직접 입력)
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+# 팀원분이 완벽하게 짜둔 gpt_reasoning 로직 그대로 가져오기
+from src.gpt_reasoning import generate_recommendation
 
-def generate_recommendation(query, target_id, perception_data, db_candidates):
-    print(f"[LLM Engine] Starting reasoning for target_id: {target_id}")
-    
-    system_prompt = """
-    You are an intelligent interior design AI for a 3D digital twin platform.
-    Your job is to recommend the best fit furniture based on spatial data and database candidates.
-    
-    [CRITICAL INSTRUCTION]
-    You MUST output strictly in JSON format. The Unity 3D engine will parse this directly.
-    You MUST include the exact 3D filename (.ply) from the database candidates into the 'recommended_ply' key.
-    If the exact .ply filename is not provided in candidates, infer a logical one (e.g., 'micke.ply' for MICKE desk).
-    
-    Format:
-    {
-        "status": "success",
-        "answer": "한국어로 추천 이유, 크기, 남은 공간 등을 자세히 설명하세요.",
-        "recommended_ply": "micke.ply",
-        "model": "gpt-4o-mini"
-    }
-    """
-    
-    user_prompt = f"""
-    - User Query: {query}
-    - Target Furniture ID: {target_id}
-    - Spatial Perception Data: {json.dumps(perception_data, ensure_ascii=False)}
-    - Database Candidates: {json.dumps(db_candidates, ensure_ascii=False)}
-    
-    Based on the candidates, select the best one and return the JSON.
-    """
+app = FastAPI(title="Interior AI Matching Engine")
 
+# 임시 가구 DB (실제 DB 연동 전 테스트용. db_matcher.py가 있다면 그걸로 교체하시면 됩니다)
+DUMMY_FURNITURE_DB = [
+    {"id": 101, "name": "MICKE desk", "style": "modern", "color": "white", "filename": "micke.ply", "size": "105x50cm"},
+    {"id": 102, "name": "LAGKAPTEN desk", "style": "minimalist", "color": "black", "filename": "lagkapten.ply", "size": "120x60cm"}
+]
+
+@app.post("/api/recommend")
+async def get_recommendation(request: Request):
     try:
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            response_format={"type": "json_object"}, # 🔥 GPT가 무조건 JSON으로만 대답하게 강제
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ],
-            temperature=0.3
+        # 1. 유니티(또는 C++)에서 보낸 JSON 데이터 받기
+        payload = await request.json()
+        query = payload.get("query", "")
+        target_id = payload.get("target_id", 0)
+        perception_data = payload.get("perception_data", {})
+
+        print(f"\n[Matching API] 📩 유니티로부터 추천 요청 수신")
+        print(f"- Query: {query}")
+        print(f"- Target ID: {target_id}")
+
+        # 2. 팀원분이 만든 완벽한 GPT 추론 함수 실행 (RAG)
+        # db_candidates에 DUMMY_DB를 넘겨서 GPT가 고르게 만듭니다.
+        result_json = generate_recommendation(
+            query=query,
+            target_id=target_id,
+            perception_data=perception_data,
+            db_candidates=DUMMY_FURNITURE_DB
         )
-        
-        result_json_str = response.choices[0].message.content
-        result_data = json.loads(result_json_str)
-        
-        # ====================================================================
-        # 🔥 [파이썬 백엔드 강제 보정 로직]
-        # GPT가 recommended_ply를 빼먹었거나 파일명을 이상하게 줬을 경우를 대비한 안전장치
-        # ====================================================================
-        if "recommended_ply" not in result_data or not result_data["recommended_ply"].endswith(".ply"):
-            answer_text = result_data.get("answer", "").upper()
-            
-            if "MICKE" in answer_text:
-                result_data["recommended_ply"] = "micke.ply"
-            elif "LAGKAPTEN" in answer_text:
-                result_data["recommended_ply"] = "lagkapten.ply"
-            else:
-                result_data["recommended_ply"] = "asset_unknown.ply"
-        
-        print(f"[LLM Engine] Reasoning completed successfully. Selected PLY: {result_data['recommended_ply']}")
-        
-        return result_data
-        
+
+        # 3. 유니티로 결과 리턴
+        return result_json
+
     except Exception as e:
-        print(f"[LLM Engine] Error during API call: {e}")
-        return {
-            "status": "error",
-            "answer": "추천을 생성하는 중 오류가 발생했습니다.",
-            "recommended_ply": "asset_unknown.ply",
-            "model": "none"
-        }
+        print(f"[Matching API] 🚨 오류 발생: {e}")
+        return {"status": "error", "answer": "서버 내부 오류 발생", "recommended_ply": "asset_unknown.ply"}
+
+if __name__ == "__main__":
+    # 포트는 팀 규칙에 맞게 변경하세요. (ngrok이 이 포트를 물고 외부로 포워딩합니다)
+    uvicorn.run(app, host="0.0.0.0", port=8001)

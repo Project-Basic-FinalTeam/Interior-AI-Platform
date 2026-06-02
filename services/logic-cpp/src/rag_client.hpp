@@ -16,12 +16,13 @@ private:
     std::string rag_api_url = "https://interplacental-liana-puddly.ngrok-free.dev/rag/perception-query";
 
 public:
-    std::string GetRecommendation(int target_id, const std::string& label, float conf, 
+    // 🔥 첫 번째 파라미터로 const std::string& user_query 추가!
+    std::string GetRecommendation(const std::string& user_query, int target_id, const std::string& label, float conf, 
                                   float x_min, float y_min, float x_max, float y_max, 
                                   float pos_x, float pos_y, float pos_z) {
         
         json payload = {
-            {"query", "감지된 객체 자리에 들어갈 수 있는 상품을 추천해줘"},
+            {"query", user_query}, // 🔥 하드코딩된 문자열 대신 유니티에서 넘어온 실제 질문(user_query)을 삽입!
             {"target_object_id", target_id},
             {"clearance_cm", 2},
             {"allow_xy_rotation", true},

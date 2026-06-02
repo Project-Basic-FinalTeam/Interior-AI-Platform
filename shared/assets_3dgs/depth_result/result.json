@@ -31,13 +31,13 @@
   },
   "floor_plane_estimation": {
     "plane_normal_camera_coord": [
-      -0.006127833854407072,
-      -0.9972469806671143,
-      -0.07389744371175766
+      0.008801042102277279,
+      -0.9971064329147339,
+      -0.07550690323114395
     ],
-    "plane_d": 1.6859257221221924,
+    "plane_d": 1.6871534585952759,
     "distance_threshold_m": 0.08026684284210205,
-    "inlier_count_sampled": 6307
+    "inlier_count_sampled": 6301
   },
   "postprocessing": {
     "enabled": true,
@@ -51,30 +51,30 @@
       "edge_id": "floor_wall_edge_1",
       "type": "floor_wall_boundary_candidate",
       "pixel_start": {
-        "x": 116,
+        "x": 117,
         "y": 780
       },
       "pixel_end": {
-        "x": 548,
+        "x": 547,
         "y": 780
       },
       "point_3d_start_m": {
-        "x": -3.2410764694213867,
-        "y": 1.2633801698684692,
-        "z": 5.5118513107299805
+        "x": -3.2251698970794678,
+        "y": 1.2592508792877197,
+        "z": 5.493835926055908
       },
       "point_3d_end_m": {
         "x": -0.9434340000152588,
-        "y": 1.2662038803100586,
-        "z": 5.524170398712158
+        "y": 1.257311463356018,
+        "z": 5.485374927520752
       },
-      "length_m_estimated": 2.2976772293966925,
-      "pixel_length": 432.0,
-      "mean_depth_m": 5.469990332921346,
+      "length_m_estimated": 2.281752408518895,
+      "pixel_length": 430.0,
+      "mean_depth_m": 5.4695205370585125,
       "confidence_note": "Estimated length without camera intrinsic parameters.",
-      "postprocess_source_count": 3,
+      "postprocess_source_count": 2,
       "postprocess_note": "Filtered and merged horizontal lines.",
-      "length_m_raw_fov_based": 2.2976772293966925,
+      "length_m_raw_fov_based": 2.281752408518895,
       "length_scale_factor": 1.0,
       "calibration_note": "Used FOV assumption without extra scale correction."
     },
@@ -82,30 +82,30 @@
       "edge_id": "floor_wall_edge_2",
       "type": "floor_wall_boundary_candidate",
       "pixel_start": {
-        "x": 693,
-        "y": 776
+        "x": 676,
+        "y": 778
       },
       "pixel_end": {
         "x": 987,
-        "y": 776
+        "y": 778
       },
       "point_3d_start_m": {
-        "x": -0.1598512977361679,
-        "y": 1.201462984085083,
-        "z": 5.331707000732422
+        "x": -0.2469359189271927,
+        "y": 1.2089570760726929,
+        "z": 5.319846153259277
       },
       "point_3d_end_m": {
-        "x": 1.35565185546875,
-        "y": 1.201014757156372,
-        "z": 5.329717636108398
+        "x": 1.356795310974121,
+        "y": 1.2123456001281738,
+        "z": 5.333648204803467
       },
-      "length_m_estimated": 1.5155045251839518,
-      "pixel_length": 294.0,
-      "mean_depth_m": 5.345391893386841,
+      "length_m_estimated": 1.6037942001649972,
+      "pixel_length": 311.0,
+      "mean_depth_m": 5.348014767964681,
       "confidence_note": "Estimated length without camera intrinsic parameters.",
-      "postprocess_source_count": 1,
+      "postprocess_source_count": 2,
       "postprocess_note": "Filtered and merged horizontal lines.",
-      "length_m_raw_fov_based": 1.5155045251839518,
+      "length_m_raw_fov_based": 1.6037942001649972,
       "length_scale_factor": 1.0,
       "calibration_note": "Used FOV assumption without extra scale correction."
     }

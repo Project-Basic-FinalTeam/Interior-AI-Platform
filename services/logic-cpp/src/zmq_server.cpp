@@ -41,15 +41,63 @@ int main() {
             std::string req_str(static_cast<char*>(unity_req.data()), unity_req.size());
 
             // ===================================================================
-            // 🔥 [RAG 분기] ASK_RAG 명령 처리
+            // 🔥 [RAG 분기] ASK_RAG 명령 처리 (RAG + 3DGS 통합 자동화)
             // ===================================================================
             if (req_str.rfind("ASK_RAG|", 0) == 0) {
-                int target_id = std::stoi(req_str.substr(8));
+                size_t first_pipe = req_str.find('|');
+                size_t second_pipe = req_str.find('|', first_pipe + 1);
+                
+                int target_id = 0;
+                std::string user_query = "";
+                
+                if (second_pipe != std::string::npos) {
+                    target_id = std::stoi(req_str.substr(first_pipe + 1, second_pipe - first_pipe - 1));
+                    user_query = req_str.substr(second_pipe + 1);
+                }
+
                 std::cout << "[Logic Core] 📩 RAG 추천 요청 수신! (ID: " << target_id << ")" << std::endl;
 
                 if (global_object_memory.count(target_id)) {
                     auto& m = global_object_memory[target_id];
-                    std::string ans = rag_client.GetRecommendation(target_id, m.label, m.conf, m.x_min, m.y_min, m.x_max, m.y_max, m.pos_x, m.pos_y, m.pos_z);
+                    // 1. RAG 서버에 추천 요청
+                    std::string ans = rag_client.GetRecommendation(user_query, target_id, m.label, m.conf, m.x_min, m.y_min, m.x_max, m.y_max, m.pos_x, m.pos_y, m.pos_z);
+                    std::cout << "[Logic Core] 🔍 GPT 응답 수신 완료." << std::endl;
+
+                    // 2. JSON에서 storage_uri 파싱 후 ai-reconstruction 으로 전송
+                    std::string recommended_ply = "asset_unknown.ply"; 
+                    std::string uri_key = "\"storage_uri\":\"";
+                    size_t pos = ans.find(uri_key);
+                    
+                    if (pos != std::string::npos) {
+                        size_t start = pos + uri_key.length();
+                        size_t end = ans.find("\"", start);
+                        std::string storage_uri = ans.substr(start, end - start);
+                        
+                        std::cout << "[Logic Core] 🖼️ 추천 가구 이미지 발견! : " << storage_uri << std::endl;
+                        std::cout << "[Logic Core] 🚀 3DGS 엔진(TRELLIS)으로 실시간 3D 변환을 지시합니다..." << std::endl;
+                        
+                        // ID 앞에 rag_ 를 붙여서 기존 가구 파일명과 충돌하지 않게 만듭니다.
+                        std::string rag_obj_id = "rag_" + std::to_string(target_id);
+                        std::string recon_cmd = "{\"obj_id\": \"" + rag_obj_id + "\", \"image_url\": \"" + storage_uri + "\"}";
+                        
+                        zmq::message_t recon_req(recon_cmd.c_str(), recon_cmd.size());
+                        sock_reconstruction.send(recon_req, zmq::send_flags::none);
+                        
+                        zmq::message_t recon_reply;
+                        sock_reconstruction.recv(recon_reply, zmq::recv_flags::none);
+                        
+                        std::cout << "[Logic Core] 🏁 3D 모델(.ply) 생성 완료!" << std::endl;
+                        recommended_ply = "furniture_" + rag_obj_id + ".ply";
+                    }
+
+                    // 3. JSON 문자열의 마지막 닫는 괄호 '}' 바로 앞에 recommended_ply 끼워넣기
+                    size_t last_brace = ans.find_last_of('}');
+                    if (last_brace != std::string::npos) {
+                        std::string inject_str = ",\"recommended_ply\":\"" + recommended_ply + "\"";
+                        ans.insert(last_brace, inject_str);
+                    }
+
+                    // 4. 완성된 JSON을 유니티로 최종 전송!
                     zmq::message_t reply(ans.c_str(), ans.size());
                     sock_unity.send(reply, zmq::send_flags::none);
                 } else {
@@ -105,17 +153,16 @@ int main() {
                 if (object_count == 0) continue; 
 
                 // ===================================================================
-                // 🔥 [핵심 수정] 아래 두 줄을 for 루프 위로 올렸습니다!
-                // 유니티에게 "기다리지 말고 먼저 스캔 데이터 가져가서 렌더링해!" 라고 던져줍니다.
+                // 🔥 [핵심 수정: 순서 복원] 파이썬이 파일을 다 만들 때까지 기다립니다!
                 // ===================================================================
+                
+                // 1. 유니티가 보낸 "GIVE_ME_FINAL_DATA" 신호만 일단 받아둠
                 zmq::message_t dummy_req;
                 sock_unity.recv(dummy_req, zmq::recv_flags::none); 
-                sock_unity.send(py_reply, zmq::send_flags::none);
-                std::cout << "[Logic Core] ✅ 스캔 완료! 유니티 화면을 갱신합니다. 백그라운드 3D 복원 돌입..." << std::endl;
 
-                // ===================================================================
-                // 👇 C++은 유니티를 퇴근시키고 묵묵히 3D 복원 로직을 끝까지 수행합니다.
-                // ===================================================================
+                std::cout << "[Logic Core] ⏳ 3D 복원 돌입 (유니티는 모든 파일이 완성될 때까지 대기합니다)..." << std::endl;
+
+                // 2. 파이썬을 시켜서 3D 파일(ply)을 모두 생성
                 for (int i = 0; i < object_count; ++i) {
                     auto obj = vision_data->objects()->Get(i);
                     int obj_id = obj->id();
@@ -131,7 +178,11 @@ int main() {
                     zmq::message_t recon_reply;
                     sock_reconstruction.recv(recon_reply, zmq::recv_flags::none);
                 }
-                std::cout << "[Logic Core] 🏁 3D 복원 파이프라인 완벽 종료!" << std::endl;
+                std::cout << "[Logic Core] 🏁 3D 복원 파이프라인 완벽 종료! 파일 준비 완료." << std::endl;
+
+                // 3. 파일이 서버에 전부 준비된 이 시점에! 유니티에게 데이터를 넘겨줍니다.
+                sock_unity.send(py_reply, zmq::send_flags::none);
+                std::cout << "[Logic Core] ✅ 유니티에게 최종 데이터를 전송했습니다. (다운로드 시작)" << std::endl;
             }
         }
     } catch (const zmq::error_t& e) { return 1; }
