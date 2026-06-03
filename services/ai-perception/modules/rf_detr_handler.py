@@ -2,7 +2,29 @@ import os
 import torch
 import numpy as np
 from PIL import Image
-from rfdetr import RFDETRBase
+from rfdetr import RFDETRBase, RFDETR
+
+# 파인튜닝 모델의 14클래스 (인덱스 0은 플레이스홀더)
+_CLASS_NAMES = [
+    "objects", "BED", "BOOKCASE", "CHAIR", "COFFEE_TABLE", "CUPBOARD",
+    "CURTAIN", "LAMP", "READING_LAMP", "RUG", "SIDE_TABLE", "SOFA",
+    "STORAGE_CHAIR", "TABLE", "TABLE_LAMP"
+]
+
+# 14클래스 → 9그룹 병합 규칙
+_MERGE = {
+    "LAMP": "LAMP", "READING_LAMP": "LAMP", "TABLE_LAMP": "LAMP",
+    "TABLE": "TABLE", "COFFEE_TABLE": "TABLE", "SIDE_TABLE": "TABLE",
+    "CHAIR": "CHAIR", "STORAGE_CHAIR": "CHAIR",
+    "BED": "BED", "BOOKCASE": "BOOKCASE", "CUPBOARD": "CUPBOARD",
+    "CURTAIN": "CURTAIN", "RUG": "RUG", "SOFA": "SOFA",
+}
+
+# 최종 출력 9그룹
+_GROUP_NAMES = ["BED", "BOOKCASE", "CHAIR", "CUPBOARD", "CURTAIN",
+                "LAMP", "RUG", "SOFA", "TABLE"]
+_GROUP_ID = {n: i for i, n in enumerate(_GROUP_NAMES)}
+
 
 class RFDETRHandler:
     def __init__(self, model_path: str = None, device: str = None, confidence: float = 0.5):
@@ -10,8 +32,7 @@ class RFDETRHandler:
         self.confidence = confidence
         self.model_path = model_path
         self.model = None
-        self.class_names = {}
-        # IoU 임계값 (겹침을 판단하는 기준, 0.3 이하는 다른 객체로 간주)
+        self.use_merge = False  # 파인튜닝 모델 사용 시 9그룹 병합 활성화
         self.iou_threshold = 0.3
 
         print(f"[RF-DETR 모듈] Initializing (device={self.device})")
@@ -20,14 +41,14 @@ class RFDETRHandler:
     def _load_model(self):
         try:
             if self.model_path and os.path.exists(self.model_path):
-                self.model = RFDETRBase(pretrain_weights=self.model_path)
-                print(f"[RF-DETR 모듈] Custom weights loaded: {self.model_path}")
+                self.model = RFDETR.from_checkpoint(self.model_path)
+                self.use_merge = True  # 파인튜닝 모델 → 9그룹 병합 활성화
+                print(f"[RF-DETR 모듈] Fine-tuned weights loaded: {self.model_path}")
+                print(f"[RF-DETR 모듈] 9그룹 병합 활성화: {_GROUP_NAMES}")
             else:
                 self.model = RFDETRBase()
-                print("[RF-DETR 모듈] Default weights loaded")
-
-            if hasattr(self.model, "class_names"):
-                self.class_names = self.model.class_names
+                self.use_merge = False
+                print("[RF-DETR 모듈] Default COCO weights loaded (파인튜닝 모델 없음)")
         except Exception as e:
             print(f"[RF-DETR 모듈] ⚠️ Model load failed: {e}")
             self.model = None
@@ -100,16 +121,22 @@ class RFDETRHandler:
 
             # 1. NMS 적용
             keep_indices = self._apply_nms(xyxy, conf, self.iou_threshold)
-            
-            # 2. 필터링된 결과만 추출
+
+            # 2. 필터링 및 9그룹 병합
             for i in keep_indices:
                 cid = int(class_id[i]) if class_id is not None else -1
-                
-                if isinstance(self.class_names, dict):
-                    label = self.class_names.get(cid, str(cid))
-                elif isinstance(self.class_names, (list, tuple)):
-                    label = self.class_names[cid] if 0 <= cid < len(self.class_names) else str(cid)
+
+                if self.use_merge:
+                    # 파인튜닝 모델: 14클래스 → 9그룹 병합
+                    if cid >= len(_CLASS_NAMES):
+                        continue
+                    raw_name = _CLASS_NAMES[cid]
+                    if raw_name == "objects":
+                        continue
+                    label = _MERGE[raw_name]
+                    cid = _GROUP_ID[label]
                 else:
+                    # 기본 COCO 모델
                     label = str(cid)
 
                 results.append({
