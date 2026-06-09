@@ -32,6 +32,11 @@ docker compose down
 3DGS 서비스만 백그라운드로 켜기:
 docker compose up -d ai-reconstruction
 
+docker compose up -d ai-perception
+
+docker compose up -d logic-cpp
+
+
 ai-perception 부분 재 빌드
 docker compose build ai-perception
 

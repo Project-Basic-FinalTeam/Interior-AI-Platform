@@ -100,6 +100,8 @@ public class SimplePlyLoader : MonoBehaviour
             bc.center = mesh.bounds.center;
             bc.size = mesh.bounds.size;
 
+            gameObject.layer = LayerMask.NameToLayer("Furniture");
+
             MeshFilter mf = GetComponent<MeshFilter>();
             if (mf == null) mf = gameObject.AddComponent<MeshFilter>();
             mf.mesh = mesh;
